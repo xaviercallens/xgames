@@ -1,0 +1,69 @@
+# Jekyll Configuration for Bomberman AI Project
+
+# Site settings
+title: "Proutman - AI Bomberman Game"
+description: "Educational Bomberman game with reinforcement learning AI. Play against trained PPO agents or test your own AI strategies."
+baseurl: "/xgames"
+url: "https://xaviercallens.github.io"
+
+# Author
+author:
+  name: "Xavier Callens"
+  email: "your.email@example.com"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /docs/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "page"
+
+# Exclude from processing
+exclude:
+  - .venv/
+  - venv/
+  - __pycache__/
+  - "*.pyc"
+  - bomber_game/
+  - examples/
+  - games_2d/
+  - games_3d/
+  - utils/
+  - web_demo/
+  - "*.py"
+  - "*.sh"
+  - requirements.txt
+  - setup.py
+  - .gitignore
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Include
+include:
+  - _pages
+  - docs/play
+
+# Sass
+sass:
+  style: compressed
+
+# Permalink
+permalink: pretty

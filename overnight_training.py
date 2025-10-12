@@ -34,9 +34,9 @@ from bomber_game.heuristics_improved import ImprovedHeuristicAgent
 # ============================================================================
 
 # Training duration
-TOTAL_EPISODES = 10000  # Overnight training target
+TOTAL_EPISODES = 1000
 MAX_STEPS_PER_EPISODE = 500
-TRAINING_HOURS = 8  # Maximum training time
+TRAINING_HOURS = 1
 
 # PPO Hyperparameters (optimized for overnight training)
 UPDATE_INTERVAL = 4096  # Update every N steps (larger for stability)
