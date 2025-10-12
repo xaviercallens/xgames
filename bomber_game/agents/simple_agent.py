@@ -17,6 +17,7 @@ class SimpleAgent(Agent):
     def __init__(self, player):
         super().__init__(player)
         self.target_player = None
+        self.think_delay = 0.15  # Smarter, faster thinking
         
     def choose_action(self, game_state):
         """Choose action using simple heuristics."""
@@ -34,9 +35,9 @@ class SimpleAgent(Agent):
         if self._in_danger(game_state):
             return self._find_safe_move(game_state)
         
-        # Priority 2: Place bomb if near enemy
+        # Priority 2: Place bomb if near enemy (more aggressive)
         if self.target_player and self._near_enemy(game_state):
-            if self.player.can_place_bomb():
+            if self.player.can_place_bomb() and random.random() < 0.7:  # 70% chance
                 return (0, 0, True)
         
         # Priority 3: Move toward enemy
@@ -110,7 +111,7 @@ class SimpleAgent(Agent):
         tx, ty = self.target_player.grid_x, self.target_player.grid_y
         
         distance = abs(px - tx) + abs(py - ty)  # Manhattan distance
-        return distance <= 3
+        return distance <= 4  # Increased range for more aggressive AI
     
     def _move_toward_enemy(self, game_state):
         """Move toward enemy player."""

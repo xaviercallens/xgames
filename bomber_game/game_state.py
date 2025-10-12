@@ -3,7 +3,7 @@ Game state management for Bomberman.
 """
 
 import random
-from .entities import Player, Bomb, Explosion, PowerUp
+from .entities import Player, Bomb, Explosion, PowerUp, Caca
 
 
 class GameState:
@@ -24,6 +24,7 @@ class GameState:
         self.players = []
         self.bombs = []
         self.explosions = []
+        self.cacas = []  # Caca blocks!
         
         # Game state
         self.game_over = False
@@ -56,8 +57,8 @@ class GameState:
                 if grid[y][x] == 0 and (x, y) not in safe_zones:
                     if random.random() < 0.6:  # 60% chance of soft wall
                         grid[y][x] = 2
-                        # 30% chance of power-up under soft wall
-                        if random.random() < 0.3:
+                        # 50% chance of power-up under soft wall
+                        if random.random() < 0.5:
                             powerup_type = random.randint(0, 2)
                             self.powerups[(x, y)] = PowerUp(x, y, powerup_type)
         
@@ -87,6 +88,27 @@ class GameState:
         self.bombs.append(bomb)
         return bomb
     
+    def place_caca(self, player):
+        """Place a caca block for the player."""
+        if not player.can_place_caca():
+            return None
+        
+        # Place caca at player's grid position
+        x, y = player.grid_x, player.grid_y
+        
+        # Check if there's already something here
+        for caca in self.cacas:
+            if caca.grid_x == x and caca.grid_y == y:
+                return None
+        for bomb in self.bombs:
+            if bomb.grid_x == x and bomb.grid_y == y:
+                return None
+        
+        caca = Caca(x, y, player)
+        player.active_cacas += 1
+        self.cacas.append(caca)
+        return caca
+    
     def update(self, dt):
         """Update all game entities."""
         # Update bombs
@@ -101,6 +123,15 @@ class GameState:
             explosion.update(dt)
             if not explosion.alive:
                 self.explosions.remove(explosion)
+        
+        # Update cacas
+        for caca in self.cacas[:]:
+            caca.update(dt)
+            if not caca.alive:
+                self.cacas.remove(caca)
+                # Owner can place another caca
+                if caca.owner:
+                    caca.owner.active_cacas -= 1
         
         # Update power-ups
         for powerup in list(self.powerups.values()):
@@ -192,6 +223,11 @@ class GameState:
         # Check for bombs
         for bomb in self.bombs:
             if bomb.grid_x == x and bomb.grid_y == y:
+                return False
+        
+        # Check for cacas (poop blocks!)
+        for caca in self.cacas:
+            if caca.grid_x == x and caca.grid_y == y:
                 return False
         
         return True

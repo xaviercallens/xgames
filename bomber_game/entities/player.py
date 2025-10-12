@@ -19,21 +19,25 @@ class Player(Entity):
             color: Player color (RGB tuple)
             name: Player name
         """
-        super().__init__(x, y, 28, 28)
+        super().__init__(x, y, 48, 48)  # Smaller sprite (was 28)
         self.grid_x = x
         self.grid_y = y
         self.color = color
         self.name = name
         
         # Movement
-        self.speed = 4  # tiles per second
+        self.speed = 7  # tiles per second (faster)
         self.move_x = 0
         self.move_y = 0
         
         # Bomb properties
-        self.max_bombs = 1
+        self.max_bombs = 2  # Start with 2 bombs
         self.bomb_range = 2
         self.active_bombs = 0
+        
+        # Caca properties
+        self.max_cacas = 3
+        self.active_cacas = 0
         
         # Power-ups
         self.speed_level = 1
@@ -89,6 +93,10 @@ class Player(Entity):
     def can_place_bomb(self):
         """Check if player can place a bomb."""
         return self.active_bombs < self.max_bombs
+    
+    def can_place_caca(self):
+        """Check if player can place a caca."""
+        return self.active_cacas < self.max_cacas
     
     def add_powerup(self, powerup_type):
         """Apply power-up effect."""

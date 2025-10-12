@@ -58,6 +58,9 @@ class BombermanGame:
                 elif event.key == pygame.K_SPACE:
                     if self.human_player.alive:
                         self.game_state.place_bomb(self.human_player)
+                elif event.key == pygame.K_c:
+                    if self.human_player.alive:
+                        self.game_state.place_caca(self.human_player)
     
     def update(self, dt):
         """Update game state."""
@@ -102,6 +105,10 @@ class BombermanGame:
         # Draw power-ups
         for powerup in self.game_state.powerups.values():
             powerup.render(self.screen, TILE_SIZE)
+        
+        # Draw cacas (poop blocks)
+        for caca in self.game_state.cacas:
+            caca.render(self.screen, TILE_SIZE)
         
         # Draw bombs
         for bomb in self.game_state.bombs:
@@ -161,7 +168,7 @@ class BombermanGame:
         
         # Player stats
         if self.human_player.alive:
-            player_text = f"Player: Bombs:{self.human_player.max_bombs} Range:{self.human_player.bomb_range} Speed:{self.human_player.speed_level}"
+            player_text = f"Player: Trumps:{self.human_player.max_bombs} Cacas:{self.human_player.max_cacas} Range:{self.human_player.bomb_range}"
             text_surf = self.font.render(player_text, True, GREEN)
             self.screen.blit(text_surf, (10, ui_y))
         else:
@@ -178,7 +185,7 @@ class BombermanGame:
             self.screen.blit(text_surf, (10, ui_y + 25))
         
         # Controls
-        controls = "Controls: WASD/Arrows=Move, Space=Trump💨, P=Pause, ESC=Quit"
+        controls = "Controls: WASD=Move, Space=Trump💨, C=Caca💩, P=Pause"
         text_surf = self.font.render(controls, True, WHITE)
         text_rect = text_surf.get_rect(right=SCREEN_WIDTH - 10, top=ui_y)
         self.screen.blit(text_surf, text_rect)

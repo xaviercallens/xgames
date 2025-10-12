@@ -14,25 +14,27 @@ GAME_CONFIG = {
 
 # Player settings
 PLAYER_CONFIG = {
-    'speed': 6,  # tiles per second (increased from 4 for easier gameplay)
-    'initial_bombs': 1,
+    'speed': 7,  # tiles per second (increased for easier gameplay)
+    'initial_bombs': 2,  # Start with 2 bombs
     'initial_range': 2,  # explosion range in tiles
     'max_bombs': 8,
     'max_range': 10,
-    'max_speed': 8,
+    'max_speed': 10,
+    'max_cacas': 3,  # Maximum caca blocks
+    'caca_duration': 5.0,  # How long caca lasts
 }
 
 # AI settings
 AI_CONFIG = {
-    'difficulty': 'medium',  # easy, medium, hard
-    'reaction_time': 0.5,  # seconds
-    'think_time': 0.1,  # seconds between decisions
+    'difficulty': 'hard',  # easy, medium, hard
+    'reaction_time': 0.3,  # seconds (faster reaction)
+    'think_time': 0.15,  # seconds between decisions (smarter)
 }
 
 # Map generation
 MAP_CONFIG = {
-    'soft_wall_density': 0.35,  # Percentage of empty spaces with soft walls (reduced from 0.6 for easier gameplay)
-    'powerup_chance': 0.4,  # Chance of powerup under soft wall (increased from 0.3 for more rewards)
+    'soft_wall_density': 0.25,  # Percentage of empty spaces with soft walls (reduced for easier gameplay)
+    'powerup_chance': 0.5,  # Chance of powerup under soft wall (increased for more rewards)
 }
 
 # Reinforcement Learning settings
