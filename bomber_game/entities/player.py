@@ -27,8 +27,9 @@ class Player(Entity):
         self.name = name
         
         # Position is in grid coordinates (float for smooth movement)
-        self.x = float(x)
-        self.y = float(y)
+        # Position at CENTER of grid cell for proper collision detection
+        self.x = float(x) + 0.5
+        self.y = float(y) + 0.5
         
         # Movement
         self.speed = 7  # tiles per second (faster)
@@ -79,15 +80,18 @@ class Player(Entity):
         if self._can_move_to(new_x, new_y, grid, tile_size, game_state):
             self.x = new_x
             self.y = new_y
-            # Update grid position (rounded to nearest tile)
-            self.grid_x = int(round(self.x))
-            self.grid_y = int(round(self.y))
+            # Update grid position (floor since we're using cell centers)
+            # Position 1.5 is in grid cell 1, position 2.3 is in grid cell 2
+            import math
+            self.grid_x = int(math.floor(self.x))
+            self.grid_y = int(math.floor(self.y))
     
     def _can_move_to(self, x, y, grid, tile_size, game_state=None):
         """Check if player can move to position."""
-        # Use a smaller hitbox (0.35 tiles from center = 0.7 tile width)
-        # This allows easier movement through tight spaces
-        hitbox_size = 0.35  # Half-width of hitbox
+        # Use a hitbox smaller than 0.5 to fit within grid cells
+        # Player centered at (1.5, 1.5) with hitbox 0.4 has corners at (1.1, 1.1) to (1.9, 1.9)
+        # which all stay within grid cell (1, 1)
+        hitbox_size = 0.4  # Half-width of hitbox
         
         # Check corners of smaller hitbox centered on player
         corners = [
@@ -98,10 +102,16 @@ class Player(Entity):
         ]
         
         for cx, cy in corners:
-            gx, gy = int(cx), int(cy)
-            # Check bounds
+            # Convert to grid coordinates using floor
+            # This checks which grid cell the corner is in
+            import math
+            gx = math.floor(cx)
+            gy = math.floor(cy)
+            
+            # Skip corners that are out of bounds
             if gx < 0 or gx >= len(grid[0]) or gy < 0 or gy >= len(grid):
-                return False
+                continue
+            
             # Check for walls
             if grid[gy][gx] in [1, 2]:  # Wall or soft wall
                 return False
