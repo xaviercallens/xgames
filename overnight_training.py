@@ -413,11 +413,11 @@ def train_overnight():
             from bomber_game import TILE_SIZE
             agent_player.move(*agent_action[:2], game_state.grid, TILE_SIZE, game_state)
             if agent_action[2]:
-                game_state.place_bomb(agent_player.grid_x, agent_player.grid_y)
+                game_state.place_bomb(agent_player)
             
             enemy_player.move(*enemy_action[:2], game_state.grid, TILE_SIZE, game_state)
             if enemy_action[2]:
-                game_state.place_bomb(enemy_player.grid_x, enemy_player.grid_y)
+                game_state.place_bomb(enemy_player)
             
             # Update game
             game_state.update(1/FPS)  # dt = 1/FPS for consistent timing
