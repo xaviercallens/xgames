@@ -173,11 +173,11 @@ def save_checkpoint(agent, episode, stats, checkpoint_type="auto"):
     checkpoint_name = f"checkpoint_ep{episode}_{checkpoint_type}_{timestamp}.pth"
     checkpoint_path = os.path.join(CHECKPOINT_DIR, checkpoint_name)
     
-    agent.save(checkpoint_path)
+    agent.save_model(checkpoint_path)
     
     # Also save as latest
     latest_path = os.path.join(CHECKPOINT_DIR, "latest_checkpoint.pth")
-    agent.save(latest_path)
+    agent.save_model(latest_path)
     
     # Save checkpoint metadata
     metadata = {
@@ -505,7 +505,7 @@ def train_overnight():
     
     # Save final model
     final_model_path = os.path.join(MODELS_DIR, "ppo_agent.pth")
-    agent.save(final_model_path)
+    agent.save_model(final_model_path)
     log_message(f"💾 Final model saved: {final_model_path}")
     
     # Print summary
