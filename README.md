@@ -68,7 +68,19 @@ This game was **inspired by my son's creativity** to make programming education 
 
 ## 🚀 **Quick Start - Play in 2 Minutes!**
 
+### **🎮 [Try Live Demo](https://xaviercallens.github.io/xgames/demo.html)** | **📥 [Download](https://github.com/xaviercallens/xgames)**
+
 </div>
+
+### **Option 1: Try Online Demo** 🌐
+
+Visit our **[Live Demo Page](https://xaviercallens.github.io/xgames/demo.html)** to see Proutman in action!
+- 📸 View gameplay screenshots
+- 🎮 See game controls
+- 📚 Quick installation guide
+- 🚀 Get started instantly
+
+### **Option 2: Download & Play** 💻
 
 ### **Step 1: Setup (One Time)**
 
