@@ -62,6 +62,14 @@ class AssetManager:
         filename = f"player{player_num}_60_60.png"
         return self.load_image(filename, size)
     
+    def get_player_spritesheet(self):
+        """Get the player spritesheet (Proutman version if available)."""
+        # Try Proutman version first
+        try:
+            return self.load_image("sprite_player_versionproutman.png")
+        except:
+            return self.load_image("sprite_player.png")
+    
     def get_bomb_sprite(self, size=(60, 60)):
         """Get bomb sprite."""
         return self.load_image("bomb.png", size)
@@ -71,8 +79,12 @@ class AssetManager:
         return self.load_image("wallhard.png", size)
     
     def get_tiles_spritesheet(self):
-        """Get the tiles spritesheet."""
-        return self.load_image("tiles_bomberman.png")
+        """Get the tiles spritesheet (Proutman version if available)."""
+        # Try Proutman version first
+        try:
+            return self.load_image("tiles_bomberman_versionproutman.png")
+        except:
+            return self.load_image("tiles_bomberman.png")
     
     def extract_tile(self, spritesheet, x, y, width, height, scale=None):
         """

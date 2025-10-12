@@ -9,24 +9,29 @@ from . import (GRID_SIZE, TILE_SIZE, FPS, SCREEN_WIDTH, SCREEN_HEIGHT,
 from .game_state import GameState
 from .agents import SimpleAgent, RLAgent, PPOAgent
 from .assets import get_asset_manager
+from .menu import MenuScreen
 import os
 
 
 class BombermanGame:
     """Main game class that handles the game loop and rendering."""
     
-    def __init__(self):
+    def __init__(self, show_splash=True):
         """Initialize the game."""
         pygame.init()
         
         # Screen setup
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        pygame.display.set_caption("Trump Man (Prouts Man) - Educational Game")
+        pygame.display.set_caption("💨 PROUTMAN - L'aventure Codée! 💩")
         self.clock = pygame.time.Clock()
         
         # Font
         self.font = pygame.font.Font(None, 24)
         self.big_font = pygame.font.Font(None, 48)
+        
+        # Menu system
+        self.menu = MenuScreen(self.screen)
+        self.show_splash = show_splash
         
         # Game state
         self.game_state = GameState(GRID_SIZE)
@@ -319,6 +324,14 @@ class BombermanGame:
     
     def run(self):
         """Main game loop."""
+        # Show splash screen
+        if self.show_splash:
+            quit_requested = self.menu.show_splash(duration=3.0)
+            if quit_requested:
+                pygame.quit()
+                sys.exit()
+        
+        # Main game loop
         while self.running:
             dt = self.clock.tick(FPS) / 1000.0  # Delta time in seconds
             
