@@ -22,13 +22,14 @@ class ModelSelector:
         self.models_dir = models_dir
         self.stats_file = os.path.join(models_dir, "training_stats.json")
         self.heuristic_stats_file = os.path.join(models_dir, "heuristic_stats.json")
+        self.heuristic_benchmark_file = os.path.join(models_dir, "heuristic_benchmark.json")
         self.best_model_file = os.path.join(models_dir, "best_model.pth")
         self.ppo_model_file = os.path.join(models_dir, "ppo_agent.pth")
         self.pretrained_file = os.path.join(models_dir, "ppo_pretrained.pth")
         
         # Performance thresholds
         self.min_episodes_for_comparison = 50  # Minimum games before comparing
-        self.heuristic_baseline_win_rate = 15.0  # Expected heuristic win rate
+        self.heuristic_baseline_win_rate = 15.0  # Default if not benchmarked
         
     def get_model_stats(self, stats_file):
         """
@@ -78,13 +79,32 @@ class ModelSelector:
     
     def initialize_heuristic_stats(self):
         """Initialize statistics for heuristic baseline."""
+        # Check if we have benchmark data
+        if os.path.exists(self.heuristic_benchmark_file):
+            benchmark_data = self.get_model_stats(self.heuristic_benchmark_file)
+            if benchmark_data:
+                # Use benchmarked win rate
+                stats = {
+                    'model_type': 'heuristic',
+                    'total_episodes': benchmark_data.get('total_games', 0),
+                    'total_wins': benchmark_data.get('heuristic_wins', 0),
+                    'win_rate': benchmark_data.get('win_rate', self.heuristic_baseline_win_rate),
+                    'description': 'Heuristic agent (benchmarked)',
+                    'benchmarked': True,
+                    'created': datetime.now().isoformat()
+                }
+                self.save_model_stats(stats, self.heuristic_stats_file)
+                return stats
+        
+        # No benchmark data, use default or existing
         if not os.path.exists(self.heuristic_stats_file):
             stats = {
                 'model_type': 'heuristic',
                 'total_episodes': 0,
                 'total_wins': 0,
                 'win_rate': self.heuristic_baseline_win_rate,
-                'description': 'Pure heuristic agent (baseline)',
+                'description': 'Heuristic agent (estimated)',
+                'benchmarked': False,
                 'created': datetime.now().isoformat()
             }
             self.save_model_stats(stats, self.heuristic_stats_file)
