@@ -10,9 +10,12 @@ class PowerUp(Entity):
     """Power-up that enhances player abilities."""
     
     TYPES = {
-        0: {'name': 'Bomb+', 'color': (255, 100, 100)},
-        1: {'name': 'Fire+', 'color': (255, 150, 0)},
-        2: {'name': 'Speed+', 'color': (100, 200, 255)},
+        0: {'name': 'Bomb+', 'color': (255, 100, 100), 'description': 'More bombs!'},
+        1: {'name': 'Fire+', 'color': (255, 150, 0), 'description': 'Bigger explosions!'},
+        2: {'name': 'Speed+', 'color': (100, 200, 255), 'description': 'Move faster!'},
+        3: {'name': 'Shield', 'color': (100, 255, 100), 'description': 'Survive one hit!'},
+        4: {'name': 'Remote', 'color': (255, 255, 100), 'description': 'Detonate on command!'},
+        5: {'name': 'Pierce', 'color': (200, 100, 255), 'description': 'Bombs go through walls!'},
     }
     
     def __init__(self, x, y, powerup_type):
@@ -78,3 +81,12 @@ class PowerUp(Entity):
                 (center_x + 6, center_y),
                 (center_x, center_y - 6),
             ])
+        elif self.powerup_type == 3:  # Shield
+            pygame.draw.rect(screen, (255, 255, 255), (center_x - 6, center_y - 6, 12, 12), 2)
+            pygame.draw.line(screen, (255, 255, 255), (center_x - 4, center_y), (center_x + 4, center_y), 2)
+        elif self.powerup_type == 4:  # Remote
+            pygame.draw.rect(screen, (255, 255, 255), (center_x - 4, center_y - 4, 8, 8))
+            pygame.draw.circle(screen, (255, 0, 0), (center_x, center_y - 6), 2)
+        elif self.powerup_type == 5:  # Pierce
+            pygame.draw.line(screen, (255, 255, 255), (center_x - 6, center_y), (center_x + 6, center_y), 3)
+            pygame.draw.line(screen, (255, 255, 255), (center_x, center_y - 6), (center_x, center_y + 6), 3)

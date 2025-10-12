@@ -47,6 +47,10 @@ class Player(Entity):
         
         # Power-ups
         self.speed_level = 1
+        self.has_shield = False
+        self.has_remote_bombs = False
+        self.has_pierce_bombs = False
+        self.shield_hits = 0  # Number of hits shield can take
         
         # Animation
         self.direction = 'down'

@@ -33,8 +33,11 @@ AI_CONFIG = {
 
 # Map generation
 MAP_CONFIG = {
-    'soft_wall_density': 0.25,  # Percentage of empty spaces with soft walls (reduced for easier gameplay)
-    'powerup_chance': 0.5,  # Chance of powerup under soft wall (increased for more rewards)
+    'soft_wall_density': 0.05,  # Percentage of empty spaces with soft walls (5% as requested)
+    'powerup_chance': 0.6,  # Chance of powerup under soft wall (increased for more rewards)
+    'num_teleport_doors': 4,  # Number of teleport door pairs
+    'bomb_machine_enabled': True,  # Enable central bomb machine
+    'bomb_machine_interval': 10.0,  # Seconds between bomb drops
 }
 
 # Reinforcement Learning settings
