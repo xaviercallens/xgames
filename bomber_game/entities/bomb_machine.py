@@ -97,7 +97,9 @@ class BombMachine(Entity):
             # Create bomb at center (or near center if occupied)
             bomb_pos = self._find_drop_position(game_state)
             if bomb_pos:
-                bomb = Bomb(bomb_pos[0], bomb_pos[1], self.bomb_range, self.bomb_timer)
+                # Create bomb with no owner (machine-dropped)
+                bomb = Bomb(bomb_pos[0], bomb_pos[1], self.bomb_range, None)
+                bomb.timer = self.bomb_timer  # Set custom timer (10 seconds)
                 return bomb
                 
         return None
