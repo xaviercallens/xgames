@@ -6,7 +6,9 @@
 
 **An Educational Bomberman Game That Makes Learning Programming FUN!**
 
-![Proutman Splash](bomber_game/assets/images/proutman_splash.jpg)
+![Proutman Splash](bomber_game/assets/images/proutman_splash.png)
+
+<img src="bomber_game/assets/images/Gemini_Generated_Image_xkb82mxkb82mxkb8.png" alt="Proutman Character" width="300"/>
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Pygame](https://img.shields.io/badge/Pygame-2.6+-green.svg)](https://www.pygame.org/)
@@ -30,6 +32,11 @@ This game was **inspired by my son's creativity** to make programming education 
 - 🤖 **Understand AI** and reinforcement learning
 - 🎮 **Create games** from scratch
 - 😂 **Have FUN** while learning!
+
+<div align="center">
+<img src="bomber_game/assets/images/prout_man_player.png" alt="Proutman Player" width="150"/>
+<img src="bomber_game/assets/images/toilet_wall_proutmanversion.png" alt="Toilet Wall" width="150"/>
+</div>
 
 ---
 
@@ -91,20 +98,28 @@ source setup_terminal.sh
 
 <table>
 <tr>
-<td width="50%">
+<td width="33%" align="center">
 
 ### 💨 **Smelly Trump Bombs**
 Drop hilarious fart bombs that explode in a cross pattern! Destroy walls and defeat enemies with your stinky power!
 
-<img src="bomber_game/assets/images/sprite_player_versionproutman.png" width="200"/>
+<img src="bomber_game/assets/images/sprite_player_versionproutman.png" width="180"/>
 
 </td>
-<td width="50%">
+<td width="33%" align="center">
 
 ### 💩 **Caca Blocks**
 Place strategic poop blocks to trap enemies or protect yourself! A unique mechanic that adds tactical depth!
 
-<img src="bomber_game/assets/images/tiles_bomberman_versionproutman.png" width="200"/>
+<img src="bomber_game/assets/images/tiles_bomberman_versionproutman.png" width="180"/>
+
+</td>
+<td width="33%" align="center">
+
+### 🚽 **Toilet Walls**
+Destroy toilet walls to find power-ups! Hilarious French bathroom humor meets strategic gameplay!
+
+<img src="bomber_game/assets/images/toilet_wall_proutmanversion.png" width="180"/>
 
 </td>
 </tr>
@@ -426,7 +441,38 @@ After completing this project, students will:
 
 </div>
 
-The game features **beautiful custom sprites**:
+The game features **beautiful custom sprites** with hilarious French bathroom humor!
+
+<div align="center">
+
+### **🖼️ Visual Gallery**
+
+<table>
+<tr>
+<td align="center" width="25%">
+<img src="bomber_game/assets/images/prout_man_player.png" width="120"/><br>
+<b>Proutman Character</b><br>
+The hero himself!
+</td>
+<td align="center" width="25%">
+<img src="bomber_game/assets/images/sprite_player_versionproutman.png" width="120"/><br>
+<b>Player Sprites</b><br>
+Animated characters
+</td>
+<td align="center" width="25%">
+<img src="bomber_game/assets/images/tiles_bomberman_versionproutman.png" width="120"/><br>
+<b>Game Tiles</b><br>
+Walls & floors
+</td>
+<td align="center" width="25%">
+<img src="bomber_game/assets/images/toilet_wall_proutmanversion.png" width="120"/><br>
+<b>Toilet Walls</b><br>
+French humor!
+</td>
+</tr>
+</table>
+
+</div>
 
 ### **Character Sprites**
 - 🎮 Player animations (Proutman version)
@@ -437,6 +483,7 @@ The game features **beautiful custom sprites**:
 ### **Tile Graphics**
 - 🧱 Destructible walls
 - 🏰 Indestructible blocks
+- 🚽 Toilet walls (hilarious!)
 - 🌱 Grass floor
 - ⚡ Power-up items
 
