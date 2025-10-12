@@ -1,8 +1,8 @@
 {
-  "total_episodes": 760,
-  "total_training_time": 84249.16862750053,
+  "total_episodes": 767,
+  "total_training_time": 86378.5214266777,
   "total_wins": 0,
-  "total_losses": 760,
+  "total_losses": 767,
   "episode_rewards": [
     -246.0,
     -235.0,
@@ -763,7 +763,14 @@
     -225.0,
     -230.0,
     -231.0,
-    -220.5
+    -220.5,
+    -216.5,
+    -235.0,
+    -235.0,
+    -241.0,
+    -240.0,
+    -230.0,
+    -211.5
   ],
   "win_rates": [
     0.0,
@@ -884,5 +891,5 @@
     }
   ],
   "current_level": "Beginner",
-  "last_updated": "2025-10-12T17:29:51.017885"
+  "last_updated": "2025-10-12T17:30:23.054428"
 }

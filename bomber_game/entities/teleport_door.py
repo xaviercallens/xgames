@@ -22,7 +22,7 @@ class TeleportDoor(Entity):
             door_id: Unique identifier for this door
             color: Door color (RGB tuple)
         """
-        super().__init__(x, y)
+        super().__init__(x, y, 32, 32)  # Full tile size
         self.door_id = door_id
         self.color = color
         self.linked_door = None  # Will be set to paired door
