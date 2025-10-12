@@ -1,39 +1,65 @@
-# Python Game Development Setup
+# 🎮 Python Game Development - Educational Project
 
-A comprehensive setup for both 2D and 3D game development in Python, featuring popular libraries and complete example games.
+A comprehensive game development environment featuring **Trump Man** (Prouts Man), a fully-featured educational Bomberman-style game with professional graphics, smart AI, and hilarious gameplay!
 
-## 🎮 Features
+## 🌟 **Featured: Trump Man (Prouts Man) v2.1**
+
+**A complete educational Bomberman game with:**
+- 💨 **Smelly Trump Bombs** - Hilarious explosions!
+- 💩 **Caca Blocks** - Strategic poop obstacles!
+- 🤖 **Smart AI Opponent** - Challenging gameplay
+- 🎨 **Professional Sprites** - Beautiful graphics
+- 📚 **Educational Value** - Learn Python, AI, and game dev!
+
+### **Quick Play:**
+```bash
+./launch_bomberman.sh
+```
+
+---
+
+## 🎮 Development Features
 
 - **2D Game Development**: Pygame, Arcade, Pyglet
 - **3D Game Development**: Panda3D, ModernGL, Ursina
 - **Physics Engines**: Pymunk (2D), PyBullet (3D)
 - **Utility Modules**: Math helpers, input handling, collision detection
-- **Complete Examples**: Space Shooter (2D) and Cube Runner (3D)
+- **Complete Examples**: Trump Man, Space Shooter, Cube Runner
 
 ## 📁 Project Structure
 
 ```
 windsurf-project-2/
-├── requirements.txt          # All dependencies
-├── README.md                # This file
-├── snake_game.py            # Your original Turtle game
-├── games_2d/                # 2D game examples
-│   ├── __init__.py
-│   └── space_shooter.py     # Complete Pygame example
-├── games_3d/                # 3D game examples
-│   ├── __init__.py
-│   └── cube_runner.py       # Complete Panda3D example
-├── utils/                   # Utility modules
-│   ├── __init__.py
-│   ├── game_math.py         # Vector math, collision detection
-│   └── input_handler.py     # Input management system
-├── assets/                  # Game assets
-│   ├── images/
-│   ├── sounds/
-│   ├── models/
-│   └── textures/
-├── examples/                # Additional examples
-└── docs/                    # Documentation
+├── 🎮 TRUMP MAN GAME (Featured!)
+│   ├── bomber_game/              # Main game package
+│   │   ├── __init__.py          # Game constants
+│   │   ├── config.py            # Settings
+│   │   ├── assets.py            # Asset manager
+│   │   ├── game_state.py        # Game logic
+│   │   ├── game_engine.py       # Main loop
+│   │   ├── entities/            # Game objects
+│   │   │   ├── player.py        # Player with sprites
+│   │   │   ├── bomb.py          # Trump bombs
+│   │   │   ├── caca.py          # Poop blocks!
+│   │   │   ├── explosion.py     # Explosions
+│   │   │   └── powerup.py       # Power-ups
+│   │   ├── agents/              # AI system
+│   │   │   └── simple_agent.py  # Smart AI
+│   │   └── assets/images/       # Professional sprites
+│   ├── play_bomberman.py        # Game launcher
+│   ├── launch_bomberman.sh      # Quick start
+│   └── 📚 Documentation/
+│       ├── TRUMP_MAN_COMPLETE.md    # Complete guide
+│       ├── TRUMP_MAN_V2_FEATURES.md # v2.0 features
+│       ├── VISUAL_UPGRADE.md        # Sprite guide
+│       └── EDUCATION_PLAN.md        # Learning path
+│
+├── games_2d/                # 2D examples
+│   └── space_shooter.py
+├── games_3d/                # 3D examples
+│   └── cube_runner.py
+├── utils/                   # Utilities
+└── assets/                  # Shared assets
 ```
 
 ## 🚀 Quick Start
@@ -49,25 +75,38 @@ source game_dev_env/bin/activate  # On Windows: game_dev_env\\Scripts\\activate
 pip install -r requirements.txt
 ```
 
-### 2. Run Example Games
+### 2. Play Trump Man! 🎮
+
+**The Featured Educational Game:**
+```bash
+./launch_bomberman.sh
+```
+
+**Controls:**
+- WASD or Arrows: Move
+- Space: Drop Trump 💨
+- C: Drop Caca 💩
+- P: Pause
+- R: Restart
+
+**Read the complete guide:**
+```bash
+cat TRUMP_MAN_COMPLETE.md
+```
+
+---
+
+### 3. Run Other Example Games
 
 **2D Space Shooter (Pygame):**
 ```bash
 python games_2d/space_shooter.py
 ```
-- Use WASD or Arrow Keys to move
-- Space to shoot
-- Avoid red enemies, shoot them for points
-- R to restart when game over
 
 **3D Cube Runner (Panda3D):**
 ```bash
 python games_3d/cube_runner.py
 ```
-- Use A/D or Arrow Keys to move left/right
-- Space to jump
-- Avoid red obstacles
-- R to restart when game over
 
 **Original Snake Game:**
 ```bash
@@ -193,7 +232,13 @@ class AssetManager:
 
 ## 📖 Learning Resources
 
-### Documentation
+### Trump Man Documentation
+- **TRUMP_MAN_COMPLETE.md** - Complete game guide
+- **TRUMP_MAN_V2_FEATURES.md** - Feature details
+- **VISUAL_UPGRADE.md** - Sprite integration
+- **EDUCATION_PLAN.md** - Learning roadmap
+
+### External Documentation
 - [Pygame Documentation](https://www.pygame.org/docs/)
 - [Panda3D Manual](https://docs.panda3d.org/)
 - [Arcade Documentation](https://api.arcade.academy/)
@@ -231,10 +276,38 @@ pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
 pygame.mixer.init()
 ```
 
+## 🙏 Credits
+
+### Trump Man Sprites
+- **Source**: https://github.com/YoannHumeau/Bomberman
+- **Author**: Yoann Humeau
+- **License**: Open Source
+- Thank you for the amazing sprites!
+
+### Inspiration
+- CoderOneHQ/bomberland repository
+- Classic Bomberman games
+- Educational game design principles
+
 ## 🤝 Contributing
 
 Feel free to add more examples, improve existing code, or fix bugs. This setup is designed to be a learning resource and starting point for Python game development.
 
-## 📄 License
+##  License
 
 This project is open source and available under the MIT License.
+
+---
+
+## **Start Playing Trump Man Now!**
+
+```bash
+cd ~/CascadeProjects/windsurf-project-2
+./launch_bomberman.sh
+```
+
+**Perfect for learning Python, AI, and game development while having fun!** 
+
+---
+
+**Happy Game Development!**
