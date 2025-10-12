@@ -18,6 +18,10 @@ try:
 except:
     RUNNING_IN_BROWSER = False
 
+# Disable audio for web version to ensure compatibility
+if RUNNING_IN_BROWSER:
+    os.environ['SDL_AUDIODRIVER'] = 'dummy'
+
 print("=" * 60)
 print("💨 PROUTMAN - Web Version 💨")
 print("=" * 60)

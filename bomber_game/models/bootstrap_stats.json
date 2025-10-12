@@ -1,10 +1,10 @@
 {
   "bootstrap_episodes": 500,
-  "total_wins": 125,
-  "total_losses": 375,
-  "win_rate": 25.0,
-  "avg_reward": 4.315599999999998,
-  "timestamp": "2025-10-12T20:31:54.754033",
+  "total_wins": 149,
+  "total_losses": 351,
+  "win_rate": 29.799999999999997,
+  "avg_reward": 5.5158,
+  "timestamp": "2025-10-12T21:27:58.668943",
   "strategies_learned": [
     "Walk in unblocked directions",
     "Find safe spaces for bombs",

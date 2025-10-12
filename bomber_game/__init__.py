@@ -10,9 +10,22 @@ This package contains:
 - Educational materials and tutorials
 """
 
+import os
+import sys
+
 __version__ = "0.1.0"
 __author__ = "Xavier Callens"
 __description__ = "Educational Bomberman game for learning Python, AI, and RL"
+
+# Disable audio for web/browser compatibility
+# This ensures the game works on all browsers without audio issues
+try:
+    import platform
+    if platform.system() == "Emscripten":
+        os.environ['SDL_AUDIODRIVER'] = 'dummy'
+        os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+except:
+    pass
 
 # Game constants
 GRID_SIZE = 13
