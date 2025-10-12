@@ -17,8 +17,8 @@ class GameState:
             grid_size: Size of the grid (grid_size x grid_size)
         """
         self.grid_size = grid_size
+        self.powerups = {}  # {(x, y): PowerUp} - Initialize before _generate_grid
         self.grid = self._generate_grid()
-        self.powerups = {}  # {(x, y): PowerUp}
         
         # Entities
         self.players = []
