@@ -1,5 +1,6 @@
 """
-Bomb entity for Bomberman game.
+Trump (Prout) entity for Trump Man game.
+A smelly trump instead of a bomb!
 """
 
 import pygame
@@ -7,7 +8,7 @@ from .entity import Entity
 
 
 class Bomb(Entity):
-    """Bomb that explodes after a timer."""
+    """Trump (Prout) that explodes after a timer with a smelly cloud!"""
     
     def __init__(self, x, y, bomb_range, owner):
         """
@@ -38,25 +39,34 @@ class Bomb(Entity):
                 self.owner.active_bombs -= 1
     
     def render(self, screen, tile_size):
-        """Render bomb on screen."""
+        """Render trump (prout) on screen - green and brown smelly cloud!"""
         pixel_x = int(self.grid_x * tile_size)
         pixel_y = int(self.grid_y * tile_size)
         
-        # Bomb body
-        bomb_rect = pygame.Rect(
+        # Trump body - green and brown colors for smelly effect!
+        trump_rect = pygame.Rect(
             pixel_x + 4,
             pixel_y + 4,
             tile_size - 8,
             tile_size - 8
         )
         
-        # Pulsing effect based on timer
+        # Pulsing effect based on timer - alternating green and brown
         pulse = int((self.timer * 4) % 2)
-        color = (50, 50, 50) if pulse == 0 else (80, 80, 80)
+        # Green and brown colors for the smelly trump!
+        color = (100, 150, 50) if pulse == 0 else (139, 90, 43)  # Green / Brown
         
-        pygame.draw.ellipse(screen, color, bomb_rect)
+        pygame.draw.ellipse(screen, color, trump_rect)
         
-        # Fuse
-        fuse_color = (255, 100, 0) if self.timer < 1.0 else (200, 200, 0)
-        fuse_rect = pygame.Rect(pixel_x + 14, pixel_y + 2, 4, 6)
-        pygame.draw.rect(screen, fuse_color, fuse_rect, border_radius=2)
+        # Add stink lines (wavy lines coming out)
+        stink_color = (150, 200, 100) if self.timer < 1.0 else (100, 150, 50)
+        # Draw wavy stink lines
+        for i in range(3):
+            offset = i * 8
+            pygame.draw.line(screen, stink_color, 
+                           (pixel_x + 8 + offset, pixel_y + 2),
+                           (pixel_x + 6 + offset, pixel_y - 4), 2)
+        
+        # Add brown spots for extra smelly effect
+        pygame.draw.circle(screen, (101, 67, 33), (pixel_x + 10, pixel_y + 12), 3)
+        pygame.draw.circle(screen, (101, 67, 33), (pixel_x + 20, pixel_y + 18), 2)

@@ -19,7 +19,7 @@ class BombermanGame:
         
         # Screen setup
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        pygame.display.set_caption("Bomberman - Educational Game")
+        pygame.display.set_caption("Trump Man (Prouts Man) - Educational Game")
         self.clock = pygame.time.Clock()
         
         # Font
@@ -178,7 +178,7 @@ class BombermanGame:
             self.screen.blit(text_surf, (10, ui_y + 25))
         
         # Controls
-        controls = "Controls: WASD/Arrows=Move, Space=Bomb, P=Pause, ESC=Quit"
+        controls = "Controls: WASD/Arrows=Move, Space=Trump💨, P=Pause, ESC=Quit"
         text_surf = self.font.render(controls, True, WHITE)
         text_rect = text_surf.get_rect(right=SCREEN_WIDTH - 10, top=ui_y)
         self.screen.blit(text_surf, text_rect)
