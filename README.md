@@ -98,11 +98,21 @@ source setup_terminal.sh
 
 <div align="center">
 
-### **🎮 Gameplay Screenshot**
+### **🎮 Proutman Gameplay**
 
-<img src="bomber_game/assets/images/gameplay_screenshot.png" alt="Proutman Gameplay" width="800"/>
+<img src="bomber_game/assets/images/screenshot-proutman-gameplay.png" alt="Proutman Gameplay" width="800"/>
 
 *Proutman in action! Drop trump bombs 💨, avoid explosions 💥, and defeat the AI opponent! 🤖*
+
+</div>
+
+<div align="center">
+
+### **🤖 AI Training Mode**
+
+<img src="bomber_game/assets/images/gameplay_screenshot.png" alt="AI Training" width="800"/>
+
+*Training the AI agent! Watch it learn strategies and improve over time. 📊*
 
 </div>
 
@@ -263,7 +273,7 @@ Learn how games are built from scratch!
 ### **🎮 Live Gameplay**
 
 <div align="center">
-<img src="bomber_game/assets/images/gameplay_screenshot.png" alt="Gameplay" width="700"/>
+<img src="bomber_game/assets/images/screenshot-proutman-gameplay.png" alt="Gameplay" width="700"/>
 </div>
 
 **What you see:**
@@ -273,6 +283,19 @@ Learn how games are built from scratch!
 - 🧱 **Destructible Walls** - Break them for power-ups
 - 🏰 **Solid Blocks** - Indestructible obstacles
 - ⚡ **Power-ups** - Collect to get stronger
+
+### **🤖 AI Training in Progress**
+
+<div align="center">
+<img src="bomber_game/assets/images/gameplay_screenshot.png" alt="AI Training" width="700"/>
+</div>
+
+**Training mode:**
+- 📊 **Headless mode** - No graphics, faster training
+- 🧠 **Learning strategies** - AI improves over time
+- 📈 **Progress tracking** - Win rate, episodes, time
+- 💾 **Auto-save** - Model saved every few minutes
+- 🎯 **Bootstrap + RL** - Heuristics then reinforcement learning
 
 ### **🎨 Game Elements**
 
