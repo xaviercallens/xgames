@@ -21,15 +21,19 @@ class ModelSelector:
         """
         self.models_dir = models_dir
         self.stats_file = os.path.join(models_dir, "training_stats.json")
+        self.bootstrap_stats_file = os.path.join(models_dir, "bootstrap_stats.json")
         self.heuristic_stats_file = os.path.join(models_dir, "heuristic_stats.json")
         self.heuristic_benchmark_file = os.path.join(models_dir, "heuristic_benchmark.json")
+        self.enhanced_benchmark_file = os.path.join(models_dir, "enhanced_heuristic_benchmark.json")
         self.best_model_file = os.path.join(models_dir, "best_model.pth")
         self.ppo_model_file = os.path.join(models_dir, "ppo_agent.pth")
         self.pretrained_file = os.path.join(models_dir, "ppo_pretrained.pth")
         
         # Performance thresholds
         self.min_episodes_for_comparison = 50  # Minimum games before comparing
-        self.heuristic_baseline_win_rate = 15.0  # Default if not benchmarked
+        self.heuristic_baseline_win_rate = 30.0  # Improved heuristic baseline
+        self.enhanced_heuristic_win_rate = 66.0  # Enhanced heuristic (from benchmarks)
+        self.bootstrap_win_rate = 25.0  # Bootstrap pretrained model
         
     def get_model_stats(self, stats_file):
         """
