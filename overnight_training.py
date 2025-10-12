@@ -25,7 +25,7 @@ import signal
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from bomber_game import GRID_SIZE
+from bomber_game import GRID_SIZE, TILE_SIZE, FPS
 from bomber_game.game_state import GameState
 from bomber_game.agents import PPOAgent
 from bomber_game.heuristics_improved import ImprovedHeuristicAgent
@@ -410,7 +410,6 @@ def train_overnight():
             enemy_action = enemy_agent.choose_action(game_state)
             
             # Execute actions
-            from bomber_game import TILE_SIZE
             agent_player.move(*agent_action[:2], game_state.grid, TILE_SIZE, game_state)
             if agent_action[2]:
                 game_state.place_bomb(agent_player)
