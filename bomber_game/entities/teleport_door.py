@@ -30,6 +30,8 @@ class TeleportDoor(Entity):
         self.linked_door = None  # Will be set to paired door
         self.animation_frame = 0
         self.animation_speed = 0.1
+        self.last_teleport_time = 0  # Cooldown timer
+        self.teleport_cooldown = 1.0  # 1 second cooldown
         
     def link_to(self, other_door):
         """
@@ -41,33 +43,46 @@ class TeleportDoor(Entity):
         self.linked_door = other_door
         other_door.linked_door = self
         
-    def can_teleport(self, player):
+    def can_teleport(self, player, current_time):
         """
         Check if player can use this door.
         
         Args:
             player: Player entity
+            current_time: Current game time for cooldown
             
         Returns:
             True if player is on door and linked door exists
         """
         if not self.linked_door:
             return False
-            
-        # Check if player is on this door
-        player_x, player_y = int(player.x), int(player.y)
-        return player_x == self.grid_x and player_y == self.grid_y
         
-    def teleport_player(self, player):
+        # Check cooldown
+        if current_time - self.last_teleport_time < self.teleport_cooldown:
+            return False
+            
+        # Check if player is on this door (use grid position)
+        player_grid_x = int(player.x)
+        player_grid_y = int(player.y)
+        return player_grid_x == self.grid_x and player_grid_y == self.grid_y
+        
+    def teleport_player(self, player, current_time):
         """
         Teleport player to linked door.
         
         Args:
             player: Player entity to teleport
+            current_time: Current game time
         """
         if self.linked_door:
-            player.x = self.linked_door.grid_x
-            player.y = self.linked_door.grid_y
+            # Teleport to center of linked door tile
+            player.x = float(self.linked_door.grid_x) + 0.5
+            player.y = float(self.linked_door.grid_y) + 0.5
+            
+            # Update cooldowns for both doors
+            self.last_teleport_time = current_time
+            self.linked_door.last_teleport_time = current_time
+            
             return True
         return False
         
@@ -130,32 +145,32 @@ class TeleportDoorManager:
         
     def create_door_pairs(self, num_pairs):
         """
-        Create pairs of linked teleport doors ONLY on map borders.
-        Doors are placed on the border walls (x=0, y=0, x=max, y=max).
+        Create pairs of linked teleport doors next to borders (walkable positions).
+        Doors are placed one tile inside the border walls so players can walk on them.
         
         Args:
             num_pairs: Number of door pairs to create
         """
         import random
         
-        # Define border positions - ONLY on the actual border walls
+        # Define border positions - ONE TILE INSIDE the border walls (walkable)
         border_positions = []
         
-        # Top border (y=0, excluding corners)
+        # Top border (y=1, one tile inside, excluding corners)
         for x in range(2, self.grid_size - 2):
-            border_positions.append((x, 0))
+            border_positions.append((x, 1))
             
-        # Bottom border (y=max, excluding corners)
+        # Bottom border (y=max-1, one tile inside, excluding corners)
         for x in range(2, self.grid_size - 2):
-            border_positions.append((x, self.grid_size - 1))
+            border_positions.append((x, self.grid_size - 2))
             
-        # Left border (x=0, excluding corners)
+        # Left border (x=1, one tile inside, excluding corners)
         for y in range(2, self.grid_size - 2):
-            border_positions.append((0, y))
+            border_positions.append((1, y))
             
-        # Right border (x=max, excluding corners)
+        # Right border (x=max-1, one tile inside, excluding corners)
         for y in range(2, self.grid_size - 2):
-            border_positions.append((self.grid_size - 1, y))
+            border_positions.append((self.grid_size - 2, y))
             
         # Shuffle and select positions
         random.shuffle(border_positions)

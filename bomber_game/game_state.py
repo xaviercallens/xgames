@@ -40,6 +40,7 @@ class GameState:
         # Game state
         self.game_over = False
         self.winner = None
+        self.game_time = 0.0  # Track total game time for cooldowns
         
     def _generate_grid(self):
         """Generate game grid with walls and soft walls."""
@@ -126,6 +127,9 @@ class GameState:
     
     def update(self, dt):
         """Update all game entities."""
+        # Update game time
+        self.game_time += dt
+        
         # Update bombs
         for bomb in self.bombs[:]:
             bomb.update(dt)
@@ -159,8 +163,8 @@ class GameState:
             for player in self.players:
                 if player.alive:
                     door = self.teleport_doors.get_door_at(int(player.x), int(player.y))
-                    if door and door.can_teleport(player):
-                        door.teleport_player(player)
+                    if door and door.can_teleport(player, self.game_time):
+                        door.teleport_player(player, self.game_time)
         
         # Update bomb machine
         if self.bomb_machine:
