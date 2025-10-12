@@ -6,6 +6,14 @@
 
 **An Educational Bomberman Game That Makes Learning Programming FUN!**
 
+---
+
+## 🎮 **[TRY LIVE DEMO](https://xaviercallens.github.io/xgames/demo.html)** | 📥 **[DOWNLOAD](https://github.com/xaviercallens/xgames)**
+
+**Play Proutman Online - No Installation Required!**
+
+---
+
 ![Proutman Splash](bomber_game/assets/images/proutman_splash.png)
 
 <img src="bomber_game/assets/images/Gemini_Generated_Image_xkb82mxkb82mxkb8.png" alt="Proutman Character" width="300"/>
