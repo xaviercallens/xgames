@@ -41,3 +41,27 @@
 [2025-10-12 22:15:28] 📊 Loaded existing stats: 3101 episodes
 [2025-10-12 22:15:28] 🆕 Starting fresh training
 [2025-10-12 22:15:32] ❌ Training error: 'ImprovedHeuristicAgent' object has no attribute 'get_action'
+[2025-10-12 22:19:37] 📊 Loaded existing stats: 3159 episodes
+[2025-10-12 22:19:37] 🆕 Starting fresh training
+[2025-10-12 22:19:46] ❌ Training error: name 'FPS' is not defined
+[2025-10-12 22:20:15] 📊 Loaded existing stats: 3167 episodes
+[2025-10-12 22:20:15] 🆕 Starting fresh training
+[2025-10-12 22:20:18] ❌ Training error: GameState.place_bomb() takes 2 positional arguments but 3 were given
+[2025-10-12 22:21:40] 📊 Loaded existing stats: 3196 episodes
+[2025-10-12 22:21:40] 🆕 Starting fresh training
+[2025-10-12 22:21:43] ❌ Training error: name 'FPS' is not defined
+[2025-10-12 22:23:12] 📊 Loaded existing stats: 3225 episodes
+[2025-10-12 22:23:12] 🆕 Starting fresh training
+[2025-10-12 22:23:15] ❌ Training error: name 'reward' is not defined
+[2025-10-12 22:24:40] 📊 Loaded existing stats: 3242 episodes
+[2025-10-12 22:24:40] 🆕 Starting fresh training
+[2025-10-12 22:24:47] ❌ Training error: 'Bomb' object has no attribute 'power'
+[2025-10-12 22:27:05] 📊 Loaded existing stats: 3286 episodes
+[2025-10-12 22:27:05] 🆕 Starting fresh training
+[2025-10-12 22:27:11] ❌ Training error: 'total_rewards'
+[2025-10-12 22:28:39] 📊 Loaded existing stats: 3315 episodes
+[2025-10-12 22:28:39] 🆕 Starting fresh training
+[2025-10-12 22:29:09] 📊 Loaded existing stats: 3322 episodes
+[2025-10-12 22:29:09] 🆕 Starting fresh training
+[2025-10-12 22:36:24] ❌ Training error: 'PPOAgent' object has no attribute 'save'
+[2025-10-12 22:36:57] ❌ Training error: 'PPOAgent' object has no attribute 'save'
