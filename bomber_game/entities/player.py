@@ -1,9 +1,10 @@
 """
-Player entity for Bomberman game.
+Player entity for Trump Man game.
 """
 
 import pygame
 from .entity import Entity
+from ..assets import get_asset_manager
 
 
 class Player(Entity):
@@ -44,6 +45,11 @@ class Player(Entity):
         
         # Animation
         self.direction = 'down'
+        
+        # Sprite
+        self.sprite = None
+        self.player_num = 1 if color == (0, 255, 0) else 2  # Green=1, Red=2
+        self._load_sprite()
         
     def move(self, dx, dy, grid, tile_size):
         """
@@ -108,31 +114,41 @@ class Player(Entity):
             self.speed = min(self.speed + 1, 8)
             self.speed_level += 1
     
+    def _load_sprite(self):
+        """Load player sprite."""
+        try:
+            assets = get_asset_manager()
+            self.sprite = assets.get_player_sprite(self.player_num, (56, 56))
+        except Exception as e:
+            print(f"Could not load player sprite: {e}")
+            self.sprite = None
+    
     def render(self, screen, tile_size):
         """Render player on screen."""
         pixel_x = int(self.x * tile_size)
         pixel_y = int(self.y * tile_size)
         
-        # Draw player body
-        body_rect = pygame.Rect(
-            pixel_x + 2,
-            pixel_y + 2,
-            self.width,
-            self.height
-        )
-        pygame.draw.rect(screen, self.color, body_rect, border_radius=4)
-        
-        # Draw eyes based on direction
-        eye_color = (255, 255, 255)
-        if self.direction == 'down':
-            pygame.draw.circle(screen, eye_color, (pixel_x + 10, pixel_y + 12), 3)
-            pygame.draw.circle(screen, eye_color, (pixel_x + 22, pixel_y + 12), 3)
-        elif self.direction == 'up':
-            pygame.draw.circle(screen, eye_color, (pixel_x + 10, pixel_y + 8), 3)
-            pygame.draw.circle(screen, eye_color, (pixel_x + 22, pixel_y + 8), 3)
-        elif self.direction == 'left':
-            pygame.draw.circle(screen, eye_color, (pixel_x + 8, pixel_y + 10), 3)
-            pygame.draw.circle(screen, eye_color, (pixel_x + 8, pixel_y + 20), 3)
-        else:  # right
-            pygame.draw.circle(screen, eye_color, (pixel_x + 24, pixel_y + 10), 3)
-            pygame.draw.circle(screen, eye_color, (pixel_x + 24, pixel_y + 20), 3)
+        # Use sprite if available, otherwise draw simple shape
+        if self.sprite:
+            # Center the sprite
+            sprite_rect = self.sprite.get_rect()
+            sprite_rect.center = (pixel_x + tile_size // 2, pixel_y + tile_size // 2)
+            screen.blit(self.sprite, sprite_rect)
+        else:
+            # Fallback to simple colored rectangle
+            body_rect = pygame.Rect(
+                pixel_x + 4,
+                pixel_y + 4,
+                self.width,
+                self.height
+            )
+            pygame.draw.rect(screen, self.color, body_rect, border_radius=4)
+            
+            # Draw eyes based on direction
+            eye_color = (255, 255, 255)
+            if self.direction == 'down':
+                pygame.draw.circle(screen, eye_color, (pixel_x + 16, pixel_y + 20), 3)
+                pygame.draw.circle(screen, eye_color, (pixel_x + 32, pixel_y + 20), 3)
+            elif self.direction == 'up':
+                pygame.draw.circle(screen, eye_color, (pixel_x + 16, pixel_y + 12), 3)
+                pygame.draw.circle(screen, eye_color, (pixel_x + 32, pixel_y + 12), 3)

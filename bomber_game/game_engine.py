@@ -8,6 +8,7 @@ from . import (GRID_SIZE, TILE_SIZE, FPS, SCREEN_WIDTH, SCREEN_HEIGHT,
                BLACK, WHITE, GRAY, DARK_GRAY, GREEN, RED, BROWN)
 from .game_state import GameState
 from .agents import SimpleAgent
+from .assets import get_asset_manager
 
 
 class BombermanGame:
@@ -41,6 +42,19 @@ class BombermanGame:
         # Game state
         self.running = True
         self.paused = False
+        
+        # Load assets
+        self.assets = get_asset_manager()
+        self.wall_sprite = None
+        self._load_sprites()
+    
+    def _load_sprites(self):
+        """Load game sprites."""
+        try:
+            self.wall_sprite = self.assets.get_wall_sprite((TILE_SIZE, TILE_SIZE))
+        except Exception as e:
+            print(f"Could not load wall sprite: {e}")
+            self.wall_sprite = None
         
     def handle_events(self):
         """Handle pygame events."""
@@ -152,10 +166,13 @@ class BombermanGame:
                 
                 # Draw walls
                 if tile == 1:  # Indestructible wall
-                    pygame.draw.rect(self.screen, DARK_GRAY,
-                                   (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
-                    pygame.draw.rect(self.screen, GRAY,
-                                   (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE), 2)
+                    if self.wall_sprite:
+                        self.screen.blit(self.wall_sprite, (pixel_x, pixel_y))
+                    else:
+                        pygame.draw.rect(self.screen, DARK_GRAY,
+                                       (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
+                        pygame.draw.rect(self.screen, GRAY,
+                                       (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE), 2)
                 elif tile == 2:  # Soft wall
                     pygame.draw.rect(self.screen, BROWN,
                                    (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
@@ -223,6 +240,7 @@ class BombermanGame:
             GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
         )
         self.ai_agent = SimpleAgent(self.ai_player)
+        self._load_sprites()  # Reload sprites
     
     def run(self):
         """Main game loop."""
