@@ -1,0 +1,14 @@
+{
+  "sessions": [
+    {
+      "timestamp": "2025-10-12T20:33:00.483269",
+      "opponent": "Simple AI",
+      "games": 100,
+      "wins": 27,
+      "losses": 55,
+      "draws": 18,
+      "win_rate": 27.0
+    }
+  ],
+  "baseline_win_rate": 27.0
+}
