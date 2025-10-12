@@ -13,6 +13,8 @@ from .menu import MenuScreen
 from .model_selector import ModelSelector
 from .heuristics import HeuristicAgent
 from .heuristics_improved import ImprovedHeuristicAgent
+from .game_statistics import GameStatistics
+from .stats_panel import StatsPanel
 import os
 
 
@@ -23,10 +25,17 @@ class BombermanGame:
         """Initialize the game."""
         pygame.init()
         
-        # Screen setup
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        # Screen setup with stats panel
+        self.stats_panel_width = 300
+        self.game_width = SCREEN_WIDTH
+        self.total_width = SCREEN_WIDTH + self.stats_panel_width
+        self.screen = pygame.display.set_mode((self.total_width, SCREEN_HEIGHT))
         pygame.display.set_caption("💨 PROUTMAN - L'aventure Codée! 💩")
         self.clock = pygame.time.Clock()
+        
+        # Statistics tracking
+        self.stats = GameStatistics()
+        self.stats_panel = StatsPanel(SCREEN_WIDTH, 0, self.stats_panel_width, SCREEN_HEIGHT)
         
         # Font
         self.font = pygame.font.Font(None, 24)
@@ -126,6 +135,9 @@ class BombermanGame:
             self.ai_agent = SimpleAgent(self.ai_player)
             self.ai_type = "Simple"
         
+        # Set AI info in statistics
+        self.stats.set_ai_info(self.ai_type, selection.get('model_path'))
+        
         # Game state
         self.running = True
         self.paused = False
@@ -188,6 +200,7 @@ class BombermanGame:
                 elif event.key == pygame.K_SPACE:
                     if self.human_player.alive:
                         self.game_state.place_bomb(self.human_player)
+                        self.stats.record_bomb(True)
                 elif event.key == pygame.K_c:
                     if self.human_player.alive:
                         self.game_state.place_caca(self.human_player)
@@ -211,17 +224,32 @@ class BombermanGame:
             dx = 1
         
         if self.human_player.alive:
+            old_pos = (self.human_player.grid_x, self.human_player.grid_y)
             self.human_player.move(dx, dy, self.game_state.grid, TILE_SIZE, self.game_state)
+            new_pos = (self.human_player.grid_x, self.human_player.grid_y)
+            
+            # Track movement
+            if old_pos != new_pos:
+                self.stats.record_move(True, new_pos, self.game_state)
+            
             self.human_player.update(dt)  # Update animation
         
         # Update AI
         if self.ai_player.alive:
+            old_pos = (self.ai_player.grid_x, self.ai_player.grid_y)
             action = self.ai_agent.update(dt, self.game_state)
             if action:
                 ai_dx, ai_dy, place_bomb = action
                 self.ai_player.move(ai_dx, ai_dy, self.game_state.grid, TILE_SIZE, self.game_state)
+                new_pos = (self.ai_player.grid_x, self.ai_player.grid_y)
+                
+                # Track movement
+                if old_pos != new_pos:
+                    self.stats.record_move(False, new_pos, self.game_state)
+                
                 if place_bomb:
                     self.game_state.place_bomb(self.ai_player)
+                    self.stats.record_bomb(False)
             self.ai_player.update(dt)  # Update animation
         
         # Update game state
@@ -265,6 +293,9 @@ class BombermanGame:
         
         # Draw UI
         self._draw_ui()
+        
+        # Draw statistics panel
+        self.stats_panel.draw(self.screen, self.stats, self.game_state)
         
         # Draw game over screen
         if self.game_state.game_over:
@@ -375,6 +406,9 @@ class BombermanGame:
                 
                 # Print stats to console
                 print(self.ai_agent.get_stats_string())
+            
+            # Save game statistics
+            self.stats.finish_game(self.game_state.winner.name if self.game_state.winner else None)
         else:
             text = "Draw!"
             color = WHITE
@@ -413,12 +447,37 @@ class BombermanGame:
     
     def _restart_game(self):
         """Restart the game."""
+        # Save previous game stats if game was finished
+        if self.game_state.game_over and self.game_state.winner:
+            self.stats.finish_game(self.game_state.winner.name)
+        
+        # Reset game state
         self.game_state = GameState(GRID_SIZE)
         self.human_player = self.game_state.add_player(1, 1, GREEN, "Player")
         self.ai_player = self.game_state.add_player(
             GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
         )
-        self.ai_agent = SimpleAgent(self.ai_player)
+        
+        # Reload AI with same type
+        models_dir = os.path.join(os.path.dirname(__file__), "models")
+        selector = ModelSelector(models_dir)
+        selection = selector.select_best_model()
+        
+        if selection['model_type'] == 'ppo':
+            self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
+        elif selection['model_type'] == 'ppo_pretrained':
+            self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
+        elif selection['model_type'] == 'heuristic':
+            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+        else:
+            self.ai_agent = SimpleAgent(self.ai_player)
+        
+        # Reset statistics for new game
+        self.stats = GameStatistics()
+        self.stats.set_ai_info(self.ai_type, selection.get('model_path'))
+        self.stats_panel.human_perf_history = []
+        self.stats_panel.ai_perf_history = []
+        
         self._load_sprites()  # Reload sprites
     
     def run(self):
