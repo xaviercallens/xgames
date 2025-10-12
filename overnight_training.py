@@ -410,19 +410,19 @@ def train_overnight():
             enemy_action = enemy_agent.choose_action(game_state)
             
             # Execute actions
-            agent_player.move(*agent_action[:2])
+            from bomber_game import TILE_SIZE
+            agent_player.move(*agent_action[:2], game_state.grid, TILE_SIZE, game_state)
             if agent_action[2]:
-                agent_player.place_bomb(game_state)
+                game_state.place_bomb(agent_player.grid_x, agent_player.grid_y)
             
-            enemy_player.move(*enemy_action[:2])
+            enemy_player.move(*enemy_action[:2], game_state.grid, TILE_SIZE, game_state)
             if enemy_action[2]:
-                enemy_player.place_bomb(game_state)
+                game_state.place_bomb(enemy_player.grid_x, enemy_player.grid_y)
             
             # Update game
-            game_state.update()
+            game_state.update(1/FPS)  # dt = 1/FPS for consistent timing
             
             # Calculate reward
-            reward = calculate_reward(game_state, agent_player, enemy_player, prev_state, agent_action)
             episode_reward += reward
             
             # Store experience (if agent supports it)

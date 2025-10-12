@@ -7,7 +7,7 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from bomber_game import GRID_SIZE
+from bomber_game import GRID_SIZE, TILE_SIZE
 from bomber_game.game_state import GameState
 from bomber_game.agents import PPOAgent
 from bomber_game.heuristics_improved import ImprovedHeuristicAgent
@@ -32,19 +32,20 @@ print("3. Running test episode...")
 for step in range(10):
     # Get actions
     agent_action = agent.choose_action(game_state)
-    enemy_action = enemy_agent.get_action(game_state, enemy_player, agent_player)
+    enemy_action = enemy_agent.choose_action(game_state)
     
     # Execute actions
-    agent_player.move(*agent_action[:2])
+    agent_player.move(*agent_action[:2], game_state.grid, TILE_SIZE, game_state)
     if agent_action[2]:
-        agent_player.place_bomb(game_state)
+        game_state.place_bomb(agent_player)
     
-    enemy_player.move(*enemy_action[:2])
+    enemy_player.move(*enemy_action[:2], game_state.grid, TILE_SIZE, game_state)
     if enemy_action[2]:
-        enemy_player.place_bomb(game_state)
+        game_state.place_bomb(enemy_player)
     
     # Update game
-    game_state.update()
+    from bomber_game import FPS
+    game_state.update(1/FPS)
     
     if not agent_player.alive or not enemy_player.alive:
         break

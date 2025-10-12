@@ -1,0 +1,43 @@
+[2025-10-12 21:54:22] 📊 Loaded existing stats: 2860 episodes
+[2025-10-12 21:54:22] 🆕 Starting fresh training
+[2025-10-12 21:54:25] ❌ Training error: name 'deque' is not defined
+[2025-10-12 22:02:58] 📊 Loaded existing stats: 2933 episodes
+[2025-10-12 22:02:58] 🆕 Starting fresh training
+[2025-10-12 22:03:03] ❌ Training error: name 'deque' is not defined
+[2025-10-12 22:04:04] 📊 Loaded existing stats: 2942 episodes
+[2025-10-12 22:04:04] 🆕 Starting fresh training
+[2025-10-12 22:04:07] ❌ Training error: name 'deque' is not defined
+[2025-10-12 22:04:57] 📊 Loaded existing stats: 2947 episodes
+[2025-10-12 22:04:57] 🆕 Starting fresh training
+[2025-10-12 22:05:00] ❌ Training error: name 'deque' is not defined
+[2025-10-12 22:06:05] 📊 Loaded existing stats: 2963 episodes
+[2025-10-12 22:06:05] 🆕 Starting fresh training
+[2025-10-12 22:06:08] ❌ Training error: name 'deque' is not defined
+[2025-10-12 22:07:59] 📊 Loaded existing stats: 2985 episodes
+[2025-10-12 22:07:59] 🆕 Starting fresh training
+[2025-10-12 22:08:02] ❌ Training error: name 'deque' is not defined
+[2025-10-12 22:09:53] 📊 Loaded existing stats: 3014 episodes
+[2025-10-12 22:09:53] 🆕 Starting fresh training
+[2025-10-12 22:09:56] ❌ Training error: 'GameState' object has no attribute 'reset'
+[2025-10-12 22:10:13] 📊 Loaded existing stats: 3014 episodes
+[2025-10-12 22:10:13] 🆕 Starting fresh training
+[2025-10-12 22:10:16] 
+🏁 Training completed!
+[2025-10-12 22:10:16] ❌ Training error: cannot access local variable 'episode' where it is not associated with a value
+[2025-10-12 22:10:32] 📊 Loaded existing stats: 3022 episodes
+[2025-10-12 22:10:32] 🆕 Starting fresh training
+[2025-10-12 22:10:35] 
+🏁 Training completed!
+[2025-10-12 22:10:35] ❌ Training error: cannot access local variable 'episode' where it is not associated with a value
+[2025-10-12 22:11:02] 📊 Loaded existing stats: 3032 episodes
+[2025-10-12 22:11:02] 🆕 Starting fresh training
+[2025-10-12 22:11:06] ❌ Training error: 'GameState' object has no attribute 'reset'
+[2025-10-12 22:11:48] 📊 Loaded existing stats: 3042 episodes
+[2025-10-12 22:11:48] 🆕 Starting fresh training
+[2025-10-12 22:11:51] ❌ Training error: 'GameState' object has no attribute 'reset'
+[2025-10-12 22:13:32] 📊 Loaded existing stats: 3076 episodes
+[2025-10-12 22:13:32] 🆕 Starting fresh training
+[2025-10-12 22:13:35] ❌ Training error: 'PPOAgent' object has no attribute 'get_action'
+[2025-10-12 22:15:28] 📊 Loaded existing stats: 3101 episodes
+[2025-10-12 22:15:28] 🆕 Starting fresh training
+[2025-10-12 22:15:32] ❌ Training error: 'ImprovedHeuristicAgent' object has no attribute 'get_action'
