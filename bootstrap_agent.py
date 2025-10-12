@@ -16,7 +16,10 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
 import warnings
 warnings.filterwarnings('ignore')
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Ensure we're in the right directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+sys.path.insert(0, script_dir)
 
 from bomber_game import GRID_SIZE, TILE_SIZE
 from bomber_game.game_state import GameState
@@ -60,7 +63,7 @@ def save_state(game_state, player, enemy):
     }
 
 
-def calculate_reward(prev_state, curr_state, action, player, enemy):
+def calculate_reward(prev_state, curr_state, action, player, enemy, game_state):
     """Calculate reward for heuristic action."""
     reward = 0
     
@@ -80,11 +83,11 @@ def calculate_reward(prev_state, curr_state, action, player, enemy):
     prev_px, prev_py = prev_state['player_pos']
     
     # Reward for moving to safer positions
-    if GameHeuristics.is_safe_position(px, py, None):
+    if GameHeuristics.is_safe_position(px, py, game_state):
         reward += 0.2
     
     # Reward for placing bombs strategically
-    if action[2]:  # Placed bomb
+    if action and len(action) > 2 and action[2]:  # Placed bomb
         reward += 0.5
     
     # Small penalty for staying still
@@ -183,7 +186,7 @@ def bootstrap_training():
             
             # Calculate reward
             curr_state = save_state(game_state, agent_player, enemy_player)
-            reward = calculate_reward(prev_state, curr_state, action, agent_player, enemy_player)
+            reward = calculate_reward(prev_state, curr_state, action, agent_player, enemy_player, game_state)
             total_reward += reward
             
             # Store experience

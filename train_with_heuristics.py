@@ -56,10 +56,19 @@ def run_bootstrap():
     print("   This will take a few minutes...")
     print()
     
+    # Determine python executable (use venv if available)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    venv_python = os.path.join(script_dir, "game_dev_env", "bin", "python")
+    
+    if os.path.exists(venv_python):
+        python_exe = venv_python
+    else:
+        python_exe = sys.executable
+    
     # Run bootstrap script
     result = subprocess.run(
-        [sys.executable, "bootstrap_agent.py"],
-        cwd=os.path.dirname(os.path.abspath(__file__))
+        [python_exe, "bootstrap_agent.py"],
+        cwd=script_dir
     )
     
     if result.returncode != 0:
@@ -80,10 +89,19 @@ def run_training():
     print("   Auto-save: Every 30 seconds")
     print()
     
+    # Determine python executable (use venv if available)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    venv_python = os.path.join(script_dir, "game_dev_env", "bin", "python")
+    
+    if os.path.exists(venv_python):
+        python_exe = venv_python
+    else:
+        python_exe = sys.executable
+    
     # Run training script
     result = subprocess.run(
-        [sys.executable, "quick_train_agent.py"],
-        cwd=os.path.dirname(os.path.abspath(__file__))
+        [python_exe, "quick_train_agent.py"],
+        cwd=script_dir
     )
     
     if result.returncode != 0:
