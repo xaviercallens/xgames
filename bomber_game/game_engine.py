@@ -95,14 +95,14 @@ class BombermanGame:
             dx = 1
         
         if self.human_player.alive:
-            self.human_player.move(dx, dy, self.game_state.grid, TILE_SIZE)
+            self.human_player.move(dx, dy, self.game_state.grid, TILE_SIZE, self.game_state)
         
         # Update AI
         if self.ai_player.alive:
             action = self.ai_agent.update(dt, self.game_state)
             if action:
                 ai_dx, ai_dy, place_bomb = action
-                self.ai_player.move(ai_dx, ai_dy, self.game_state.grid, TILE_SIZE)
+                self.ai_player.move(ai_dx, ai_dy, self.game_state.grid, TILE_SIZE, self.game_state)
                 if place_bomb:
                     self.game_state.place_bomb(self.ai_player)
         
