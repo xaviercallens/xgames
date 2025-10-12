@@ -203,37 +203,38 @@ quick_train_agent.quick_train()
         
         if [ -f "$TRAINING_STATS" ]; then
             echo -e "${CYAN}════════════════════════════════════════════════════════════════════${NC}"
-            $PYTHON -c "
+            $PYTHON << 'PYEOF'
 import json
 from datetime import datetime
 
-with open('$TRAINING_STATS', 'r') as f:
+with open('bomber_game/models/training_stats.json', 'r') as f:
     stats = json.load(f)
 
-print(f\"📈 Overall Statistics:\")
-print(f\"   Total Episodes: {stats.get('total_episodes', 0)}")
-print(f\"   Total Wins: {stats.get('total_wins', 0)}")
-print(f\"   Total Losses: {stats.get('total_losses', 0)}")
-print(f\"   Win Rate: {stats.get('total_wins', 0) / max(stats.get('total_episodes', 1), 1) * 100:.1f}%\")
-print(f\"   Current Level: {stats.get('current_level', 'Unknown')}\")
+print("📈 Overall Statistics:")
+print(f"   Total Episodes: {stats.get('total_episodes', 0)}")
+print(f"   Total Wins: {stats.get('total_wins', 0)}")
+print(f"   Total Losses: {stats.get('total_losses', 0)}")
+win_rate = stats.get('total_wins', 0) / max(stats.get('total_episodes', 1), 1) * 100
+print(f"   Win Rate: {win_rate:.1f}%")
+print(f"   Current Level: {stats.get('current_level', 'Unknown')}")
 
 if 'total_training_time' in stats:
     hours = stats['total_training_time'] // 3600
     minutes = (stats['total_training_time'] % 3600) // 60
-    print(f\"   Training Time: {int(hours)}h {int(minutes)}m\")
+    print(f"   Training Time: {int(hours)}h {int(minutes)}m")
 
 if 'last_updated' in stats:
-    print(f\"   Last Updated: {stats.get('last_updated', 'Unknown')}\")
+    print(f"   Last Updated: {stats.get('last_updated', 'Unknown')}")
 
 if 'training_sessions' in stats and stats['training_sessions']:
-    print(f\"\n📅 Recent Sessions:\")
+    print("\n📅 Recent Sessions:")
     for i, session in enumerate(stats['training_sessions'][-5:], 1):
         date = session.get('date', 'Unknown')[:19]
         episodes = session.get('episodes', 0)
         wins = session.get('wins', 0)
         win_rate = wins / max(episodes, 1) * 100
-        print(f\"   {i}. {date} - {episodes} episodes, {win_rate:.1f}% wins\")
-"
+        print(f"   {i}. {date} - {episodes} episodes, {win_rate:.1f}% wins")
+PYEOF
             echo -e "${CYAN}════════════════════════════════════════════════════════════════════${NC}"
         else
             echo -e "${YELLOW}⚠️  No training statistics found${NC}"
@@ -243,23 +244,23 @@ if 'training_sessions' in stats and stats['training_sessions']:
         
         if [ -f "$BOOTSTRAP_STATS" ]; then
             echo -e "${CYAN}════════════════════════════════════════════════════════════════════${NC}"
-            $PYTHON -c "
+            $PYTHON << 'PYEOF'
 import json
 
-with open('$BOOTSTRAP_STATS', 'r') as f:
+with open('bomber_game/models/bootstrap_stats.json', 'r') as f:
     stats = json.load(f)
 
-print(f\"🎓 Bootstrap Statistics:\")
-print(f\"   Episodes: {stats.get('bootstrap_episodes', 0)}")
-print(f\"   Wins: {stats.get('total_wins', 0)}")
-print(f\"   Win Rate: {stats.get('win_rate', 0):.1f}%\")
-print(f\"   Avg Reward: {stats.get('avg_reward', 0):.2f}\")
+print("🎓 Bootstrap Statistics:")
+print(f"   Episodes: {stats.get('bootstrap_episodes', 0)}")
+print(f"   Wins: {stats.get('total_wins', 0)}")
+print(f"   Win Rate: {stats.get('win_rate', 0):.1f}%")
+print(f"   Avg Reward: {stats.get('avg_reward', 0):.2f}")
 
 if 'strategies_learned' in stats:
-    print(f\"\n✅ Strategies Learned:\")
+    print("\n✅ Strategies Learned:")
     for strategy in stats['strategies_learned']:
-        print(f\"   ✓ {strategy}\")
-"
+        print(f"   ✓ {strategy}")
+PYEOF
             echo -e "${CYAN}════════════════════════════════════════════════════════════════════${NC}"
         fi
         
