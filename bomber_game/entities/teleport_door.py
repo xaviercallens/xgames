@@ -23,6 +23,8 @@ class TeleportDoor(Entity):
             color: Door color (RGB tuple)
         """
         super().__init__(x, y, 32, 32)  # Full tile size
+        self.grid_x = x
+        self.grid_y = y
         self.door_id = door_id
         self.color = color
         self.linked_door = None  # Will be set to paired door

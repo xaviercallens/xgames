@@ -25,6 +25,8 @@ class BombMachine(Entity):
         """
         center = grid_size // 2
         super().__init__(center, center, 32, 32)  # Full tile size
+        self.grid_x = center
+        self.grid_y = center
         self.grid_size = grid_size
         self.timer = 0
         self.interval = 10.0  # Drop bomb every 10 seconds
