@@ -35,7 +35,7 @@ class GameState:
         
         self.bomb_machine = None
         if MAP_CONFIG.get('bomb_machine_enabled', True):
-            self.bomb_machine = BombMachine(grid_size)
+            self.bomb_machine = BombMachine(grid_size, self)
         
         # Game state
         self.game_over = False

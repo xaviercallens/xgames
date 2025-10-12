@@ -130,25 +130,32 @@ class TeleportDoorManager:
         
     def create_door_pairs(self, num_pairs):
         """
-        Create pairs of linked teleport doors on map borders.
+        Create pairs of linked teleport doors ONLY on map borders.
+        Doors are placed on the border walls (x=0, y=0, x=max, y=max).
         
         Args:
             num_pairs: Number of door pairs to create
         """
         import random
         
-        # Define border positions (excluding corners)
+        # Define border positions - ONLY on the actual border walls
         border_positions = []
         
-        # Top and bottom borders
+        # Top border (y=0, excluding corners)
         for x in range(2, self.grid_size - 2):
-            border_positions.append((x, 0))  # Top
-            border_positions.append((x, self.grid_size - 1))  # Bottom
+            border_positions.append((x, 0))
             
-        # Left and right borders
+        # Bottom border (y=max, excluding corners)
+        for x in range(2, self.grid_size - 2):
+            border_positions.append((x, self.grid_size - 1))
+            
+        # Left border (x=0, excluding corners)
         for y in range(2, self.grid_size - 2):
-            border_positions.append((0, y))  # Left
-            border_positions.append((self.grid_size - 1, y))  # Right
+            border_positions.append((0, y))
+            
+        # Right border (x=max, excluding corners)
+        for y in range(2, self.grid_size - 2):
+            border_positions.append((self.grid_size - 1, y))
             
         # Shuffle and select positions
         random.shuffle(border_positions)

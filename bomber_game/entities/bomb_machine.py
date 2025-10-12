@@ -16,17 +16,23 @@ class BombMachine(Entity):
     Creates a dangerous zone that players must avoid.
     """
     
-    def __init__(self, grid_size):
+    def __init__(self, grid_size, game_state=None):
         """
-        Initialize bomb machine at center of map.
+        Initialize bomb machine near center in free space.
+        Places machine in a 3-block radius around center.
         
         Args:
             grid_size: Size of the game grid
+            game_state: Optional game state to check for free space
         """
         center = grid_size // 2
-        super().__init__(center, center, 32, 32)  # Full tile size
-        self.grid_x = center
-        self.grid_y = center
+        
+        # Find free space within 3 blocks of center
+        position = self._find_free_position_near_center(center, game_state, grid_size)
+        
+        super().__init__(position[0], position[1], 32, 32)  # Full tile size
+        self.grid_x = position[0]
+        self.grid_y = position[1]
         self.grid_size = grid_size
         self.timer = 0
         self.interval = 10.0  # Drop bomb every 10 seconds
@@ -35,6 +41,35 @@ class BombMachine(Entity):
         self.animation_frame = 0
         self.warning_time = 2.0  # Warning 2 seconds before drop
         self.is_warning = False
+    
+    def _find_free_position_near_center(self, center, game_state, grid_size):
+        """
+        Find free position within 3 blocks of center.
+        
+        Args:
+            center: Center coordinate
+            game_state: Game state to check grid
+            grid_size: Size of grid
+            
+        Returns:
+            (x, y) tuple for free position
+        """
+        # Try center first if available
+        if game_state and game_state.grid[center][center] == 0:
+            return (center, center)
+        
+        # Try positions within 3-block radius
+        for radius in range(1, 4):
+            for dx in range(-radius, radius + 1):
+                for dy in range(-radius, radius + 1):
+                    if abs(dx) == radius or abs(dy) == radius:
+                        x, y = center + dx, center + dy
+                        if 0 < x < grid_size - 1 and 0 < y < grid_size - 1:
+                            if game_state and game_state.grid[y][x] == 0:
+                                return (x, y)
+        
+        # Fallback to center
+        return (center, center)
         
     def update(self, dt, game_state):
         """
