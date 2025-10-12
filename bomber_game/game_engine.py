@@ -13,6 +13,7 @@ from .menu import MenuScreen
 from .model_selector import ModelSelector
 from .heuristics import HeuristicAgent
 from .heuristics_improved import ImprovedHeuristicAgent
+from .heuristics_enhanced import EnhancedHeuristicAgent
 from .game_statistics import GameStatistics
 from .stats_panel import StatsPanel
 from .educational_stats import EducationalStatsScreen

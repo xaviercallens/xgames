@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-10-12 21:01:21",
+  "results": {
+    "enhanced_vs_simple": {
+      "wins": 33,
+      "losses": 14,
+      "draws": 53,
+      "total_games": 100,
+      "win_rate": 33.0,
+      "avg_reward": 0.0
+    },
+    "enhanced_vs_improved": {
+      "wins": 86,
+      "losses": 11,
+      "draws": 3,
+      "total_games": 100,
+      "win_rate": 86.0,
+      "avg_reward": 0.0
+    },
+    "improved_vs_simple": {
+      "wins": 30,
+      "losses": 62,
+      "draws": 8,
+      "total_games": 100,
+      "win_rate": 30.0,
+      "avg_reward": 0.0
+    }
+  }
+}
