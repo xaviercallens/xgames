@@ -283,6 +283,63 @@ config = {
         div.emscripten_border { border: 1px solid black; }
         div.thick_border { border: 4px solid black; }
 
+        /* User Engagement Overlay */
+        #user-engagement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        #user-engagement-overlay.hidden {
+            display: none;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .start-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .start-message {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
         /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
         /* average size of droid screen 470dp x 320dp  */
         canvas.emscripten {
@@ -346,6 +403,15 @@ config = {
 </head>
 
 <body>
+
+    <!-- User Engagement Overlay -->
+    <div id="user-engagement-overlay" class="hidden">
+        <div class="start-message">
+            🎮 Click anywhere or press the button below to start the game!<br>
+            <small>(Browser requires user interaction to enable audio)</small>
+        </div>
+        <button class="start-button" id="start-game-btn">🚀 START GAME</button>
+    </div>
 
     <div id="transfer" align=center>
 <!--        <div class="spinner" id='spinner'></div> -->
@@ -421,6 +487,53 @@ frameborder="1"
 
     <script type="application/javascript">
 
+    // Handle user engagement overlay
+    let userEngaged = false;
+    
+    function showEngagementOverlay() {
+        const overlay = document.getElementById('user-engagement-overlay');
+        if (overlay && !userEngaged) {
+            overlay.classList.remove('hidden');
+        }
+    }
+
+    function hideEngagementOverlay() {
+        const overlay = document.getElementById('user-engagement-overlay');
+        if (overlay) {
+            overlay.classList.add('hidden');
+            userEngaged = true;
+            
+            // Trigger media engagement
+            if (window.MM && window.MM.play) {
+                window.MM.play().catch(e => console.log('Media play attempt:', e));
+            }
+        }
+    }
+
+    // Setup engagement handlers
+    document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('user-engagement-overlay');
+        const startBtn = document.getElementById('start-game-btn');
+        
+        if (overlay) {
+            overlay.addEventListener('click', hideEngagementOverlay);
+        }
+        
+        if (startBtn) {
+            startBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                hideEngagementOverlay();
+            });
+        }
+
+        // Fix canvas context for better performance
+        const canvas = document.getElementById('canvas');
+        if (canvas) {
+            // Add willReadFrequently hint for better performance
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        }
+    });
+
     async function custom_onload(debug_hidden) {
         // this is called before anything python is loaded
         // make your js customization here
@@ -432,6 +545,10 @@ frameborder="1"
         info.hidden = debug_hidden
         box.hidden =  debug_hidden
 
+        // Show engagement overlay if media not yet engaged
+        if (!userEngaged && window.MM && !window.MM.UME) {
+            showEngagementOverlay();
+        }
     }
 
     function custom_prerun(){
