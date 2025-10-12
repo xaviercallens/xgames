@@ -7,8 +7,9 @@ import sys
 from . import (GRID_SIZE, TILE_SIZE, FPS, SCREEN_WIDTH, SCREEN_HEIGHT,
                BLACK, WHITE, GRAY, DARK_GRAY, GREEN, RED, BROWN)
 from .game_state import GameState
-from .agents import SimpleAgent
+from .agents import SimpleAgent, RLAgent
 from .assets import get_asset_manager
+import os
 
 
 class BombermanGame:
@@ -36,8 +37,14 @@ class BombermanGame:
             GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
         )
         
-        # Create AI agent
-        self.ai_agent = SimpleAgent(self.ai_player)
+        # Create AI agent (try RL first, fallback to Simple)
+        model_path = os.path.join(os.path.dirname(__file__), "models", "rl_agent.pth")
+        if os.path.exists(model_path):
+            print(f"🤖 Using RL Agent with pre-trained model")
+            self.ai_agent = RLAgent(self.ai_player, model_path=model_path, training=False)
+        else:
+            print(f"🤖 Using Simple Heuristic Agent (train RL model with train_rl_agent.py)")
+            self.ai_agent = SimpleAgent(self.ai_player)
         
         # Game state
         self.running = True
