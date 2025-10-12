@@ -4,6 +4,9 @@ Game state management for Bomberman.
 
 import random
 from .entities import Player, Bomb, Explosion, PowerUp, Caca
+from .entities.teleport_door import TeleportDoorManager
+from .entities.bomb_machine import BombMachine
+from .config import MAP_CONFIG
 
 
 class GameState:
@@ -25,6 +28,14 @@ class GameState:
         self.bombs = []
         self.explosions = []
         self.cacas = []  # Caca blocks!
+        
+        # New features
+        self.teleport_doors = TeleportDoorManager(grid_size)
+        self.teleport_doors.create_door_pairs(MAP_CONFIG.get('num_teleport_doors', 4))
+        
+        self.bomb_machine = None
+        if MAP_CONFIG.get('bomb_machine_enabled', True):
+            self.bomb_machine = BombMachine(grid_size)
         
         # Game state
         self.game_over = False
@@ -52,14 +63,18 @@ class GameState:
             (self.grid_size - 2, self.grid_size - 3),
         ]
         
+        # Get wall density from config
+        wall_density = MAP_CONFIG.get('soft_wall_density', 0.05)
+        powerup_chance = MAP_CONFIG.get('powerup_chance', 0.6)
+        
         for y in range(1, self.grid_size - 1):
             for x in range(1, self.grid_size - 1):
                 if grid[y][x] == 0 and (x, y) not in safe_zones:
-                    if random.random() < 0.6:  # 60% chance of soft wall
+                    if random.random() < wall_density:  # Use config density
                         grid[y][x] = 2
-                        # 50% chance of power-up under soft wall
-                        if random.random() < 0.5:
-                            powerup_type = random.randint(0, 2)
+                        # Chance of power-up under soft wall
+                        if random.random() < powerup_chance:
+                            powerup_type = random.randint(0, 5)  # 0-5 for 6 types
                             self.powerups[(x, y)] = PowerUp(x, y, powerup_type)
         
         return grid
@@ -136,6 +151,22 @@ class GameState:
         # Update power-ups
         for powerup in list(self.powerups.values()):
             powerup.update(dt)
+        
+        # Update teleport doors
+        if self.teleport_doors:
+            self.teleport_doors.update(dt)
+            # Check if players are on doors
+            for player in self.players:
+                if player.alive:
+                    door = self.teleport_doors.get_door_at(int(player.x), int(player.y))
+                    if door and door.can_teleport(player):
+                        door.teleport_player(player)
+        
+        # Update bomb machine
+        if self.bomb_machine:
+            dropped_bomb = self.bomb_machine.update(dt, self)
+            if dropped_bomb:
+                self.bombs.append(dropped_bomb)
         
         # Check collisions
         self._check_collisions()

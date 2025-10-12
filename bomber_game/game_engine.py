@@ -233,6 +233,14 @@ class BombermanGame:
         # Draw grid
         self._draw_grid()
         
+        # Draw teleport doors
+        if self.game_state.teleport_doors:
+            self.game_state.teleport_doors.draw(self.screen, TILE_SIZE)
+        
+        # Draw bomb machine
+        if self.game_state.bomb_machine:
+            self.game_state.bomb_machine.draw(self.screen, TILE_SIZE)
+        
         # Draw power-ups
         for powerup in self.game_state.powerups.values():
             powerup.render(self.screen, TILE_SIZE)

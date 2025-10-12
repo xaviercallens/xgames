@@ -169,6 +169,13 @@ class Player(Entity):
         elif powerup_type == 2:  # Speed up
             self.speed = min(self.speed + 1, 8)
             self.speed_level += 1
+        elif powerup_type == 3:  # Shield
+            self.has_shield = True
+            self.shield_hits = 1  # Can survive 1 hit
+        elif powerup_type == 4:  # Remote detonator
+            self.has_remote_bombs = True
+        elif powerup_type == 5:  # Pierce bombs
+            self.has_pierce_bombs = True
     
     def _load_sprite(self):
         """Load player sprite."""
