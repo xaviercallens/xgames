@@ -162,31 +162,34 @@ class Player(Entity):
     
     def render(self, screen, tile_size):
         """Render player on screen."""
-        # Convert grid position to pixel position (centered on tile)
+        # Convert grid position to pixel position
+        # Since player position is already at cell center (e.g., 1.5),
+        # we just multiply by tile_size to get pixel position
         pixel_x = int(self.x * tile_size)
         pixel_y = int(self.y * tile_size)
         
         # Use sprite if available, otherwise draw simple shape
         if self.sprite:
-            # Center the sprite on the player's position
+            # Center the sprite directly on the pixel position
+            # No need to add tile_size//2 since position is already centered
             sprite_rect = self.sprite.get_rect()
-            sprite_rect.center = (pixel_x + tile_size // 2, pixel_y + tile_size // 2)
+            sprite_rect.center = (pixel_x, pixel_y)
             screen.blit(self.sprite, sprite_rect)
         else:
-            # Fallback to simple colored rectangle
+            # Fallback to simple colored rectangle centered on position
             body_rect = pygame.Rect(
-                pixel_x + 4,
-                pixel_y + 4,
+                pixel_x - self.width // 2,
+                pixel_y - self.height // 2,
                 self.width,
                 self.height
             )
             pygame.draw.rect(screen, self.color, body_rect, border_radius=4)
             
-            # Draw eyes based on direction
+            # Draw eyes based on direction (centered on sprite)
             eye_color = (255, 255, 255)
             if self.direction == 'down':
-                pygame.draw.circle(screen, eye_color, (pixel_x + 16, pixel_y + 20), 3)
-                pygame.draw.circle(screen, eye_color, (pixel_x + 32, pixel_y + 20), 3)
+                pygame.draw.circle(screen, eye_color, (pixel_x - 8, pixel_y + 4), 3)
+                pygame.draw.circle(screen, eye_color, (pixel_x + 8, pixel_y + 4), 3)
             elif self.direction == 'up':
-                pygame.draw.circle(screen, eye_color, (pixel_x + 16, pixel_y + 12), 3)
-                pygame.draw.circle(screen, eye_color, (pixel_x + 32, pixel_y + 12), 3)
+                pygame.draw.circle(screen, eye_color, (pixel_x - 8, pixel_y - 4), 3)
+                pygame.draw.circle(screen, eye_color, (pixel_x + 8, pixel_y - 4), 3)
