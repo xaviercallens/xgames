@@ -20,7 +20,7 @@ class Player(Entity):
             color: Player color (RGB tuple)
             name: Player name
         """
-        super().__init__(x, y, 40, 40)  # Smaller hitbox for better movement
+        super().__init__(x, y, 20, 20)  # 50% smaller hitbox
         self.grid_x = x
         self.grid_y = y
         self.color = color
@@ -88,10 +88,10 @@ class Player(Entity):
     
     def _can_move_to(self, x, y, grid, tile_size, game_state=None):
         """Check if player can move to position."""
-        # Use a hitbox smaller than 0.5 to fit within grid cells
-        # Player centered at (1.5, 1.5) with hitbox 0.4 has corners at (1.1, 1.1) to (1.9, 1.9)
+        # Use a 50% smaller hitbox for easier movement
+        # Player centered at (1.5, 1.5) with hitbox 0.2 has corners at (1.3, 1.3) to (1.7, 1.7)
         # which all stay within grid cell (1, 1)
-        hitbox_size = 0.4  # Half-width of hitbox
+        hitbox_size = 0.2  # Half-width of hitbox (50% of previous 0.4)
         
         # Check corners of smaller hitbox centered on player
         corners = [
@@ -155,7 +155,8 @@ class Player(Entity):
         """Load player sprite."""
         try:
             assets = get_asset_manager()
-            self.sprite = assets.get_player_sprite(self.player_num, (56, 56))
+            # 50% smaller sprite: 28x28 instead of 56x56
+            self.sprite = assets.get_player_sprite(self.player_num, (28, 28))
         except Exception as e:
             print(f"Could not load player sprite: {e}")
             self.sprite = None
