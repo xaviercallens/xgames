@@ -92,6 +92,24 @@ source setup_terminal.sh
 
 <div align="center">
 
+## 📸 **Screenshots - See It In Action!**
+
+</div>
+
+<div align="center">
+
+### **🎮 Gameplay Screenshot**
+
+<img src="bomber_game/assets/images/gameplay_screenshot.png" alt="Proutman Gameplay" width="800"/>
+
+*Proutman in action! Drop trump bombs 💨, avoid explosions 💥, and defeat the AI opponent! 🤖*
+
+</div>
+
+---
+
+<div align="center">
+
 ## 🎮 **Game Features**
 
 </div>
@@ -233,6 +251,71 @@ Learn how games are built from scratch!
 3. ⚡ **Collect power-ups** to get stronger
 4. 🏆 **Defeat the AI** opponent
 5. 🎯 **Don't get caught** in explosions!
+
+---
+
+<div align="center">
+
+## 🎬 **Feature Demonstrations**
+
+</div>
+
+### **🎮 Live Gameplay**
+
+<div align="center">
+<img src="bomber_game/assets/images/gameplay_screenshot.png" alt="Gameplay" width="700"/>
+</div>
+
+**What you see:**
+- 🎮 **Player (Blue)** - You control Proutman
+- 🤖 **AI Opponent (Red)** - Smart AI that learns
+- 💨 **Trump Bombs** - Explosive farts in cross pattern
+- 🧱 **Destructible Walls** - Break them for power-ups
+- 🏰 **Solid Blocks** - Indestructible obstacles
+- ⚡ **Power-ups** - Collect to get stronger
+
+### **🎨 Game Elements**
+
+<table>
+<tr>
+<td width="50%" align="center">
+<img src="bomber_game/assets/images/prout_man_player.png" width="200"/><br>
+<b>🎮 Proutman Character</b><br>
+The hilarious hero with stinky powers!
+</td>
+<td width="50%" align="center">
+<img src="bomber_game/assets/images/toilet_wall_proutmanversion.png" width="200"/><br>
+<b>🚽 Toilet Walls</b><br>
+French bathroom humor at its finest!
+</td>
+</tr>
+</table>
+
+### **💨 Trump Bomb Mechanics**
+
+<div align="center">
+<img src="bomber_game/assets/images/sprite_player_versionproutman.png" width="300"/>
+</div>
+
+**How it works:**
+1. Press **SPACE** to drop a trump bomb 💨
+2. Bomb explodes after 3 seconds 💥
+3. Explosion travels in **cross pattern** (up, down, left, right)
+4. Destroys walls and defeats enemies
+5. Don't get caught in your own explosion!
+
+### **💩 Caca Block Strategy**
+
+<div align="center">
+<img src="bomber_game/assets/images/tiles_bomberman_versionproutman.png" width="300"/>
+</div>
+
+**Strategic uses:**
+1. Press **C** to place a caca block 💩
+2. Blocks enemy movement
+3. Creates safe zones
+4. Traps opponents
+5. Protects from explosions
 
 ---
 
