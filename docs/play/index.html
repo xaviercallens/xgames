@@ -503,10 +503,9 @@ frameborder="1"
             overlay.classList.add('hidden');
             userEngaged = true;
             
-            // Trigger media engagement
-            if (window.MM && window.MM.play) {
-                window.MM.play().catch(e => console.log('Media play attempt:', e));
-            }
+            // User interaction has occurred, media engagement is now enabled
+            // The pygame-web framework will handle media playback automatically
+            console.log('User engagement registered - media enabled');
         }
     }
 
