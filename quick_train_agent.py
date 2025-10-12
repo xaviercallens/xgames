@@ -25,8 +25,8 @@ from bomber_game.entities import Player
 from bomber_game.agents import PPOAgent, SimpleAgent
 
 # Training configuration
-TRAINING_DURATION = 15 * 60  # 15 minutes in seconds
-CHECKPOINT_INTERVAL = 60  # Save every 60 seconds
+TRAINING_DURATION = 5 * 60  # 5 minutes in seconds
+CHECKPOINT_INTERVAL = 30  # Save every 30 seconds
 STATS_FILE = "bomber_game/models/training_stats.json"
 MODEL_PATH = "bomber_game/models/ppo_agent.pth"
 
@@ -300,8 +300,8 @@ def print_banner():
     print("=" * 80)
     print()
     print("🎯 Mission: Train an intelligent AI agent to master Bomberman")
-    print("⏱️  Duration: 15 minutes of focused learning")
-    print("💾 Auto-save: Every 60 seconds")
+    print("⏱️  Duration: 5 minutes of focused learning")
+    print("💾 Auto-save: Every 30 seconds")
     print("🎮 Result: Smarter AI with each session!")
     print()
     print("=" * 80)
@@ -309,7 +309,7 @@ def print_banner():
 
 
 def quick_train():
-    """Quick 15-minute training session."""
+    """Quick 5-minute training session."""
     global training_interrupted
     
     # Register signal handler for graceful shutdown
