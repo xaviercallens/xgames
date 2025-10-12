@@ -506,6 +506,16 @@ frameborder="1"
             // User interaction has occurred, media engagement is now enabled
             // The pygame-web framework will handle media playback automatically
             console.log('User engagement registered - media enabled');
+            
+            // Focus the canvas to enable keyboard input
+            setTimeout(() => {
+                const canvas = document.getElementById('canvas');
+                if (canvas) {
+                    canvas.focus();
+                    canvas.click();
+                    console.log('Canvas focused and clicked');
+                }
+            }, 500);
         }
     }
 
@@ -530,6 +540,20 @@ frameborder="1"
         if (canvas) {
             // Add willReadFrequently hint for better performance
             const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            
+            // Make canvas focusable
+            canvas.setAttribute('tabindex', '0');
+            
+            // Auto-focus canvas when clicked
+            canvas.addEventListener('click', function() {
+                canvas.focus();
+                console.log('Canvas clicked and focused');
+            });
+            
+            // Show instruction when canvas loses focus
+            canvas.addEventListener('blur', function() {
+                console.log('Canvas lost focus - click to regain control');
+            });
         }
     });
 
@@ -548,6 +572,21 @@ frameborder="1"
         if (!userEngaged && window.MM && !window.MM.UME) {
             showEngagementOverlay();
         }
+        
+        // Ensure canvas is ready and focusable
+        setTimeout(() => {
+            const canvas = document.getElementById('canvas');
+            if (canvas) {
+                canvas.setAttribute('tabindex', '0');
+                canvas.style.outline = 'none';
+                console.log('Canvas setup complete');
+                
+                // Send ready signal to parent
+                if (window.parent !== window) {
+                    window.parent.postMessage('game-ready', '*');
+                }
+            }
+        }, 1000);
     }
 
     function custom_prerun(){

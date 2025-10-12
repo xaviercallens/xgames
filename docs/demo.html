@@ -330,6 +330,11 @@
                             First load may take 10-30 seconds
                         </p>
                     </div>
+                    <div id="clickToPlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(102, 126, 234, 0.95); color: white; padding: 30px; border-radius: 15px; text-align: center; z-index: 5; display: none; cursor: pointer;">
+                        <h3 style="margin-bottom: 15px;">🎮 Click to Start Playing!</h3>
+                        <p style="margin-bottom: 10px;">Game loaded successfully</p>
+                        <p style="font-size: 0.9em; opacity: 0.9;">Click here or inside the game to enable keyboard controls</p>
+                    </div>
                     <iframe 
                         id="gameFrame"
                         src="play/index.html" 
@@ -348,7 +353,10 @@
                         WASD or Arrow Keys = Move | SPACE = Drop Bomb 💨 | C = Place Caca 💩 | P = Pause
                     </p>
                     <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9;">
-                        💡 Click inside the game window to start playing!
+                        💡 <strong>IMPORTANT:</strong> Click the "Click to Start Playing" button when it appears!
+                    </p>
+                    <p style="font-size: 0.85em; margin-top: 10px; opacity: 0.8;">
+                        If keyboard doesn't work, click inside the game window again
                     </p>
                 </div>
             </div>
@@ -561,6 +569,19 @@
         window.addEventListener('message', function(event) {
             if (event.data === 'game-ready') {
                 hideLoading();
+                // Show click to play prompt
+                setTimeout(() => {
+                    const clickPrompt = document.getElementById('clickToPlay');
+                    if (clickPrompt) {
+                        clickPrompt.style.display = 'block';
+                        clickPrompt.addEventListener('click', function() {
+                            clickPrompt.style.display = 'none';
+                            // Focus the iframe
+                            iframe.contentWindow.focus();
+                            console.log('User clicked to play - iframe focused');
+                        });
+                    }
+                }, 500);
             } else if (event.data && event.data.type === 'game-error') {
                 showError(event.data.message || 'Game initialization error.');
             }
