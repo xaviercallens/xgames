@@ -4,6 +4,8 @@ Menu and splash screen for Proutman game.
 
 import pygame
 import os
+import json
+from pathlib import Path
 from . import SCREEN_WIDTH, SCREEN_HEIGHT, BLACK, WHITE, GREEN, BROWN
 
 
@@ -16,6 +18,11 @@ class MenuScreen:
         self.font_large = pygame.font.Font(None, 72)
         self.font_medium = pygame.font.Font(None, 48)
         self.font_small = pygame.font.Font(None, 32)
+        self.font_tiny = pygame.font.Font(None, 24)
+        
+        # AI selection options
+        self.ai_options = self._load_ai_options()
+        self.selected_ai_index = 0
         
         # Load splash image
         self.splash_image = None
@@ -39,6 +46,72 @@ class MenuScreen:
         # Animation
         self.pulse_timer = 0
         self.pulse_speed = 2.0
+    
+    def _load_ai_options(self):
+        """Load available AI options."""
+        models_dir = Path(__file__).parent / "models"
+        stats_file = models_dir / "training_stats.json"
+        
+        # Load training stats
+        training_stats = {}
+        if stats_file.exists():
+            try:
+                with open(stats_file, 'r') as f:
+                    training_stats = json.load(f)
+            except:
+                pass
+        
+        options = [
+            {
+                'name': 'Beginner Bot',
+                'type': 'simple',
+                'level': 'Beginner',
+                'description': 'Basic AI - Easy to beat',
+                'icon': '🌱',
+                'win_rate': 10.0,
+                'color': (100, 255, 100),
+            },
+            {
+                'name': 'Intermediate Bot',
+                'type': 'heuristic',
+                'level': 'Intermediate',
+                'description': 'Smart heuristic AI',
+                'icon': '🎯',
+                'win_rate': 35.0,
+                'color': (255, 200, 100),
+            },
+        ]
+        
+        # Add PPO models if available
+        ppo_model = models_dir / "ppo_agent.pth"
+        if ppo_model.exists():
+            win_rate = training_stats.get('win_rate', 0.3)
+            options.append({
+                'name': 'Advanced Bot (AI)',
+                'type': 'ppo',
+                'level': 'Advanced',
+                'description': 'Deep RL trained AI',
+                'icon': '🤖',
+                'win_rate': win_rate,
+                'color': (255, 100, 100),
+                'model_path': str(ppo_model),
+            })
+        
+        # Add expert model if available
+        best_model = models_dir / "best_model.pth"
+        if best_model.exists():
+            options.append({
+                'name': 'Expert Bot (AI)',
+                'type': 'ppo_best',
+                'level': 'Expert',
+                'description': 'Strongest AI opponent',
+                'icon': '👑',
+                'win_rate': training_stats.get('win_rate', 0.3),
+                'color': (200, 100, 255),
+                'model_path': str(best_model),
+            })
+        
+        return options
         
     def show_splash(self, duration=3.0):
         """
@@ -217,3 +290,122 @@ class MenuScreen:
             self.screen.blit(hint, hint_rect)
             
             pygame.display.flip()
+    
+    def show_ai_selection(self):
+        """Show AI selection screen after splash."""
+        clock = pygame.time.Clock()
+        
+        while True:
+            dt = clock.tick(60) / 1000.0
+            self.pulse_timer += dt
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return None
+                
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP or event.key == pygame.K_w:
+                        self.selected_ai_index = (self.selected_ai_index - 1) % len(self.ai_options)
+                    elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                        self.selected_ai_index = (self.selected_ai_index + 1) % len(self.ai_options)
+                    elif event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
+                        return self.ai_options[self.selected_ai_index]
+                    elif event.key == pygame.K_ESCAPE:
+                        # Use default (first option)
+                        return self.ai_options[0]
+                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = event.pos
+                    # Check if clicked on an option
+                    for i, rect in enumerate(self.option_rects):
+                        if rect.collidepoint(mouse_pos):
+                            self.selected_ai_index = i
+                            return self.ai_options[i]
+            
+            self._draw_ai_selection()
+            pygame.display.flip()
+    
+    def _draw_ai_selection(self):
+        """Draw AI selection screen."""
+        self.screen.fill(BLACK)
+        
+        # Title
+        title = self.font_large.render("🎮 Choose Your Opponent", True, GREEN)
+        title_rect = title.get_rect(center=(SCREEN_WIDTH // 2, 80))
+        self.screen.blit(title, title_rect)
+        
+        # Subtitle
+        subtitle = self.font_small.render("Select AI difficulty level", True, WHITE)
+        subtitle_rect = subtitle.get_rect(center=(SCREEN_WIDTH // 2, 130))
+        self.screen.blit(subtitle, subtitle_rect)
+        
+        # Draw AI options
+        self.option_rects = []
+        start_y = 200
+        option_height = 100
+        option_spacing = 20
+        option_width = 600
+        
+        for i, option in enumerate(self.ai_options):
+            y = start_y + i * (option_height + option_spacing)
+            x = (SCREEN_WIDTH - option_width) // 2
+            
+            rect = pygame.Rect(x, y, option_width, option_height)
+            self.option_rects.append(rect)
+            
+            # Determine colors
+            if i == self.selected_ai_index:
+                bg_color = (60, 60, 100)
+                border_color = option['color']
+                border_width = 4
+                
+                # Pulse effect
+                pulse = abs(pygame.math.Vector2(0, 1).rotate(
+                    self.pulse_timer * 360 * self.pulse_speed).y)
+                glow = int(20 + 20 * pulse)
+                bg_color = tuple(min(255, c + glow) for c in bg_color)
+            else:
+                bg_color = (40, 40, 60)
+                border_color = (100, 100, 150)
+                border_width = 2
+            
+            # Draw option box
+            pygame.draw.rect(self.screen, bg_color, rect, border_radius=10)
+            pygame.draw.rect(self.screen, border_color, rect, border_width, border_radius=10)
+            
+            # Icon and name
+            icon_name = f"{option['icon']} {option['name']}"
+            name_text = self.font_medium.render(icon_name, True, WHITE)
+            name_rect = name_text.get_rect(left=rect.left + 20, top=rect.top + 15)
+            self.screen.blit(name_text, name_rect)
+            
+            # Level badge
+            level_text = self.font_tiny.render(option['level'], True, WHITE)
+            level_bg = pygame.Rect(rect.right - 110, rect.top + 15, 90, 25)
+            pygame.draw.rect(self.screen, option['color'], level_bg, border_radius=5)
+            level_rect = level_text.get_rect(center=level_bg.center)
+            self.screen.blit(level_text, level_rect)
+            
+            # Description
+            desc_text = self.font_small.render(option['description'], True, WHITE)
+            desc_rect = desc_text.get_rect(left=rect.left + 20, top=rect.top + 55)
+            self.screen.blit(desc_text, desc_rect)
+            
+            # Win rate
+            wr_text = self.font_tiny.render(f"Expected Win Rate: {option['win_rate']:.1f}%", True, (200, 200, 200))
+            wr_rect = wr_text.get_rect(left=rect.left + 20, top=rect.top + 80)
+            self.screen.blit(wr_text, wr_rect)
+        
+        # Instructions
+        instructions = [
+            "↑↓ or W/S to select",
+            "ENTER or SPACE to confirm",
+            "ESC for default (Beginner)"
+        ]
+        
+        y = SCREEN_HEIGHT - 100
+        for instruction in instructions:
+            text = self.font_tiny.render(instruction, True, WHITE)
+            text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, y))
+            self.screen.blit(text, text_rect)
+            y += 25

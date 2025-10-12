@@ -488,6 +488,41 @@ class BombermanGame:
             if quit_requested:
                 pygame.quit()
                 sys.exit()
+            
+            # Show AI selection menu
+            selected_ai = self.menu.show_ai_selection()
+            if selected_ai is None:
+                pygame.quit()
+                sys.exit()
+            
+            # Create AI agent based on selection
+            print(f"\n{'='*70}")
+            print(f"🎮 SELECTED OPPONENT: {selected_ai['icon']} {selected_ai['name']}")
+            print(f"{'='*70}")
+            print(f"   Level: {selected_ai['level']}")
+            print(f"   Type: {selected_ai['type']}")
+            print(f"   Expected Win Rate: {selected_ai['win_rate']:.1f}%")
+            print(f"   Description: {selected_ai['description']}")
+            print(f"{'='*70}\n")
+            
+            # Initialize AI agent based on selection
+            if selected_ai['type'] == 'simple':
+                self.ai_agent = SimpleAgent(self.ai_player)
+                self.ai_type = "Simple"
+            elif selected_ai['type'] == 'heuristic':
+                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+                self.ai_type = "Improved Heuristic"
+            elif selected_ai['type'] == 'ppo':
+                model_path = selected_ai.get('model_path')
+                self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
+                self.ai_type = "PPO"
+            elif selected_ai['type'] == 'ppo_best':
+                model_path = selected_ai.get('model_path')
+                self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
+                self.ai_type = "PPO (Best)"
+            
+            # Update statistics with selected AI
+            self.stats.set_ai_info(self.ai_type, selected_ai.get('model_path'))
         
         # Main game loop
         while self.running:
