@@ -38,7 +38,7 @@ class GameHeuristics:
                 blocked = False
                 step = 1 if x > bomb_x else -1
                 for check_x in range(bomb_x + step, x, step):
-                    if game_state.grid[check_y][check_x] in [1, 2]:  # Wall or destructible
+                    if game_state.grid[y][check_x] in [1, 2]:  # Wall or destructible
                         blocked = True
                         break
                 if not blocked:
