@@ -40,21 +40,26 @@ class AssetManager:
             if scale:
                 image = pygame.transform.scale(image, scale)
             
-            # Convert for better performance
-            if image.get_alpha():
-                image = image.convert_alpha()
-            else:
-                image = image.convert()
+            # Convert for better performance (only if display is initialized)
+            try:
+                if pygame.display.get_surface() is not None:
+                    if image.get_alpha():
+                        image = image.convert_alpha()
+                    else:
+                        image = image.convert()
+            except pygame.error:
+                # Display not initialized (headless mode), skip conversion
+                pass
             
             # Cache it
             self.images[cache_key] = image
             return image
             
-        except pygame.error as e:
-            print(f"Warning: Could not load image {filename}: {e}")
-            # Return a colored surface as fallback
+        except (pygame.error, FileNotFoundError) as e:
+            # Silently create fallback surface (no warning in headless mode)
             surf = pygame.Surface(scale if scale else (64, 64))
             surf.fill((255, 0, 255))  # Magenta for missing textures
+            self.images[cache_key] = surf
             return surf
     
     def get_player_sprite(self, player_num, size=(60, 60)):
