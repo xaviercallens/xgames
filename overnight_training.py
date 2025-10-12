@@ -283,9 +283,9 @@ def is_in_danger(game_state, player):
     # Check for nearby bombs
     for bomb in game_state.bombs:
         bx, by = bomb.grid_x, bomb.grid_y
-        if px == bx and abs(py - by) <= bomb.power:
+        if px == bx and abs(py - by) <= bomb.bomb_range:
             return True
-        if py == by and abs(px - bx) <= bomb.power:
+        if py == by and abs(px - bx) <= bomb.bomb_range:
             return True
     
     return False
