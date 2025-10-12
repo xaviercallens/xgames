@@ -193,7 +193,19 @@ class ModelSelector:
                 return result
             
             # Compare PPO vs Heuristic
-            heuristic_win_rate = heuristic_stats.get('win_rate', self.heuristic_baseline_win_rate)
+            # CRITICAL: Use benchmarked win rate, not default
+            heuristic_win_rate = heuristic_stats.get('win_rate', 0)
+            if heuristic_win_rate == 0 and heuristic_stats.get('benchmarked', False):
+                # Reload from benchmark file if available
+                benchmark_file = os.path.join(self.models_dir, "heuristic_benchmark.json")
+                if os.path.exists(benchmark_file):
+                    benchmark_stats = self.get_model_stats(benchmark_file)
+                    if benchmark_stats:
+                        heuristic_win_rate = benchmark_stats.get('win_rate', self.heuristic_baseline_win_rate)
+            
+            # Fallback to baseline if still 0
+            if heuristic_win_rate == 0:
+                heuristic_win_rate = self.heuristic_baseline_win_rate
             
             print(f"\n⚖️  Performance Comparison:")
             print(f"   PPO Model:     {ppo_win_rate:.1f}%")
