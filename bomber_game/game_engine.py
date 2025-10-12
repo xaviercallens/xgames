@@ -37,20 +37,30 @@ class BombermanGame:
             GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
         )
         
+        # Load AI training stats
+        self.ai_stats = self._load_ai_stats()
+        
         # Create AI agent (priority: PPO > DQN > Simple)
         ppo_model_path = os.path.join(os.path.dirname(__file__), "models", "ppo_agent.pth")
         dqn_model_path = os.path.join(os.path.dirname(__file__), "models", "rl_agent.pth")
         
         if os.path.exists(ppo_model_path):
             print(f"🤖 Using PPO Agent (Advanced RL)")
+            if self.ai_stats:
+                print(f"   Level: {self.ai_stats.get('current_level', 'Unknown')}")
+                print(f"   Training: {self._format_time(self.ai_stats.get('total_training_time', 0))}")
+                print(f"   Win Rate: {self.ai_stats.get('win_rate', 0):.1f}%")
             self.ai_agent = PPOAgent(self.ai_player, model_path=ppo_model_path, training=False)
+            self.ai_type = "PPO"
         elif os.path.exists(dqn_model_path):
             print(f"🤖 Using DQN Agent (Deep Q-Learning)")
             self.ai_agent = RLAgent(self.ai_player, model_path=dqn_model_path, training=False)
+            self.ai_type = "DQN"
         else:
             print(f"🤖 Using Simple Heuristic Agent")
-            print(f"   💡 Train advanced AI: ./train_ppo_agent.py")
+            print(f"   💡 Train advanced AI: ./quick_train_agent.py")
             self.ai_agent = SimpleAgent(self.ai_player)
+            self.ai_type = "Simple"
         
         # Game state
         self.running = True
@@ -68,6 +78,35 @@ class BombermanGame:
         except Exception as e:
             print(f"Could not load wall sprite: {e}")
             self.wall_sprite = None
+    
+    def _load_ai_stats(self):
+        """Load AI training statistics."""
+        import json
+        stats_file = os.path.join(os.path.dirname(__file__), "models", "training_stats.json")
+        if os.path.exists(stats_file):
+            try:
+                with open(stats_file, 'r') as f:
+                    data = json.load(f)
+                    # Calculate win rate
+                    total_episodes = data.get('total_episodes', 0)
+                    total_wins = data.get('total_wins', 0)
+                    win_rate = (total_wins / total_episodes * 100) if total_episodes > 0 else 0
+                    data['win_rate'] = win_rate
+                    return data
+            except Exception as e:
+                print(f"Could not load AI stats: {e}")
+        return None
+    
+    def _format_time(self, seconds):
+        """Format seconds to readable time."""
+        hours = int(seconds // 3600)
+        minutes = int((seconds % 3600) // 60)
+        if hours > 0:
+            return f"{hours}h {minutes}m"
+        elif minutes > 0:
+            return f"{minutes}m"
+        else:
+            return f"{int(seconds)}s"
         
     def handle_events(self):
         """Handle pygame events."""
@@ -207,11 +246,32 @@ class BombermanGame:
             text_surf = self.font.render("Player: DEAD", True, RED)
             self.screen.blit(text_surf, (10, ui_y))
         
-        # AI stats
+        # AI stats with training info
         if self.ai_player.alive:
-            ai_text = f"AI: Bombs:{self.ai_player.max_bombs} Range:{self.ai_player.bomb_range}"
+            ai_text = f"AI ({self.ai_type}): Bombs:{self.ai_player.max_bombs} Range:{self.ai_player.bomb_range}"
             text_surf = self.font.render(ai_text, True, RED)
             self.screen.blit(text_surf, (10, ui_y + 25))
+            
+            # AI training level
+            if self.ai_stats:
+                level = self.ai_stats.get('current_level', 'Unknown')
+                training_time = self._format_time(self.ai_stats.get('total_training_time', 0))
+                win_rate = self.ai_stats.get('win_rate', 0)
+                
+                # Level colors
+                level_colors = {
+                    'Beginner': (100, 150, 255),
+                    'Novice': (100, 255, 100),
+                    'Intermediate': (255, 255, 100),
+                    'Advanced': (255, 150, 50),
+                    'Expert': (255, 50, 50),
+                    'Master': (200, 100, 255),
+                }
+                level_color = level_colors.get(level, WHITE)
+                
+                level_text = f"Level: {level} | Training: {training_time} | Win Rate: {win_rate:.0f}%"
+                text_surf = self.font.render(level_text, True, level_color)
+                self.screen.blit(text_surf, (10, ui_y + 50))
         else:
             text_surf = self.font.render("AI: DEAD", True, GRAY)
             self.screen.blit(text_surf, (10, ui_y + 25))
