@@ -1,0 +1,28 @@
+# 2D Game Development Libraries
+pygame>=2.5.0              # Most popular 2D game engine for Python
+arcade>=2.6.0              # Modern Python framework for crafting games
+pyglet>=2.0.0              # Cross-platform windowing and multimedia library
+
+# 3D Game Development Libraries
+panda3d>=1.10.0            # Powerful 3D game engine
+moderngl>=5.8.0            # Modern OpenGL wrapper
+pyrr>=0.10.0               # 3D mathematical functions using NumPy
+
+# Physics Engines
+pymunk>=6.5.0              # 2D physics library (Chipmunk Physics)
+pybullet>=3.2.0            # 3D physics simulation
+
+# Audio Libraries
+pydub>=0.25.0              # Audio manipulation
+
+# Utility Libraries
+numpy>=1.24.0              # Numerical computing
+pillow>=10.0.0             # Image processing
+
+# Development Tools
+pytest>=7.4.0             # Testing framework
+black>=23.9.0              # Code formatter
+flake8>=6.1.0              # Code linting
+
+# Optional: Game Development Frameworks
+ursina>=6.2.0              # Simplified 3D engine built on Panda3D
