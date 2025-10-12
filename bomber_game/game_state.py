@@ -33,9 +33,15 @@ class GameState:
         self.teleport_doors = TeleportDoorManager(grid_size)
         self.teleport_doors.create_door_pairs(MAP_CONFIG.get('num_teleport_doors', 4))
         
+        # Clear grid tiles where doors are placed so players can walk on them
+        for door in self.teleport_doors.doors:
+            self.grid[door.grid_y][door.grid_x] = 0  # Make walkable
+        
         self.bomb_machine = None
         if MAP_CONFIG.get('bomb_machine_enabled', True):
             self.bomb_machine = BombMachine(grid_size, self)
+            # Clear grid tile where bomb machine is placed
+            self.grid[self.bomb_machine.grid_y][self.bomb_machine.grid_x] = 0
         
         # Game state
         self.game_over = False
