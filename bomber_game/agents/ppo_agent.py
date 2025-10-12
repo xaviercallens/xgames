@@ -296,10 +296,13 @@ class PPOAgent(Agent):
         count = len(game_state.powerups)
         
         if count > 0:
-            nearest = min(game_state.powerups, 
-                         key=lambda p: abs(px - p.grid_x) + abs(py - p.grid_y))
-            dist = abs(px - nearest.grid_x) + abs(py - nearest.grid_y)
-            return [count / 10.0, min(dist / 13.0, 1.0), nearest.powerup_type / 2.0]
+            # powerups is a dict with (x, y) tuples as keys
+            nearest_pos = min(game_state.powerups.keys(), 
+                             key=lambda pos: abs(px - pos[0]) + abs(py - pos[1]))
+            nearest_powerup = game_state.powerups[nearest_pos]
+            dist = abs(px - nearest_pos[0]) + abs(py - nearest_pos[1])
+            powerup_type = nearest_powerup.powerup_type if hasattr(nearest_powerup, 'powerup_type') else 0
+            return [count / 10.0, min(dist / 13.0, 1.0), powerup_type / 2.0]
         
         return [0, 1.0, 0]
     
