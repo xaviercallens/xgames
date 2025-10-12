@@ -160,13 +160,30 @@ def benchmark_heuristic(num_games=100, save_results=True):
 
 def update_model_selector_data(heuristic_win_rate):
     """Update model selector with heuristic benchmark data."""
+    from datetime import datetime
+    
     selector_file = Path("bomber_game/models/heuristic_stats.json")
     
+    # Load benchmark data for complete stats
+    benchmark_file = Path("bomber_game/models/heuristic_benchmark.json")
+    total_games = 0
+    total_wins = 0
+    
+    if benchmark_file.exists():
+        with open(benchmark_file, 'r') as f:
+            benchmark_data = json.load(f)
+            total_games = benchmark_data.get('total_games', 0)
+            total_wins = benchmark_data.get('heuristic_wins', 0)
+    
     data = {
+        'model_type': 'heuristic',
+        'total_episodes': total_games,
+        'total_wins': total_wins,
         'win_rate': heuristic_win_rate,
         'agent_type': 'improved_heuristic',
         'benchmarked': True,
-        'description': 'Improved heuristic agent with A* pathfinding',
+        'description': 'Heuristic agent (benchmarked)',
+        'last_updated': datetime.now().isoformat()
     }
     
     with open(selector_file, 'w') as f:

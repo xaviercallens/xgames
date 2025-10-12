@@ -15,6 +15,7 @@ from .heuristics import HeuristicAgent
 from .heuristics_improved import ImprovedHeuristicAgent
 from .game_statistics import GameStatistics
 from .stats_panel import StatsPanel
+from .educational_stats import EducationalStatsScreen
 import os
 
 
@@ -36,6 +37,7 @@ class BombermanGame:
         # Statistics tracking
         self.stats = GameStatistics()
         self.stats_panel = StatsPanel(SCREEN_WIDTH, 0, self.stats_panel_width, SCREEN_HEIGHT)
+        self.educational_stats = EducationalStatsScreen(self.screen)
         
         # Font
         self.font = pygame.font.Font(None, 24)
@@ -192,7 +194,20 @@ class BombermanGame:
             
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.running = False
+                    # Show educational statistics screen
+                    action = self.educational_stats.show(self.stats, self.ai_agent, self.game_state)
+                    if action == 'quit':
+                        self.running = False
+                    elif action == 'restart':
+                        self._restart_game()
+                    # else: resume game
+                elif event.key == pygame.K_e:
+                    # Also show educational stats with E key
+                    action = self.educational_stats.show(self.stats, self.ai_agent, self.game_state)
+                    if action == 'quit':
+                        self.running = False
+                    elif action == 'restart':
+                        self._restart_game()
                 elif event.key == pygame.K_p:
                     self.paused = not self.paused
                 elif event.key == pygame.K_r and self.game_state.game_over:
