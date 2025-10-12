@@ -96,6 +96,7 @@ class BombermanGame:
         
         if self.human_player.alive:
             self.human_player.move(dx, dy, self.game_state.grid, TILE_SIZE, self.game_state)
+            self.human_player.update(dt)  # Update animation
         
         # Update AI
         if self.ai_player.alive:
@@ -105,6 +106,7 @@ class BombermanGame:
                 self.ai_player.move(ai_dx, ai_dy, self.game_state.grid, TILE_SIZE, self.game_state)
                 if place_bomb:
                     self.game_state.place_bomb(self.ai_player)
+            self.ai_player.update(dt)  # Update animation
         
         # Update game state
         self.game_state.update(dt)

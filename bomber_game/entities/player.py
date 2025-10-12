@@ -50,12 +50,23 @@ class Player(Entity):
         
         # Animation
         self.direction = 'down'
+        self.animation_frame = 0
+        self.animation_timer = 0
+        self.animation_speed = 0.15  # Seconds per frame
         
         # Sprite
         self.sprite = None
         self.player_num = 1 if color == (0, 255, 0) else 2  # Green=1, Red=2
         self._load_sprite()
         
+    def update(self, dt):
+        """Update player animation."""
+        # Update animation timer
+        self.animation_timer += dt
+        if self.animation_timer >= self.animation_speed:
+            self.animation_timer = 0
+            self.animation_frame = (self.animation_frame + 1) % 2  # 2-frame animation
+    
     def move(self, dx, dy, grid, tile_size, game_state=None):
         """
         Move player in given direction.
@@ -67,6 +78,7 @@ class Player(Entity):
             tile_size: Size of each tile
             game_state: Optional game state for checking bombs/cacas
         """
+        # Update direction
         if dx != 0:
             self.direction = 'right' if dx > 0 else 'left'
         elif dy != 0:
@@ -85,6 +97,9 @@ class Player(Entity):
             import math
             self.grid_x = int(math.floor(self.x))
             self.grid_y = int(math.floor(self.y))
+        else:
+            # Reset animation when blocked
+            self.animation_frame = 0
     
     def _can_move_to(self, x, y, grid, tile_size, game_state=None):
         """Check if player can move to position."""
@@ -162,19 +177,20 @@ class Player(Entity):
             self.sprite = None
     
     def render(self, screen, tile_size):
-        """Render player on screen."""
-        # Convert grid position to pixel position
+        """Render player on screen with smooth sub-pixel positioning."""
+        # Convert grid position to pixel position with sub-pixel accuracy
         # Since player position is already at cell center (e.g., 1.5),
-        # we just multiply by tile_size to get pixel position
-        pixel_x = int(self.x * tile_size)
-        pixel_y = int(self.y * tile_size)
+        # we multiply by tile_size to get exact pixel position
+        pixel_x = self.x * tile_size
+        pixel_y = self.y * tile_size
         
         # Use sprite if available, otherwise draw simple shape
         if self.sprite:
             # Center the sprite directly on the pixel position
-            # No need to add tile_size//2 since position is already centered
+            # Use float positioning for smooth movement
             sprite_rect = self.sprite.get_rect()
-            sprite_rect.center = (pixel_x, pixel_y)
+            sprite_rect.centerx = pixel_x
+            sprite_rect.centery = pixel_y
             screen.blit(self.sprite, sprite_rect)
         else:
             # Fallback to simple colored rectangle centered on position

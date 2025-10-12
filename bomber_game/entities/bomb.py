@@ -37,7 +37,8 @@ class Bomb(Entity):
         """Load bomb sprite."""
         try:
             assets = get_asset_manager()
-            self.sprite = assets.get_bomb_sprite((56, 56))
+            # Match player sprite size: 28x28
+            self.sprite = assets.get_bomb_sprite((28, 28))
         except Exception as e:
             print(f"Could not load bomb sprite: {e}")
             self.sprite = None
@@ -54,23 +55,27 @@ class Bomb(Entity):
     
     def render(self, screen, tile_size):
         """Render trump (prout) on screen - uses sprite or fallback!"""
-        pixel_x = int(self.grid_x * tile_size)
-        pixel_y = int(self.grid_y * tile_size)
+        # Position at center of grid cell for consistency with players
+        pixel_x = (self.grid_x + 0.5) * tile_size
+        pixel_y = (self.grid_y + 0.5) * tile_size
         
         # Use sprite if available
         if self.sprite:
-            # Center the sprite
+            # Center the sprite on the grid cell center
             sprite_rect = self.sprite.get_rect()
-            sprite_rect.center = (pixel_x + tile_size // 2, pixel_y + tile_size // 2)
+            sprite_rect.centerx = pixel_x
+            sprite_rect.centery = pixel_y
             
             # Pulsing effect - scale based on timer
             if self.timer < 1.0:
-                pulse_scale = 1.0 + 0.1 * (1.0 - self.timer)  # Grow as timer runs out
+                pulse_scale = 1.0 + 0.2 * (1.0 - self.timer)  # Grow as timer runs out
                 scaled_sprite = pygame.transform.scale(
                     self.sprite,
-                    (int(56 * pulse_scale), int(56 * pulse_scale))
+                    (int(28 * pulse_scale), int(28 * pulse_scale))
                 )
-                scaled_rect = scaled_sprite.get_rect(center=sprite_rect.center)
+                scaled_rect = scaled_sprite.get_rect()
+                scaled_rect.centerx = pixel_x
+                scaled_rect.centery = pixel_y
                 screen.blit(scaled_sprite, scaled_rect)
             else:
                 screen.blit(self.sprite, sprite_rect)
