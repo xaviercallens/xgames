@@ -35,9 +35,9 @@ from bomber_game.heuristics_improved import ImprovedHeuristicAgent
 # ============================================================================
 
 # Training duration
-TOTAL_EPISODES = 1000
+TOTAL_EPISODES = 10000
 MAX_STEPS_PER_EPISODE = 500
-TRAINING_HOURS = 1
+TRAINING_HOURS = 8
 
 # PPO Hyperparameters (optimized for overnight training)
 UPDATE_INTERVAL = 4096  # Update every N steps (larger for stability)
@@ -377,6 +377,7 @@ def train_overnight():
     recent_rewards = deque(maxlen=PERFORMANCE_WINDOW)
     
     # Main training loop
+    episode = start_episode  # Initialize episode variable
     for episode in range(start_episode + 1, TOTAL_EPISODES + 1):
         # Check time limit
         elapsed_time = time.time() - training_start_time
@@ -387,10 +388,14 @@ def train_overnight():
         if should_stop:
             break
         
-        # Reset game
-        game_state.reset()
-        agent_player.reset(1, 1)
-        enemy_player.reset(GRID_SIZE - 2, GRID_SIZE - 2)
+        # Reset game - recreate game state for fresh episode
+        game_state = GameState(GRID_SIZE)
+        agent_player = game_state.add_player(1, 1, (0, 255, 0), "PPO Agent")
+        enemy_player = game_state.add_player(GRID_SIZE - 2, GRID_SIZE - 2, (255, 0, 0), "Heuristic")
+        
+        # Reset agent references
+        agent.player = agent_player
+        enemy_agent.player = enemy_player
         
         episode_reward = 0
         prev_state = None
