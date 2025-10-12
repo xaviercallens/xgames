@@ -178,6 +178,90 @@
             font-size: 0.9em;
         }
 
+        /* Loading overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(102, 126, 234, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.3s ease;
+            animation: progress 30s linear;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 90%; }
+        }
+
+        .error-message {
+            background: #ff4444;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2em;
@@ -189,6 +273,10 @@
 
             .coming-soon h3 {
                 font-size: 1.8em;
+            }
+
+            .iframe-container {
+                height: 400px;
             }
         }
     </style>
@@ -216,13 +304,42 @@
             </p>
 
             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 15px; margin: 30px 0;">
-                <iframe 
-                    src="play/index.html" 
-                    width="100%" 
-                    height="600" 
-                    style="border: 3px solid white; border-radius: 10px; max-width: 900px; display: block; margin: 0 auto;"
-                    allowfullscreen>
-                </iframe>
+                <div class="error-message" id="errorMessage">
+                    <h3>⚠️ Failed to Load Game</h3>
+                    <p id="errorText">The game failed to load. Please try:</p>
+                    <ul style="text-align: left; margin: 10px 0;">
+                        <li>Refreshing the page</li>
+                        <li>Clearing your browser cache</li>
+                        <li>Using a different browser (Chrome, Firefox, Edge)</li>
+                        <li>Checking your internet connection</li>
+                    </ul>
+                    <button onclick="retryLoad()" style="background: white; color: #667eea; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 10px;">🔄 Retry</button>
+                </div>
+
+                <div class="iframe-container">
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div class="spinner"></div>
+                        <div class="loading-text">
+                            <strong>🎮 Loading Proutman...</strong><br>
+                            <span id="loadingStatus">Initializing game engine...</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p style="color: white; margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                            First load may take 10-30 seconds
+                        </p>
+                    </div>
+                    <iframe 
+                        id="gameFrame"
+                        src="play/index.html" 
+                        width="100%" 
+                        height="100%" 
+                        style="border: 3px solid white; border-radius: 10px; display: block;"
+                        allow="autoplay; fullscreen; gamepad; gyroscope; accelerometer"
+                        allowfullscreen>
+                    </iframe>
+                </div>
                 <div style="text-align: center; margin-top: 20px; color: white;">
                     <p style="font-size: 1.2em; margin-bottom: 10px;">
                         <strong>🎮 Controls:</strong>
@@ -231,7 +348,7 @@
                         WASD or Arrow Keys = Move | SPACE = Drop Bomb 💨 | C = Place Caca 💩 | P = Pause
                     </p>
                     <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9;">
-                        ⏳ Game may take 10-30 seconds to load first time. Please be patient!
+                        💡 Click inside the game window to start playing!
                     </p>
                 </div>
             </div>
@@ -391,5 +508,129 @@
             <a href="index.html" style="color: #667eea; text-decoration: none;">Home</a>
         </p>
     </div>
+
+    <script>
+        // Loading management
+        let loadingTimeout;
+        let progressInterval;
+        let loadStartTime = Date.now();
+        const iframe = document.getElementById('gameFrame');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorMessage = document.getElementById('errorMessage');
+        const loadingStatus = document.getElementById('loadingStatus');
+
+        // Loading status messages
+        const statusMessages = [
+            'Initializing game engine...',
+            'Loading Python runtime...',
+            'Downloading game assets...',
+            'Compiling WebAssembly...',
+            'Setting up game world...',
+            'Almost ready...'
+        ];
+        let statusIndex = 0;
+
+        // Update loading status every 5 seconds
+        progressInterval = setInterval(() => {
+            statusIndex = (statusIndex + 1) % statusMessages.length;
+            loadingStatus.textContent = statusMessages[statusIndex];
+        }, 5000);
+
+        // Timeout after 60 seconds
+        loadingTimeout = setTimeout(() => {
+            showError('Loading timeout. The game took too long to load.');
+        }, 60000);
+
+        // Listen for iframe load
+        iframe.addEventListener('load', function() {
+            const loadTime = ((Date.now() - loadStartTime) / 1000).toFixed(1);
+            console.log(`Game loaded in ${loadTime} seconds`);
+            
+            // Wait a bit for the game to initialize
+            setTimeout(() => {
+                hideLoading();
+            }, 2000);
+        });
+
+        // Listen for errors
+        iframe.addEventListener('error', function() {
+            showError('Failed to load game iframe.');
+        });
+
+        // Listen for messages from iframe (if game sends ready signal)
+        window.addEventListener('message', function(event) {
+            if (event.data === 'game-ready') {
+                hideLoading();
+            } else if (event.data && event.data.type === 'game-error') {
+                showError(event.data.message || 'Game initialization error.');
+            }
+        });
+
+        function hideLoading() {
+            clearTimeout(loadingTimeout);
+            clearInterval(progressInterval);
+            loadingOverlay.classList.add('hidden');
+            console.log('Game ready!');
+        }
+
+        function showError(message) {
+            clearTimeout(loadingTimeout);
+            clearInterval(progressInterval);
+            loadingOverlay.classList.add('hidden');
+            errorMessage.classList.add('show');
+            document.getElementById('errorText').textContent = message;
+            console.error('Game loading error:', message);
+        }
+
+        function retryLoad() {
+            errorMessage.classList.remove('show');
+            loadingOverlay.classList.remove('hidden');
+            loadStartTime = Date.now();
+            statusIndex = 0;
+            loadingStatus.textContent = statusMessages[0];
+            
+            // Reset progress animation
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.animation = 'none';
+            setTimeout(() => {
+                progressFill.style.animation = 'progress 30s linear';
+            }, 10);
+            
+            // Reload iframe
+            iframe.src = iframe.src;
+            
+            // Restart timeout
+            loadingTimeout = setTimeout(() => {
+                showError('Loading timeout. The game took too long to load.');
+            }, 60000);
+            
+            // Restart status updates
+            progressInterval = setInterval(() => {
+                statusIndex = (statusIndex + 1) % statusMessages.length;
+                loadingStatus.textContent = statusMessages[statusIndex];
+            }, 5000);
+        }
+
+        // Detect if user clicks inside iframe (game is interactive)
+        let clickDetected = false;
+        iframe.addEventListener('click', function() {
+            if (!clickDetected) {
+                clickDetected = true;
+                console.log('User interacted with game');
+                hideLoading();
+            }
+        });
+
+        // Performance monitoring
+        if (window.performance && window.performance.memory) {
+            setInterval(() => {
+                const memory = window.performance.memory;
+                console.log('Memory usage:', {
+                    used: (memory.usedJSHeapSize / 1048576).toFixed(2) + ' MB',
+                    total: (memory.totalJSHeapSize / 1048576).toFixed(2) + ' MB'
+                });
+            }, 30000); // Log every 30 seconds
+        }
+    </script>
 </body>
 </html>
