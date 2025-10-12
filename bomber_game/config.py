@@ -14,7 +14,7 @@ GAME_CONFIG = {
 
 # Player settings
 PLAYER_CONFIG = {
-    'speed': 4,  # tiles per second
+    'speed': 6,  # tiles per second (increased from 4 for easier gameplay)
     'initial_bombs': 1,
     'initial_range': 2,  # explosion range in tiles
     'max_bombs': 8,
@@ -31,8 +31,8 @@ AI_CONFIG = {
 
 # Map generation
 MAP_CONFIG = {
-    'soft_wall_density': 0.6,  # Percentage of empty spaces with soft walls
-    'powerup_chance': 0.3,  # Chance of powerup under soft wall
+    'soft_wall_density': 0.35,  # Percentage of empty spaces with soft walls (reduced from 0.6 for easier gameplay)
+    'powerup_chance': 0.4,  # Chance of powerup under soft wall (increased from 0.3 for more rewards)
 }
 
 # Reinforcement Learning settings
