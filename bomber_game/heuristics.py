@@ -112,7 +112,7 @@ class GameHeuristics:
     @staticmethod
     def should_place_bomb(player, game_state):
         """
-        Heuristic: Should the player place a bomb?
+        IMPROVED Heuristic: Should the player place a bomb?
         
         Args:
             player: Player entity
@@ -126,7 +126,13 @@ class GameHeuristics:
         
         px, py = int(player.x), int(player.y)
         
-        # Check if there are destructible walls nearby
+        # Must have escape route
+        safe_dirs = GameHeuristics.get_safe_directions(player, game_state)
+        if len(safe_dirs) == 0:
+            return False
+        
+        # Count destructible walls in range
+        walls_in_range = 0
         for dx, dy in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
             for dist in range(1, player.bomb_range + 1):
                 check_x = px + dx * dist
@@ -134,22 +140,50 @@ class GameHeuristics:
                 
                 if 0 <= check_x < GRID_SIZE and 0 <= check_y < GRID_SIZE:
                     if game_state.grid[check_y][check_x] == 2:  # Destructible wall
-                        # Make sure we have an escape route
-                        if len(GameHeuristics.get_safe_directions(player, game_state)) > 0:
-                            return True
+                        walls_in_range += 1
                     elif game_state.grid[check_y][check_x] == 1:  # Hard wall
                         break  # Can't see past walls
         
-        # Check if enemy is nearby
+        # Place bomb if 2+ walls in range (efficient)
+        if walls_in_range >= 2:
+            return True
+        
+        # Place bomb if 1 wall and no better position nearby
+        if walls_in_range == 1:
+            return random.random() < 0.7  # 70% chance
+        
+        # Check if enemy is in bomb range
         for other_player in game_state.players:
             if other_player != player and other_player.alive:
                 enemy_x, enemy_y = int(other_player.x), int(other_player.y)
-                dist = abs(px - enemy_x) + abs(py - enemy_y)
                 
-                if dist <= player.bomb_range + 2:
-                    # Enemy nearby, consider placing bomb
-                    if len(GameHeuristics.get_safe_directions(player, game_state)) > 0:
-                        return random.random() < 0.3  # 30% chance
+                # Check if enemy is in direct line
+                if enemy_y == py and abs(enemy_x - px) <= player.bomb_range:
+                    # Check no walls blocking
+                    blocked = False
+                    step = 1 if enemy_x > px else -1
+                    for check_x in range(px + step, enemy_x, step):
+                        if game_state.grid[py][check_x] in [1, 2]:
+                            blocked = True
+                            break
+                    if not blocked:
+                        return random.random() < 0.8  # 80% chance to trap enemy
+                
+                if enemy_x == px and abs(enemy_y - py) <= player.bomb_range:
+                    # Check no walls blocking
+                    blocked = False
+                    step = 1 if enemy_y > py else -1
+                    for check_y in range(py + step, enemy_y, step):
+                        if game_state.grid[check_y][px] in [1, 2]:
+                            blocked = True
+                            break
+                    if not blocked:
+                        return random.random() < 0.8  # 80% chance to trap enemy
+                
+                # Enemy nearby but not in direct line
+                dist = abs(px - enemy_x) + abs(py - enemy_y)
+                if dist <= 3:
+                    return random.random() < 0.4  # 40% chance
         
         return False
     

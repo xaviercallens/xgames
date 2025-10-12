@@ -10,6 +10,8 @@ from .game_state import GameState
 from .agents import SimpleAgent, RLAgent, PPOAgent
 from .assets import get_asset_manager
 from .menu import MenuScreen
+from .model_selector import ModelSelector
+from .heuristics import HeuristicAgent
 import os
 
 
@@ -42,32 +44,62 @@ class BombermanGame:
             GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
         )
         
+        # Use intelligent model selector
+        models_dir = os.path.join(os.path.dirname(__file__), "models")
+        selector = ModelSelector(models_dir)
+        
+        # Select best model based on performance
+        selection = selector.select_best_model()
+        
         # Load AI training stats
         self.ai_stats = self._load_ai_stats()
         
-        # Create AI agent (priority: PPO > DQN > Simple)
-        ppo_model_path = os.path.join(os.path.dirname(__file__), "models", "ppo_agent.pth")
-        dqn_model_path = os.path.join(os.path.dirname(__file__), "models", "rl_agent.pth")
-        
-        if os.path.exists(ppo_model_path):
-            print(f"\n🤖 LOADING AI OPPONENT")
-            print(f"{'=' * 70}")
-            print(f"✅ Found trained PPO model: {ppo_model_path}")
-            print(f"\n📊 AI Statistics:")
+        # Create AI agent based on selection
+        if selection['model_path'] == 'heuristic':
+            print(f"🌱 Using Improved Heuristic Agent")
+            print(f"   Reason: {selection['reason']}")
+            print(f"   Expected Win Rate: ~{selection['win_rate']:.1f}%")
+            print(f"\n✨ Heuristic Features:")
+            print(f"   • Improved bomb placement strategy")
+            print(f"   • Smart escape routes")
+            print(f"   • Enemy tracking and trapping")
+            print(f"   • Efficient wall destruction")
+            print(f"   • Power-up prioritization")
+            print(f"\n💡 Train AI to beat heuristic: ./train.sh")
+            self.ai_agent = HeuristicAgent(self.ai_player)
+            self.ai_type = "Heuristic"
+            
+        elif selection['model_type'] == 'ppo_pretrained':
+            print(f"🎯 Using Pretrained PPO Model")
+            print(f"   Reason: {selection['reason']}")
+            print(f"   Expected Win Rate: ~{selection['win_rate']:.1f}%")
+            print(f"\n🧠 Model Features:")
+            print(f"   • Bootstrap trained with heuristics")
+            print(f"   • Ready for reinforcement learning")
+            print(f"   • Strategic decision making")
+            print(f"\n💡 Continue training: ./train.sh")
+            self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
+            self.ai_type = "PPO (Pretrained)"
+            
+        elif selection['model_type'] == 'ppo':
+            print(f"🏆 Using Trained PPO Model")
+            print(f"   Reason: {selection['reason']}")
+            print(f"   Win Rate: {selection['win_rate']:.1f}%")
+            
             if self.ai_stats:
                 total_episodes = self.ai_stats.get('total_episodes', 0)
                 total_wins = self.ai_stats.get('total_wins', 0)
                 training_time = self.ai_stats.get('total_training_time', 0)
-                win_rate = self.ai_stats.get('win_rate', 0)
                 current_level = self.ai_stats.get('current_level', 'Unknown')
                 
+                print(f"\n📊 Detailed Statistics:")
                 print(f"   🎯 Skill Level: {current_level}")
                 print(f"   🎮 Games Played: {total_episodes:,}")
                 print(f"   🏆 Games Won: {total_wins:,}")
-                print(f"   📈 Win Rate: {win_rate:.1f}%")
                 print(f"   ⏱️  Training Time: {self._format_time(training_time)}")
                 
                 # Show AI strength message
+                win_rate = selection['win_rate']
                 if win_rate >= 50:
                     print(f"\n   ⚠️  WARNING: This AI is VERY STRONG! Good luck! 💪")
                 elif win_rate >= 30:
@@ -76,25 +108,20 @@ class BombermanGame:
                     print(f"\n   🎯 This AI is learning - you have a good chance!")
                 else:
                     print(f"\n   🌱 This AI is still learning - you should win easily!")
-            else:
-                print(f"   📝 No training stats found (using pre-trained model)")
             
             print(f"\n🧠 AI Features:")
             print(f"   • Deep Reinforcement Learning (PPO algorithm)")
-            print(f"   • Strategic decision making")
+            print(f"   • Trained on {self.ai_stats.get('total_episodes', 0):,} games")
             print(f"   • Learns from every game")
             print(f"   • Adapts to your strategy")
-            print(f"{'=' * 70}\n")
+            print(f"\n💡 Train more for even better AI: ./train.sh")
             
-            self.ai_agent = PPOAgent(self.ai_player, model_path=ppo_model_path, training=False)
+            self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
             self.ai_type = "PPO"
-        elif os.path.exists(dqn_model_path):
-            print(f"🤖 Using DQN Agent (Deep Q-Learning)")
-            self.ai_agent = RLAgent(self.ai_player, model_path=dqn_model_path, training=False)
-            self.ai_type = "DQN"
+        
         else:
-            print(f"🤖 Using Simple Heuristic Agent")
-            print(f"   💡 Train advanced AI: ./quick_train_agent.py")
+            # Fallback to simple agent
+            print(f"🤖 Using Simple Agent (Fallback)")
             self.ai_agent = SimpleAgent(self.ai_player)
             self.ai_type = "Simple"
         
