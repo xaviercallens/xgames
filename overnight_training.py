@@ -422,6 +422,7 @@ def train_overnight():
             game_state.update(1/FPS)  # dt = 1/FPS for consistent timing
             
             # Calculate reward
+            reward = calculate_reward(game_state, agent_player, enemy_player, prev_state, agent_action)
             episode_reward += reward
             
             # Store experience (if agent supports it)
