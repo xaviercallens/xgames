@@ -406,7 +406,7 @@ def train_overnight():
             curr_state = get_state_dict(game_state, agent_player, enemy_player)
             
             # Agent actions
-            agent_action = agent.get_action(game_state, agent_player, enemy_player)
+            agent_action = agent.choose_action(game_state)
             enemy_action = enemy_agent.get_action(game_state, enemy_player, agent_player)
             
             # Execute actions
