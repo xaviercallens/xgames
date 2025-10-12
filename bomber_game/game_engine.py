@@ -50,11 +50,42 @@ class BombermanGame:
         dqn_model_path = os.path.join(os.path.dirname(__file__), "models", "rl_agent.pth")
         
         if os.path.exists(ppo_model_path):
-            print(f"🤖 Using PPO Agent (Advanced RL)")
+            print(f"\n🤖 LOADING AI OPPONENT")
+            print(f"{'=' * 70}")
+            print(f"✅ Found trained PPO model: {ppo_model_path}")
+            print(f"\n📊 AI Statistics:")
             if self.ai_stats:
-                print(f"   Level: {self.ai_stats.get('current_level', 'Unknown')}")
-                print(f"   Training: {self._format_time(self.ai_stats.get('total_training_time', 0))}")
-                print(f"   Win Rate: {self.ai_stats.get('win_rate', 0):.1f}%")
+                total_episodes = self.ai_stats.get('total_episodes', 0)
+                total_wins = self.ai_stats.get('total_wins', 0)
+                training_time = self.ai_stats.get('total_training_time', 0)
+                win_rate = self.ai_stats.get('win_rate', 0)
+                current_level = self.ai_stats.get('current_level', 'Unknown')
+                
+                print(f"   🎯 Skill Level: {current_level}")
+                print(f"   🎮 Games Played: {total_episodes:,}")
+                print(f"   🏆 Games Won: {total_wins:,}")
+                print(f"   📈 Win Rate: {win_rate:.1f}%")
+                print(f"   ⏱️  Training Time: {self._format_time(training_time)}")
+                
+                # Show AI strength message
+                if win_rate >= 50:
+                    print(f"\n   ⚠️  WARNING: This AI is VERY STRONG! Good luck! 💪")
+                elif win_rate >= 30:
+                    print(f"\n   💪 This AI is quite skilled - prepare for a challenge!")
+                elif win_rate >= 10:
+                    print(f"\n   🎯 This AI is learning - you have a good chance!")
+                else:
+                    print(f"\n   🌱 This AI is still learning - you should win easily!")
+            else:
+                print(f"   📝 No training stats found (using pre-trained model)")
+            
+            print(f"\n🧠 AI Features:")
+            print(f"   • Deep Reinforcement Learning (PPO algorithm)")
+            print(f"   • Strategic decision making")
+            print(f"   • Learns from every game")
+            print(f"   • Adapts to your strategy")
+            print(f"{'=' * 70}\n")
+            
             self.ai_agent = PPOAgent(self.ai_player, model_path=ppo_model_path, training=False)
             self.ai_type = "PPO"
         elif os.path.exists(dqn_model_path):
