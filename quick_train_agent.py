@@ -10,6 +10,12 @@ import time
 import json
 import numpy as np
 from datetime import datetime, timedelta
+import signal
+
+# Suppress pygame warnings during training
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
+import warnings
+warnings.filterwarnings('ignore')
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,13 +32,63 @@ MODEL_PATH = "bomber_game/models/ppo_agent.pth"
 
 # Level thresholds
 LEVELS = [
-    {"name": "Beginner", "min_win_rate": 0, "color": "🔵"},
-    {"name": "Novice", "min_win_rate": 20, "color": "🟢"},
-    {"name": "Intermediate", "min_win_rate": 40, "color": "🟡"},
-    {"name": "Advanced", "min_win_rate": 60, "color": "🟠"},
-    {"name": "Expert", "min_win_rate": 75, "color": "🔴"},
-    {"name": "Master", "min_win_rate": 85, "color": "🟣"},
+    {"name": "Beginner", "min_win_rate": 0, "color": "🔵", "emoji": "🐣"},
+    {"name": "Novice", "min_win_rate": 20, "color": "🟢", "emoji": "🌱"},
+    {"name": "Intermediate", "min_win_rate": 40, "color": "🟡", "emoji": "🎯"},
+    {"name": "Advanced", "min_win_rate": 60, "color": "🟠", "emoji": "🔥"},
+    {"name": "Expert", "min_win_rate": 75, "color": "🔴", "emoji": "⚡"},
+    {"name": "Master", "min_win_rate": 85, "color": "🟣", "emoji": "👑"},
 ]
+
+# Progress messages
+PROGRESS_MESSAGES = {
+    "Beginner": [
+        "🐣 Learning to walk...",
+        "🎮 Understanding the game basics...",
+        "🤔 Figuring out how bombs work...",
+        "👀 Watching and learning...",
+    ],
+    "Novice": [
+        "🌱 Starting to understand strategy...",
+        "💡 Learning to avoid explosions...",
+        "🎯 Improving decision making...",
+        "📈 Getting smarter...",
+    ],
+    "Intermediate": [
+        "🎯 Developing tactical skills...",
+        "🧠 Thinking ahead...",
+        "⚔️ Learning combat strategies...",
+        "🚀 Making progress...",
+    ],
+    "Advanced": [
+        "🔥 Mastering advanced tactics...",
+        "🎓 Becoming a skilled player...",
+        "💪 Getting really good...",
+        "🌟 Impressive improvement...",
+    ],
+    "Expert": [
+        "⚡ Executing expert strategies...",
+        "🏆 Near-perfect gameplay...",
+        "🎖️ Dominating the arena...",
+        "✨ Exceptional performance...",
+    ],
+    "Master": [
+        "👑 Achieving mastery...",
+        "🌌 Playing at peak performance...",
+        "🔮 Predicting enemy moves...",
+        "🎭 A true Bomberman master...",
+    ],
+}
+
+# Global flag for graceful shutdown
+training_interrupted = False
+
+def signal_handler(sig, frame):
+    """Handle Ctrl+C gracefully."""
+    global training_interrupted
+    training_interrupted = True
+    print("\n\n⚠️  Training interruption requested...")
+    print("💾 Saving progress before exit...")
 
 
 class TrainingStats:
@@ -230,12 +286,36 @@ def print_progress_bar(current, total, width=50):
     return f"[{bar}] {percent:.1f}%"
 
 
-def quick_train():
-    """Quick 15-minute training session."""
-    print("=" * 80)
-    print("🚀 QUICK TRAINING - 15 Minute Progressive Learning Session")
+def get_progress_message(level, episode_count):
+    """Get a contextual progress message."""
+    messages = PROGRESS_MESSAGES.get(level, ["Training..."])
+    idx = (episode_count // 50) % len(messages)
+    return messages[idx]
+
+
+def print_banner():
+    """Print training banner."""
+    print("\n" + "=" * 80)
+    print("🤖 BOMBERMAN AI TRAINING - Progressive Learning System")
     print("=" * 80)
     print()
+    print("🎯 Mission: Train an intelligent AI agent to master Bomberman")
+    print("⏱️  Duration: 15 minutes of focused learning")
+    print("💾 Auto-save: Every 60 seconds")
+    print("🎮 Result: Smarter AI with each session!")
+    print()
+    print("=" * 80)
+    print()
+
+
+def quick_train():
+    """Quick 15-minute training session."""
+    global training_interrupted
+    
+    # Register signal handler for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)
+    
+    print_banner()
     
     # Check PyTorch
     try:
@@ -278,13 +358,25 @@ def quick_train():
     
     print(f"⏱️  Training Duration: {TRAINING_DURATION // 60} minutes")
     print(f"💾 Checkpoint Interval: {CHECKPOINT_INTERVAL} seconds")
-    print(f"🎯 Target: Improve from {stats.current_level}")
+    
+    # Get level emoji
+    level_emoji = next((l["emoji"] for l in LEVELS if l["name"] == stats.current_level), "🤖")
+    print(f"{level_emoji} Starting Level: {stats.current_level}")
     print()
-    print("🎮 Starting training...\n")
+    print("🎮 Training in progress... (Press Ctrl+C to stop gracefully)")
+    print()
+    
+    last_message_time = time.time()
+    message_interval = 30  # Show message every 30 seconds
     
     try:
         while True:
             elapsed = time.time() - session_start
+            
+            # Check if training interrupted
+            if training_interrupted:
+                print("\n⚠️  Training interrupted by user!")
+                break
             
             # Check if training time is up
             if elapsed >= TRAINING_DURATION:
@@ -356,22 +448,39 @@ def quick_train():
                 progress = print_progress_bar(elapsed, TRAINING_DURATION)
                 session_win_rate = (session_wins / session_episodes) * 100
                 
+                # Get level emoji
+                level_emoji = next((l["emoji"] for l in LEVELS if l["name"] == stats.current_level), "🤖")
+                
                 print(f"\r{progress} | "
-                      f"Time: {format_time(elapsed)}/{format_time(TRAINING_DURATION)} | "
-                      f"Episodes: {session_episodes} | "
-                      f"Win%: {session_win_rate:.1f} | "
-                      f"Level: {stats.current_level}", end="")
+                      f"⏱️  {format_time(elapsed)}/{format_time(TRAINING_DURATION)} | "
+                      f"🎮 {session_episodes} games | "
+                      f"🏆 {session_win_rate:.1f}% | "
+                      f"{level_emoji} {stats.current_level}", end="", flush=True)
+            
+            # Show progress message periodically
+            current_time = time.time()
+            if current_time - last_message_time >= message_interval:
+                message = get_progress_message(stats.current_level, session_episodes)
+                print(f"\n   {message}")
+                last_message_time = current_time
             
             # Checkpoint
             current_time = time.time()
             if current_time - last_checkpoint >= CHECKPOINT_INTERVAL:
                 print()  # New line after progress
+                level_emoji = next((l["emoji"] for l in LEVELS if l["name"] == stats.current_level), "🤖")
                 print(f"💾 Checkpoint at {format_time(elapsed)}...")
                 agent.save_model(MODEL_PATH)
                 stats.total_training_time += elapsed
                 stats.save()
                 last_checkpoint = current_time
-                print(f"   ✅ Saved! Level: {stats.current_level}, Win Rate: {stats.get_win_rate():.1f}%")
+                print(f"   ✅ Progress saved! {level_emoji} {stats.current_level} | 🏆 {stats.get_win_rate():.1f}% win rate")
+                
+                # Show improvement message
+                if stats.total_episodes > 100:
+                    improvement = stats.get_win_rate() - (stats.total_wins - session_wins) / (stats.total_episodes - session_episodes) * 100 if stats.total_episodes > session_episodes else 0
+                    if improvement > 0:
+                        print(f"   📈 Improved by {improvement:.1f}% this session!")
     
     except KeyboardInterrupt:
         print("\n\n⚠️  Training interrupted by user")
@@ -393,22 +502,45 @@ def quick_train():
     })
     stats.save()
     
+    # Get level info
+    level_emoji = next((l["emoji"] for l in LEVELS if l["name"] == stats.current_level), "🤖")
+    level_color = next((l["color"] for l in LEVELS if l["name"] == stats.current_level), "🤖")
+    
     print("=" * 80)
     print("✅ TRAINING SESSION COMPLETE!")
     print("=" * 80)
     print()
-    print(f"📊 Session Statistics:")
-    print(f"   Duration: {format_time(session_duration)}")
-    print(f"   Episodes: {session_episodes}")
-    print(f"   Wins: {session_wins} ({(session_wins/session_episodes*100):.1f}%)")
+    print(f"📊 Session Summary:")
+    print(f"   ⏱️  Duration: {format_time(session_duration)}")
+    print(f"   🎮 Episodes: {session_episodes}")
+    print(f"   🏆 Wins: {session_wins} ({(session_wins/session_episodes*100):.1f}%)")
     print()
-    print(f"📈 Overall Statistics:")
-    print(f"   Total Episodes: {stats.total_episodes}")
-    print(f"   Total Training Time: {format_time(stats.total_training_time)}")
-    print(f"   Overall Win Rate: {stats.get_win_rate():.1f}%")
-    print(f"   Current Level: {stats.current_level}")
+    print(f"📈 AI Intelligence Report:")
+    print(f"   🧠 Total Training: {format_time(stats.total_training_time)}")
+    print(f"   🎯 Total Episodes: {stats.total_episodes}")
+    print(f"   🏆 Overall Win Rate: {stats.get_win_rate():.1f}%")
+    print(f"   {level_emoji} Current Level: {level_color} {stats.current_level}")
     print()
-    print(f"🎮 Play with your trained agent: ./launch_bomberman.sh")
+    
+    # Show level progression message
+    if stats.get_win_rate() < 20:
+        print("💡 Keep training! Your AI is learning the basics.")
+    elif stats.get_win_rate() < 40:
+        print("🌱 Good progress! Your AI is developing strategies.")
+    elif stats.get_win_rate() < 60:
+        print("🎯 Impressive! Your AI is becoming tactical.")
+    elif stats.get_win_rate() < 75:
+        print("🔥 Excellent! Your AI is mastering advanced techniques.")
+    elif stats.get_win_rate() < 85:
+        print("⚡ Outstanding! Your AI is playing at expert level.")
+    else:
+        print("👑 Incredible! Your AI has achieved mastery!")
+    
+    print()
+    print("=" * 80)
+    print(f"🎮 Test your AI: ./launch_bomberman.sh")
+    print(f"🔄 Continue training: ./quick_train_agent.py")
+    print("=" * 80)
     print()
 
 
