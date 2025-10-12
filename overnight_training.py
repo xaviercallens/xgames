@@ -117,16 +117,7 @@ def get_learning_rate(episode, total_episodes):
 
 def load_or_create_stats():
     """Load existing stats or create new ones."""
-    if os.path.exists(STATS_FILE):
-        try:
-            with open(STATS_FILE, 'r') as f:
-                stats = json.load(f)
-                log_message(f"📊 Loaded existing stats: {stats.get('total_episodes', 0)} episodes")
-                return stats
-        except:
-            pass
-    
-    return {
+    default_stats = {
         'total_episodes': 0,
         'total_wins': 0,
         'total_rewards': 0,
@@ -136,6 +127,21 @@ def load_or_create_stats():
         'training_start': datetime.now().isoformat(),
         'total_training_time': 0
     }
+    
+    if os.path.exists(STATS_FILE):
+        try:
+            with open(STATS_FILE, 'r') as f:
+                stats = json.load(f)
+                # Ensure all keys exist (merge with defaults)
+                for key, value in default_stats.items():
+                    if key not in stats:
+                        stats[key] = value
+                log_message(f"📊 Loaded existing stats: {stats.get('total_episodes', 0)} episodes")
+                return stats
+        except:
+            pass
+    
+    return default_stats
 
 
 def save_stats(stats):
