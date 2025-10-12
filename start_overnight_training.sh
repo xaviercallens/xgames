@@ -9,17 +9,35 @@ echo "🌙 OVERNIGHT TRAINING LAUNCHER"
 echo "=================================="
 echo ""
 
+# Check for virtual environment
+if [ -d ".venv" ]; then
+    echo "✅ Virtual environment found"
+    source .venv/bin/activate
+    PYTHON_CMD="python"
+elif [ -d "venv" ]; then
+    echo "✅ Virtual environment found"
+    source venv/bin/activate
+    PYTHON_CMD="python"
+else
+    echo "⚠️  No virtual environment found, using system Python"
+    PYTHON_CMD="python3"
+fi
+
 # Check Python
-if ! command -v python3 &> /dev/null; then
-    echo "❌ Python3 not found"
+if ! command -v $PYTHON_CMD &> /dev/null; then
+    echo "❌ Python not found"
     exit 1
 fi
 
+echo "🐍 Python: $($PYTHON_CMD --version)"
+
 # Check PyTorch
-if ! python3 -c "import torch" 2>/dev/null; then
+if ! $PYTHON_CMD -c "import torch" 2>/dev/null; then
     echo "⚠️  PyTorch not found. Installing..."
-    pip3 install torch
+    pip install torch --index-url https://download.pytorch.org/whl/cpu
 fi
+
+echo "✅ PyTorch: $(python -c 'import torch; print(torch.__version__)')"
 
 # Create output directory
 mkdir -p bomber_game/models/checkpoints
@@ -89,16 +107,16 @@ case $exec_choice in
         echo "💡 Press Ctrl+C to stop (will save checkpoint)"
         echo ""
         sleep 2
-        python3 overnight_training.py
+        $PYTHON_CMD overnight_training.py
         ;;
     2)
         echo "🚀 Starting training in background..."
-        nohup python3 overnight_training.py > training_output.log 2>&1 &
+        nohup $PYTHON_CMD overnight_training.py > training_output.log 2>&1 &
         PID=$!
         echo "✅ Training started (PID: $PID)"
         echo ""
         echo "📊 Monitor progress:"
-        echo "   python3 monitor_training.py"
+        echo "   $PYTHON_CMD monitor_training.py"
         echo ""
         echo "📝 View logs:"
         echo "   tail -f training_output.log"
@@ -112,12 +130,12 @@ case $exec_choice in
         read -p "Start monitor now? [y/N]: " start_monitor
         if [[ $start_monitor =~ ^[Yy]$ ]]; then
             sleep 2
-            python3 monitor_training.py
+            $PYTHON_CMD monitor_training.py
         fi
         ;;
     3)
         echo "🚀 Starting screen session..."
-        screen -dmS bomberman_training python3 overnight_training.py
+        screen -dmS bomberman_training $PYTHON_CMD overnight_training.py
         echo "✅ Screen session started: bomberman_training"
         echo ""
         echo "📊 Attach to session:"
@@ -128,7 +146,7 @@ case $exec_choice in
         ;;
     4)
         echo "🚀 Starting tmux session..."
-        tmux new-session -d -s training "python3 overnight_training.py"
+        tmux new-session -d -s training "$PYTHON_CMD overnight_training.py"
         echo "✅ tmux session started: training"
         echo ""
         echo "📊 Attach to session:"
