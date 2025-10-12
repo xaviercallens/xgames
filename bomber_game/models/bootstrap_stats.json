@@ -1,0 +1,16 @@
+{
+  "bootstrap_episodes": 500,
+  "total_wins": 125,
+  "total_losses": 375,
+  "win_rate": 25.0,
+  "avg_reward": 3.9103999999999983,
+  "timestamp": "2025-10-12T18:04:37.105321",
+  "strategies_learned": [
+    "Walk in unblocked directions",
+    "Find safe spaces for bombs",
+    "Create bombs and escape",
+    "Avoid bombs when detected",
+    "Move towards objectives",
+    "Basic survival strategies"
+  ]
+}

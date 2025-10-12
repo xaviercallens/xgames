@@ -12,6 +12,7 @@ from .assets import get_asset_manager
 from .menu import MenuScreen
 from .model_selector import ModelSelector
 from .heuristics import HeuristicAgent
+from .heuristics_improved import ImprovedHeuristicAgent
 import os
 
 
@@ -53,21 +54,21 @@ class BombermanGame:
         
         # Load AI training stats
         self.ai_stats = self._load_ai_stats()
-        
         # Create AI agent based on selection
         if selection['model_path'] == 'heuristic':
             print(f"🌱 Using Improved Heuristic Agent")
             print(f"   Reason: {selection['reason']}")
             print(f"   Expected Win Rate: ~{selection['win_rate']:.1f}%")
-            print(f"\n✨ Heuristic Features:")
-            print(f"   • Improved bomb placement strategy")
-            print(f"   • Smart escape routes")
-            print(f"   • Enemy tracking and trapping")
-            print(f"   • Efficient wall destruction")
-            print(f"   • Power-up prioritization")
-            print(f"\n💡 Train AI to beat heuristic: ./train.sh")
-            self.ai_agent = HeuristicAgent(self.ai_player)
-            self.ai_type = "Heuristic"
+            if selection['model_type'] == 'heuristic':
+                print(f"🧠 Using IMPROVED Heuristic Agent (Industry Best Practices)")
+                print(f"   • A* pathfinding algorithm")
+                print(f"   • Weighted evaluation function")
+                print(f"   • Danger zone prediction")
+                print(f"   • Strategic bomb placement")
+                print(f"   • Performance tracking (Win Rate & Rewards)")
+                print(f"\n💡 Train AI to beat heuristic: ./train.sh")
+                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+                self.ai_type = "Improved Heuristic"
             
         elif selection['model_type'] == 'ppo_pretrained':
             print(f"🎯 Using Pretrained PPO Model")
@@ -354,7 +355,7 @@ class BombermanGame:
         self.screen.blit(text_surf, text_rect)
     
     def _draw_game_over(self):
-        """Draw game over screen."""
+        """Draw game over screen with AI statistics."""
         # Semi-transparent overlay
         overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         overlay.set_alpha(200)
@@ -365,17 +366,49 @@ class BombermanGame:
         if self.game_state.winner:
             text = f"{self.game_state.winner.name} Wins!"
             color = self.game_state.winner.color
+            
+            # Track AI performance
+            if hasattr(self.ai_agent, 'record_game_result'):
+                ai_won = (self.game_state.winner == self.ai_player)
+                reward = 100.0 if ai_won else -50.0
+                self.ai_agent.record_game_result(ai_won, reward)
+                
+                # Print stats to console
+                print(self.ai_agent.get_stats_string())
         else:
             text = "Draw!"
             color = WHITE
+            if hasattr(self.ai_agent, 'record_game_result'):
+                self.ai_agent.record_game_result(False, 0.0)
         
         text_surf = self.big_font.render(text, True, color)
-        text_rect = text_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 30))
+        text_rect = text_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 80))
         self.screen.blit(text_surf, text_rect)
+        
+        # Show AI stats if available
+        if hasattr(self.ai_agent, 'get_win_rate'):
+            win_rate = self.ai_agent.get_win_rate() * 100
+            avg_reward = self.ai_agent.get_average_reward()
+            games = self.ai_agent.total_games
+            
+            stats_y = SCREEN_HEIGHT // 2 - 20
+            stats_font = pygame.font.Font(None, 20)
+            
+            stats_lines = [
+                f"AI Performance:",
+                f"Win Rate: {win_rate:.1f}%",
+                f"Avg Reward: {avg_reward:.1f}",
+                f"Games: {games}"
+            ]
+            
+            for i, line in enumerate(stats_lines):
+                stats_surf = stats_font.render(line, True, WHITE)
+                stats_rect = stats_surf.get_rect(center=(SCREEN_WIDTH // 2, stats_y + i * 25))
+                self.screen.blit(stats_surf, stats_rect)
         
         # Restart text
         restart_surf = self.font.render("Press R to Restart", True, WHITE)
-        restart_rect = restart_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 20))
+        restart_rect = restart_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
         self.screen.blit(restart_surf, restart_rect)
     
     def _restart_game(self):
