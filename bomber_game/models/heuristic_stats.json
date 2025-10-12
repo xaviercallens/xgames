@@ -1,9 +1,10 @@
 {
   "model_type": "heuristic",
-  "total_episodes": 0,
-  "total_wins": 0,
-  "win_rate": 15.0,
-  "description": "Pure heuristic agent (baseline)",
-  "created": "2025-10-12T17:20:38.081933",
-  "last_updated": "2025-10-12T17:20:38.081946"
+  "total_episodes": 100,
+  "total_wins": 29,
+  "win_rate": 0.0,
+  "description": "Heuristic agent (benchmarked)",
+  "benchmarked": true,
+  "created": "2025-10-12T20:24:01.512464",
+  "last_updated": "2025-10-12T20:24:01.512485"
 }

@@ -1,0 +1,812 @@
+{
+  "total_games": 100,
+  "heuristic_wins": 29,
+  "simple_wins": 56,
+  "draws": 15,
+  "total_duration": 11.794979095458984,
+  "games": [
+    {
+      "game_id": 1,
+      "winner": "Heuristic",
+      "duration": 0.04445815086364746,
+      "steps": 213,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 2,
+      "winner": "Simple",
+      "duration": 0.06742286682128906,
+      "steps": 467,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 3,
+      "winner": "Simple",
+      "duration": 0.024898052215576172,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 4,
+      "winner": "Simple",
+      "duration": 0.022438526153564453,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 5,
+      "winner": "Heuristic",
+      "duration": 0.05309009552001953,
+      "steps": 277,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 6,
+      "winner": "Simple",
+      "duration": 0.03865957260131836,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 7,
+      "winner": "Heuristic",
+      "duration": 0.043398380279541016,
+      "steps": 202,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 8,
+      "winner": "Draw",
+      "duration": 0.40240907669067383,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 9,
+      "winner": "Simple",
+      "duration": 0.03222322463989258,
+      "steps": 257,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 10,
+      "winner": "Simple",
+      "duration": 0.032354116439819336,
+      "steps": 199,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 11,
+      "winner": "Heuristic",
+      "duration": 0.0516362190246582,
+      "steps": 229,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 12,
+      "winner": "Heuristic",
+      "duration": 0.04060840606689453,
+      "steps": 257,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 13,
+      "winner": "Heuristic",
+      "duration": 0.042936086654663086,
+      "steps": 283,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 14,
+      "winner": "Draw",
+      "duration": 0.03951144218444824,
+      "steps": 277,
+      "heuristic_alive": false,
+      "simple_alive": false
+    },
+    {
+      "game_id": 15,
+      "winner": "Simple",
+      "duration": 0.05293846130371094,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 16,
+      "winner": "Draw",
+      "duration": 0.40995240211486816,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 17,
+      "winner": "Simple",
+      "duration": 0.025022268295288086,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 18,
+      "winner": "Heuristic",
+      "duration": 0.039034128189086914,
+      "steps": 262,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 19,
+      "winner": "Simple",
+      "duration": 0.020338773727416992,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 20,
+      "winner": "Simple",
+      "duration": 0.024811744689941406,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 21,
+      "winner": "Draw",
+      "duration": 0.3693554401397705,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 22,
+      "winner": "Simple",
+      "duration": 0.03196406364440918,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 23,
+      "winner": "Draw",
+      "duration": 0.027100801467895508,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": false
+    },
+    {
+      "game_id": 24,
+      "winner": "Heuristic",
+      "duration": 0.17403793334960938,
+      "steps": 1250,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 25,
+      "winner": "Draw",
+      "duration": 0.04674935340881348,
+      "steps": 277,
+      "heuristic_alive": false,
+      "simple_alive": false
+    },
+    {
+      "game_id": 26,
+      "winner": "Draw",
+      "duration": 0.02116084098815918,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": false
+    },
+    {
+      "game_id": 27,
+      "winner": "Draw",
+      "duration": 0.4060511589050293,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 28,
+      "winner": "Simple",
+      "duration": 0.02489781379699707,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 29,
+      "winner": "Heuristic",
+      "duration": 0.23576784133911133,
+      "steps": 1875,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 30,
+      "winner": "Simple",
+      "duration": 0.16410207748413086,
+      "steps": 867,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 31,
+      "winner": "Simple",
+      "duration": 0.0490269660949707,
+      "steps": 267,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 32,
+      "winner": "Simple",
+      "duration": 0.04196047782897949,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 33,
+      "winner": "Heuristic",
+      "duration": 0.16704630851745605,
+      "steps": 1250,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 34,
+      "winner": "Simple",
+      "duration": 0.03793144226074219,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 35,
+      "winner": "Simple",
+      "duration": 0.02803349494934082,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 36,
+      "winner": "Simple",
+      "duration": 0.03536558151245117,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 37,
+      "winner": "Heuristic",
+      "duration": 0.07552385330200195,
+      "steps": 379,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 38,
+      "winner": "Heuristic",
+      "duration": 0.39653873443603516,
+      "steps": 2852,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 39,
+      "winner": "Draw",
+      "duration": 0.48748207092285156,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 40,
+      "winner": "Heuristic",
+      "duration": 0.033472537994384766,
+      "steps": 287,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 41,
+      "winner": "Heuristic",
+      "duration": 0.2774829864501953,
+      "steps": 1881,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 42,
+      "winner": "Simple",
+      "duration": 0.09900116920471191,
+      "steps": 457,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 43,
+      "winner": "Simple",
+      "duration": 0.02476358413696289,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 44,
+      "winner": "Heuristic",
+      "duration": 0.059691667556762695,
+      "steps": 267,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 45,
+      "winner": "Heuristic",
+      "duration": 0.03618597984313965,
+      "steps": 279,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 46,
+      "winner": "Simple",
+      "duration": 0.03594064712524414,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 47,
+      "winner": "Simple",
+      "duration": 0.02886199951171875,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 48,
+      "winner": "Simple",
+      "duration": 0.08832812309265137,
+      "steps": 407,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 49,
+      "winner": "Draw",
+      "duration": 0.5010993480682373,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 50,
+      "winner": "Simple",
+      "duration": 0.024324893951416016,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 51,
+      "winner": "Simple",
+      "duration": 0.042110443115234375,
+      "steps": 237,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 52,
+      "winner": "Heuristic",
+      "duration": 0.19368886947631836,
+      "steps": 1250,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 53,
+      "winner": "Simple",
+      "duration": 0.04722952842712402,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 54,
+      "winner": "Simple",
+      "duration": 0.0427861213684082,
+      "steps": 274,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 55,
+      "winner": "Simple",
+      "duration": 0.039012908935546875,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 56,
+      "winner": "Simple",
+      "duration": 0.03579854965209961,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 57,
+      "winner": "Simple",
+      "duration": 0.02911686897277832,
+      "steps": 218,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 58,
+      "winner": "Heuristic",
+      "duration": 0.06970381736755371,
+      "steps": 459,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 59,
+      "winner": "Simple",
+      "duration": 0.0380401611328125,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 60,
+      "winner": "Heuristic",
+      "duration": 0.05967235565185547,
+      "steps": 267,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 61,
+      "winner": "Heuristic",
+      "duration": 0.08922076225280762,
+      "steps": 295,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 62,
+      "winner": "Heuristic",
+      "duration": 0.08089089393615723,
+      "steps": 327,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 63,
+      "winner": "Simple",
+      "duration": 0.02490830421447754,
+      "steps": 257,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 64,
+      "winner": "Heuristic",
+      "duration": 0.035280704498291016,
+      "steps": 291,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 65,
+      "winner": "Simple",
+      "duration": 0.031856536865234375,
+      "steps": 257,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 66,
+      "winner": "Simple",
+      "duration": 0.022682666778564453,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 67,
+      "winner": "Draw",
+      "duration": 0.4125840663909912,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 68,
+      "winner": "Draw",
+      "duration": 0.47421932220458984,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 69,
+      "winner": "Simple",
+      "duration": 0.09935760498046875,
+      "steps": 387,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 70,
+      "winner": "Simple",
+      "duration": 0.04186081886291504,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 71,
+      "winner": "Simple",
+      "duration": 0.02356243133544922,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 72,
+      "winner": "Simple",
+      "duration": 0.029868602752685547,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 73,
+      "winner": "Simple",
+      "duration": 0.07666444778442383,
+      "steps": 407,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 74,
+      "winner": "Simple",
+      "duration": 0.029889345169067383,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 75,
+      "winner": "Simple",
+      "duration": 0.036669254302978516,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 76,
+      "winner": "Simple",
+      "duration": 0.049048423767089844,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 77,
+      "winner": "Simple",
+      "duration": 0.0442957878112793,
+      "steps": 297,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 78,
+      "winner": "Heuristic",
+      "duration": 0.03779768943786621,
+      "steps": 267,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 79,
+      "winner": "Draw",
+      "duration": 0.04139900207519531,
+      "steps": 257,
+      "heuristic_alive": false,
+      "simple_alive": false
+    },
+    {
+      "game_id": 80,
+      "winner": "Simple",
+      "duration": 0.04130744934082031,
+      "steps": 217,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 81,
+      "winner": "Draw",
+      "duration": 0.5643377304077148,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 82,
+      "winner": "Heuristic",
+      "duration": 0.2978053092956543,
+      "steps": 1587,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 83,
+      "winner": "Heuristic",
+      "duration": 0.047088623046875,
+      "steps": 279,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 84,
+      "winner": "Simple",
+      "duration": 0.02015376091003418,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 85,
+      "winner": "Simple",
+      "duration": 0.031070709228515625,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 86,
+      "winner": "Draw",
+      "duration": 0.42626023292541504,
+      "steps": 3000,
+      "heuristic_alive": true,
+      "simple_alive": true
+    },
+    {
+      "game_id": 87,
+      "winner": "Simple",
+      "duration": 0.05112576484680176,
+      "steps": 350,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 88,
+      "winner": "Heuristic",
+      "duration": 0.04413294792175293,
+      "steps": 383,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 89,
+      "winner": "Simple",
+      "duration": 0.5012707710266113,
+      "steps": 2502,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 90,
+      "winner": "Heuristic",
+      "duration": 0.08530044555664062,
+      "steps": 417,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 91,
+      "winner": "Simple",
+      "duration": 0.030522584915161133,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 92,
+      "winner": "Heuristic",
+      "duration": 0.04092073440551758,
+      "steps": 207,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 93,
+      "winner": "Simple",
+      "duration": 0.4191563129425049,
+      "steps": 2777,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 94,
+      "winner": "Simple",
+      "duration": 0.5027561187744141,
+      "steps": 2807,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 95,
+      "winner": "Heuristic",
+      "duration": 0.23367953300476074,
+      "steps": 1881,
+      "heuristic_alive": true,
+      "simple_alive": false
+    },
+    {
+      "game_id": 96,
+      "winner": "Simple",
+      "duration": 0.36481475830078125,
+      "steps": 2500,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 97,
+      "winner": "Simple",
+      "duration": 0.044828176498413086,
+      "steps": 357,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 98,
+      "winner": "Simple",
+      "duration": 0.024971485137939453,
+      "steps": 197,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 99,
+      "winner": "Simple",
+      "duration": 0.17752647399902344,
+      "steps": 1467,
+      "heuristic_alive": false,
+      "simple_alive": true
+    },
+    {
+      "game_id": 100,
+      "winner": "Simple",
+      "duration": 0.029341697692871094,
+      "steps": 207,
+      "heuristic_alive": false,
+      "simple_alive": true
+    }
+  ],
+  "win_rate": 28.999999999999996,
+  "avg_game_duration": 0.11794979095458985,
+  "total_benchmark_time": 11.83075761795044
+}
