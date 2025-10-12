@@ -238,11 +238,11 @@ def train():
             
             # Update policy
             if total_steps % UPDATE_INTERVAL == 0:
-                agent.update()
+                agent.update_policy()
                 print(f"  📈 Policy updated at step {total_steps}")
         
         # Final update for episode
-        agent.update()
+        agent.update_policy()
         
         # Statistics
         episode_rewards.append(total_reward)

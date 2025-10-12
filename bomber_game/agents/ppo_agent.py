@@ -306,14 +306,33 @@ class PPOAgent(Agent):
         
         return [0, 1.0, 0]
     
+    def update(self, dt, game_state):
+        """
+        Update agent and execute actions (matches base Agent interface).
+        
+        Args:
+            dt: Delta time
+            game_state: Current game state
+            
+        Returns:
+            Action tuple: (dx, dy, place_bomb)
+        """
+        self.think_timer += dt
+        
+        if self.think_timer >= self.think_delay:
+            self.think_timer = 0
+            self.current_action = self.choose_action(game_state)
+        
+        return self.current_action
+    
     def store_reward(self, reward, done):
         """Store reward for PPO training."""
         if self.training and TORCH_AVAILABLE:
             self.memory.rewards.append(reward)
             self.memory.is_terminals.append(done)
     
-    def update(self):
-        """Update policy using PPO."""
+    def update_policy(self):
+        """Update policy using PPO (for training)."""
         if not self.training or not TORCH_AVAILABLE or len(self.memory.states) < self.batch_size:
             return
         

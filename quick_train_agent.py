@@ -432,7 +432,7 @@ def quick_train():
                 steps += 1
             
             # Update policy
-            agent.update()
+            agent.update_policy()
             
             # Update stats
             won = agent_player.alive and not enemy_player.alive
