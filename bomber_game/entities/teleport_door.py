@@ -90,7 +90,7 @@ class TeleportDoor(Entity):
         
         # Draw pulsing door
         pulse = int(50 * abs(self.animation_frame - 0.5) * 2)
-        color = tuple(min(255, c + pulse) for c in self.color)
+        color = tuple(int(min(255, max(0, c + pulse))) for c in self.color)
         
         # Draw door background
         pygame.draw.rect(screen, color, (x, y, tile_size, tile_size))

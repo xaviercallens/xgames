@@ -169,7 +169,7 @@ class BombMachine(Entity):
         if self.is_warning:
             # Flash red during warning
             flash = int(128 * abs(pygame.time.get_ticks() % 500 - 250) / 250)
-            machine_color = (200 + flash, 50, 50)
+            machine_color = (min(255, 200 + flash), 50, 50)
             
         pygame.draw.rect(screen, machine_color, (x + 4, y + 4, tile_size - 8, tile_size - 8))
         
