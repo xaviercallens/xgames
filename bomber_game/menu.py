@@ -1,5 +1,5 @@
 """
-Menu and splash screen for Proutman game.
+Menu and splash screen for Proutman game with multiplayer support.
 """
 
 import pygame
@@ -46,6 +46,9 @@ class MenuScreen:
         # Animation
         self.pulse_timer = 0
         self.pulse_speed = 2.0
+        
+        # Player selector (lazy load)
+        self._player_selector = None
     
     def _load_ai_options(self):
         """Load available AI options."""
@@ -427,3 +430,17 @@ class MenuScreen:
             text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, y))
             self.screen.blit(text, text_rect)
             y += 25
+    
+    def show_multiplayer_selection(self):
+        """
+        Show multiplayer player selection menu.
+        
+        Returns:
+            Dictionary with player configuration or None if cancelled
+        """
+        # Lazy load player selector
+        if self._player_selector is None:
+            from .player_selector import PlayerSelector
+            self._player_selector = PlayerSelector(self.screen)
+        
+        return self._player_selector.show()
