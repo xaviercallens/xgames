@@ -1,10 +1,10 @@
 {
-  "episode": 4190,
-  "total_episodes": 4190,
-  "win_rate": 21.0,
-  "avg_reward": 700.735,
-  "elapsed_hours": 0.06372489207320743,
-  "episodes_per_hour": 65751.38636855611,
-  "timestamp": "2025-10-13T22:53:33.867650",
-  "best_win_rate": 32.0
+  "episode": 4240,
+  "total_episodes": 4240,
+  "win_rate": 20.0,
+  "avg_reward": 692.1,
+  "elapsed_hours": 0.03580468740728166,
+  "episodes_per_hour": 118420.24905201948,
+  "timestamp": "2025-10-13T23:46:49.908967",
+  "best_win_rate": 0.0
 }

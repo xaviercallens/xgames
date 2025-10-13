@@ -239,15 +239,28 @@ class MultiplayerGame:
         # Update game state
         self.game_state.update(dt)
         
-        # Check for game over
-        alive_players = [p for p in [self.human_player] + self.ai_players if p.alive]
-        if len(alive_players) <= 1:
+        # Check for game over - only when human player is dead OR all AI are dead
+        human_alive = self.human_player.alive
+        ai_alive = [p for p in self.ai_players if p.alive]
+        
+        if not human_alive:
+            # Human lost - game over
             self.game_state.game_over = True
-            if len(alive_players) == 1:
-                winner = alive_players[0]
-                self.game_state.winner = winner.name
+            if len(ai_alive) > 0:
+                # Last AI standing wins
+                if len(ai_alive) == 1:
+                    self.game_state.winner = ai_alive[0].name
+                else:
+                    # Multiple AI survived
+                    self.game_state.winner = f"{len(ai_alive)} AI opponents survived"
             else:
-                self.game_state.winner = "Draw"
+                # Everyone died
+                self.game_state.winner = "Draw - Everyone eliminated"
+        elif len(ai_alive) == 0:
+            # All AI defeated - human wins!
+            self.game_state.game_over = True
+            self.game_state.winner = "Player 1 (You Win!)"
+        # Otherwise, game continues even if some AI are eliminated
     
     def render(self):
         """Render game."""
@@ -297,6 +310,29 @@ class MultiplayerGame:
         for ai_player in self.ai_players:
             ai_player.draw(game_surface)
         
+        # Draw player status (top of screen)
+        if not self.game_state.game_over:
+            status_y = 10
+            # Human player status
+            human_status = "YOU: " + ("ALIVE ✓" if self.human_player.alive else "ELIMINATED ✗")
+            human_color = GREEN if self.human_player.alive else RED
+            human_text = self.font.render(human_status, True, human_color)
+            game_surface.blit(human_text, (10, status_y))
+            
+            # AI players status
+            ai_alive_count = sum(1 for p in self.ai_players if p.alive)
+            ai_status = f"AI OPPONENTS: {ai_alive_count}/{len(self.ai_players)} ALIVE"
+            ai_color = YELLOW if ai_alive_count > 0 else RED
+            ai_text = self.font.render(ai_status, True, ai_color)
+            game_surface.blit(ai_text, (SCREEN_WIDTH - 300, status_y))
+            
+            # Individual AI status
+            for i, ai_player in enumerate(self.ai_players):
+                status = f"{ai_player.name}: " + ("✓" if ai_player.alive else "✗")
+                color = ai_player.color if ai_player.alive else GRAY
+                text = self.font.render(status, True, color)
+                game_surface.blit(text, (SCREEN_WIDTH - 300, status_y + 30 + i * 25))
+        
         # Draw game over
         if self.game_state.game_over:
             overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -304,16 +340,30 @@ class MultiplayerGame:
             overlay.fill(BLACK)
             game_surface.blit(overlay, (0, 0))
             
+            # Determine winner message
             if self.game_state.winner:
-                text = self.big_font.render(f"{self.game_state.winner} Wins!", True, WHITE)
+                if "You Win" in self.game_state.winner:
+                    text = self.big_font.render("🎉 VICTORY! 🎉", True, GREEN)
+                    subtext = self.font.render("You defeated all AI opponents!", True, WHITE)
+                elif "Draw" in self.game_state.winner:
+                    text = self.big_font.render("Draw!", True, YELLOW)
+                    subtext = self.font.render(self.game_state.winner, True, WHITE)
+                else:
+                    text = self.big_font.render("Game Over", True, RED)
+                    subtext = self.font.render(f"Winner: {self.game_state.winner}", True, WHITE)
             else:
-                text = self.big_font.render("Draw!", True, WHITE)
+                text = self.big_font.render("Game Over", True, WHITE)
+                subtext = None
             
-            text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+            text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 30))
             game_surface.blit(text, text_rect)
             
+            if subtext:
+                subtext_rect = subtext.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 20))
+                game_surface.blit(subtext, subtext_rect)
+            
             restart_text = self.font.render("Press R to restart or ESC to quit", True, WHITE)
-            restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50))
+            restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 70))
             game_surface.blit(restart_text, restart_rect)
         
         # Blit game surface

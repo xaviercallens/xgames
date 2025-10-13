@@ -128,3 +128,6 @@
 🏁 Training completed!
 [2025-10-13 22:53:39] 💾 Checkpoint saved: checkpoint_ep4193_final_20251013_225339.pth
 [2025-10-13 22:53:39] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-13 23:44:41] 📊 Loaded existing stats: 4193 episodes
+[2025-10-13 23:44:41] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-13 23:44:56] 💾 Checkpoint saved: checkpoint_ep4200_periodic_20251013_234456.pth
