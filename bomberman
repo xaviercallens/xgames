@@ -1,0 +1,340 @@
+#!/usr/bin/env python3
+"""
+Bomberman CLI - Unified command-line interface for all game features
+"""
+
+import sys
+import os
+import subprocess
+import argparse
+
+
+class BombermanCLI:
+    """Main CLI for Bomberman game and training."""
+    
+    def __init__(self):
+        self.base_dir = os.path.dirname(os.path.abspath(__file__))
+        
+    def activate_venv(self):
+        """Check if virtual environment is activated."""
+        if not hasattr(sys, 'real_prefix') and not (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
+            venv_paths = ['.venv', 'venv', 'game_dev_env']
+            for venv in venv_paths:
+                venv_path = os.path.join(self.base_dir, venv)
+                if os.path.exists(venv_path):
+                    print(f"⚠️  Virtual environment not activated!")
+                    print(f"   Please run: source {venv}/bin/activate")
+                    return False
+        return True
+    
+    def run_command(self, cmd, description):
+        """Run a shell command."""
+        print(f"\n{'='*70}")
+        print(f"🎮 {description}")
+        print(f"{'='*70}\n")
+        
+        try:
+            result = subprocess.run(cmd, shell=True, cwd=self.base_dir)
+            return result.returncode == 0
+        except KeyboardInterrupt:
+            print("\n\n⚠️  Interrupted by user")
+            return False
+        except Exception as e:
+            print(f"\n❌ Error: {e}")
+            return False
+    
+    def play_single(self):
+        """Launch single player mode."""
+        return self.run_command(
+            "python play_bomberman.py",
+            "Single Player Mode (1v1)"
+        )
+    
+    def play_multi(self):
+        """Launch multiplayer mode."""
+        return self.run_command(
+            "python -c 'from bomber_game.multiplayer_engine import main; main()'",
+            "Multiplayer Mode (1v1, 1v2, or 1v3)"
+        )
+    
+    def play_hybrid(self):
+        """Launch hybrid AI mode."""
+        return self.run_command(
+            "./play_hybrid.sh",
+            "Hybrid AI Mode"
+        )
+    
+    def play_interactive(self):
+        """Launch interactive menu."""
+        return self.run_command(
+            "./launch_bomberman_interactive.sh",
+            "Interactive Launcher"
+        )
+    
+    def train_quick(self):
+        """Quick training session."""
+        return self.run_command(
+            "python quick_train_agent.py",
+            "Quick Training (100 episodes)"
+        )
+    
+    def train_overnight(self):
+        """Overnight training session."""
+        return self.run_command(
+            "./start_overnight_training.sh",
+            "Overnight Training"
+        )
+    
+    def train_bootstrap(self):
+        """Bootstrap training with heuristics."""
+        return self.run_command(
+            "python bootstrap_agent.py",
+            "Bootstrap Training (Heuristics)"
+        )
+    
+    def train_custom(self, episodes):
+        """Custom training session."""
+        return self.run_command(
+            f"python train_ppo_agent.py --episodes {episodes}",
+            f"Custom Training ({episodes} episodes)"
+        )
+    
+    def monitor_training(self):
+        """Monitor training progress."""
+        return self.run_command(
+            "python monitor_training.py",
+            "Training Monitor"
+        )
+    
+    def view_stats(self):
+        """View training statistics."""
+        return self.run_command(
+            "./train.sh",
+            "Training Statistics (Select option 7)"
+        )
+    
+    def test_setup(self):
+        """Test game setup."""
+        return self.run_command(
+            "python test_setup.py",
+            "Test Game Setup"
+        )
+    
+    def test_training(self):
+        """Test training setup."""
+        return self.run_command(
+            "python test_training.py",
+            "Test Training Setup"
+        )
+    
+    def reset_training(self):
+        """Reset AI training."""
+        print("\n⚠️  WARNING: This will delete all training progress!")
+        response = input("Are you sure? (yes/no): ")
+        if response.lower() == 'yes':
+            return self.run_command(
+                "./reset_ai_training.sh",
+                "Reset AI Training"
+            )
+        else:
+            print("Cancelled.")
+            return False
+    
+    def create_pretrained(self):
+        """Create pretrained model."""
+        return self.run_command(
+            "python create_pretrained_model.py",
+            "Create Pretrained Model"
+        )
+    
+    def show_menu(self):
+        """Show interactive menu."""
+        print("\n╔════════════════════════════════════════════════════════════════╗")
+        print("║                                                                ║")
+        print("║     💨 BOMBERMAN CLI - Unified Command Interface 🎮       ║")
+        print("║                                                                ║")
+        print("╚════════════════════════════════════════════════════════════════╝\n")
+        
+        print("🎮 PLAY MODES:")
+        print("  1. Single Player (1v1)")
+        print("  2. Multiplayer (1v1, 1v2, or 1v3)")
+        print("  3. Hybrid AI Mode")
+        print("  4. Interactive Launcher")
+        print("")
+        print("🤖 TRAINING:")
+        print("  5. Quick Training (100 episodes)")
+        print("  6. Overnight Training (10,000 episodes)")
+        print("  7. Bootstrap Training (Heuristics)")
+        print("  8. Custom Training (specify episodes)")
+        print("  9. Monitor Training Progress")
+        print(" 10. View Training Statistics")
+        print("")
+        print("🔧 UTILITIES:")
+        print(" 11. Test Game Setup")
+        print(" 12. Test Training Setup")
+        print(" 13. Create Pretrained Model")
+        print(" 14. Reset AI Training")
+        print("")
+        print("  0. Exit")
+        print("")
+        
+        try:
+            choice = input("Enter your choice [0-14]: ").strip()
+            return choice
+        except (KeyboardInterrupt, EOFError):
+            print("\n")
+            return "0"
+    
+    def run_interactive(self):
+        """Run interactive menu mode."""
+        while True:
+            choice = self.show_menu()
+            
+            if choice == "0":
+                print("\n👋 Goodbye!\n")
+                break
+            elif choice == "1":
+                self.play_single()
+            elif choice == "2":
+                self.play_multi()
+            elif choice == "3":
+                self.play_hybrid()
+            elif choice == "4":
+                self.play_interactive()
+            elif choice == "5":
+                self.train_quick()
+            elif choice == "6":
+                self.train_overnight()
+            elif choice == "7":
+                self.train_bootstrap()
+            elif choice == "8":
+                try:
+                    episodes = int(input("Enter number of episodes: "))
+                    self.train_custom(episodes)
+                except ValueError:
+                    print("❌ Invalid number")
+            elif choice == "9":
+                self.monitor_training()
+            elif choice == "10":
+                self.view_stats()
+            elif choice == "11":
+                self.test_setup()
+            elif choice == "12":
+                self.test_training()
+            elif choice == "13":
+                self.create_pretrained()
+            elif choice == "14":
+                self.reset_training()
+            else:
+                print("❌ Invalid choice. Please try again.")
+            
+            if choice != "0":
+                input("\nPress Enter to continue...")
+
+
+def main():
+    """Main entry point."""
+    parser = argparse.ArgumentParser(
+        description="Bomberman CLI - Unified command-line interface",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  bomberman play                    # Single player mode
+  bomberman play --multi            # Multiplayer mode
+  bomberman play --hybrid           # Hybrid AI mode
+  bomberman play --interactive      # Interactive launcher
+  
+  bomberman train                   # Quick training
+  bomberman train --overnight       # Overnight training
+  bomberman train --episodes 1000   # Custom training
+  bomberman train --bootstrap       # Bootstrap with heuristics
+  
+  bomberman monitor                 # Monitor training
+  bomberman stats                   # View statistics
+  bomberman test                    # Test setup
+  bomberman reset                   # Reset training
+  
+  bomberman menu                    # Interactive menu
+        """
+    )
+    
+    subparsers = parser.add_subparsers(dest='command', help='Available commands')
+    
+    # Play commands
+    play_parser = subparsers.add_parser('play', help='Play the game')
+    play_parser.add_argument('--multi', action='store_true', help='Multiplayer mode')
+    play_parser.add_argument('--hybrid', action='store_true', help='Hybrid AI mode')
+    play_parser.add_argument('--interactive', action='store_true', help='Interactive launcher')
+    
+    # Train commands
+    train_parser = subparsers.add_parser('train', help='Train AI')
+    train_parser.add_argument('--overnight', action='store_true', help='Overnight training')
+    train_parser.add_argument('--bootstrap', action='store_true', help='Bootstrap training')
+    train_parser.add_argument('--episodes', type=int, help='Custom episode count')
+    
+    # Utility commands
+    subparsers.add_parser('monitor', help='Monitor training progress')
+    subparsers.add_parser('stats', help='View training statistics')
+    subparsers.add_parser('test', help='Test game setup')
+    subparsers.add_parser('test-train', help='Test training setup')
+    subparsers.add_parser('reset', help='Reset AI training')
+    subparsers.add_parser('pretrain', help='Create pretrained model')
+    subparsers.add_parser('menu', help='Interactive menu')
+    
+    args = parser.parse_args()
+    
+    cli = BombermanCLI()
+    
+    # Check virtual environment
+    if not cli.activate_venv():
+        sys.exit(1)
+    
+    # Execute command
+    if args.command == 'play':
+        if args.multi:
+            cli.play_multi()
+        elif args.hybrid:
+            cli.play_hybrid()
+        elif args.interactive:
+            cli.play_interactive()
+        else:
+            cli.play_single()
+    
+    elif args.command == 'train':
+        if args.overnight:
+            cli.train_overnight()
+        elif args.bootstrap:
+            cli.train_bootstrap()
+        elif args.episodes:
+            cli.train_custom(args.episodes)
+        else:
+            cli.train_quick()
+    
+    elif args.command == 'monitor':
+        cli.monitor_training()
+    
+    elif args.command == 'stats':
+        cli.view_stats()
+    
+    elif args.command == 'test':
+        cli.test_setup()
+    
+    elif args.command == 'test-train':
+        cli.test_training()
+    
+    elif args.command == 'reset':
+        cli.reset_training()
+    
+    elif args.command == 'pretrain':
+        cli.create_pretrained()
+    
+    elif args.command == 'menu':
+        cli.run_interactive()
+    
+    else:
+        # No command specified, show interactive menu
+        cli.run_interactive()
+
+
+if __name__ == "__main__":
+    main()
