@@ -102,11 +102,58 @@ source setup_terminal.sh
 
 ### **Step 2: Play!**
 
+#### **🎮 Unified CLI (Recommended)**
 ```bash
-./launch_bomberman.sh
+./bomberman              # Interactive menu
+./bomberman play         # Single player
+./bomberman play --multi # Multiplayer
+./bomberman train        # Train AI
+./bomberman --help       # Show all commands
+```
+
+#### **📜 Classic Launchers**
+```bash
+./launch_bomberman.sh    # Original launcher
 ```
 
 **That's it!** 🎉
+
+---
+
+## 🖥️ **Unified CLI Interface**
+
+**One command for everything!**
+
+### **Interactive Menu**
+```bash
+./bomberman
+```
+
+### **Direct Commands**
+```bash
+# Play modes
+./bomberman play                    # Single player (1v1)
+./bomberman play --multi            # Multiplayer (1v1, 1v2, or 1v3)
+./bomberman play --hybrid           # Hybrid AI mode
+./bomberman play --interactive      # Interactive launcher
+
+# Training
+./bomberman train                   # Quick training (100 episodes)
+./bomberman train --overnight       # Overnight (10,000 episodes)
+./bomberman train --bootstrap       # Bootstrap with heuristics
+./bomberman train --episodes 1000   # Custom training
+
+# Monitoring
+./bomberman monitor                 # Monitor training progress
+./bomberman stats                   # View statistics
+
+# Utilities
+./bomberman test                    # Test setup
+./bomberman pretrain                # Create pretrained model
+./bomberman reset                   # Reset training
+```
+
+**See [CLI_GUIDE.md](CLI_GUIDE.md) for complete documentation.**
 
 ---
 
