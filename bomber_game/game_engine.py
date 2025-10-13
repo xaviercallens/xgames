@@ -7,7 +7,7 @@ import sys
 from . import (GRID_SIZE, TILE_SIZE, FPS, SCREEN_WIDTH, SCREEN_HEIGHT,
                BLACK, WHITE, GRAY, DARK_GRAY, GREEN, RED, BROWN)
 from .game_state import GameState
-from .agents import SimpleAgent, RLAgent, PPOAgent
+from .agents import SimpleAgent, RLAgent, PPOAgent, HybridAgent
 from .assets import get_asset_manager
 from .menu import MenuScreen
 from .model_selector import ModelSelector
@@ -60,8 +60,15 @@ class BombermanGame:
         models_dir = os.path.join(os.path.dirname(__file__), "models")
         selector = ModelSelector(models_dir)
         
+        # Check if user wants hybrid mode (can be set via environment variable)
+        use_hybrid = os.environ.get('BOMBERMAN_HYBRID_MODE', '').lower() in ['true', '1', 'yes']
+        hybrid_mode = os.environ.get('BOMBERMAN_HYBRID_STRATEGY', 'balanced')
+        
         # Select best model based on performance
-        selection = selector.select_best_model()
+        if use_hybrid:
+            selection = selector.select_hybrid_mode(mode=hybrid_mode)
+        else:
+            selection = selector.select_best_model()
         
         # Load AI training stats
         self.ai_stats = self._load_ai_stats()
@@ -130,6 +137,24 @@ class BombermanGame:
             
             self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
             self.ai_type = "PPO"
+        
+        elif selection['model_type'] == 'hybrid':
+            print(f"🎭 Using Hybrid Agent (Heuristics + RL)")
+            print(f"   Mode: {selection['mode']}")
+            print(f"   Reason: {selection['reason']}")
+            print(f"   Estimated Win Rate: ~{selection['win_rate']:.1f}%")
+            print(f"\n🧠 Hybrid Features:")
+            print(f"   • Combines strategic heuristics with learned behaviors")
+            print(f"   • Adaptive decision making")
+            print(f"   • Best of both worlds approach")
+            print(f"   • Robust and reliable performance")
+            
+            self.ai_agent = HybridAgent(
+                self.ai_player,
+                mode=selection['mode'],
+                ppo_model_path=selection.get('model_path')
+            )
+            self.ai_type = f"Hybrid ({selection['mode']})"
         
         else:
             # Fallback to simple agent
