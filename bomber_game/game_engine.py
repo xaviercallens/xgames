@@ -7,7 +7,7 @@ import sys
 from . import (GRID_SIZE, TILE_SIZE, FPS, SCREEN_WIDTH, SCREEN_HEIGHT,
                BLACK, WHITE, GRAY, DARK_GRAY, GREEN, RED, BROWN)
 from .game_state import GameState
-from .agents import SimpleAgent, RLAgent, PPOAgent, HybridAgent
+from .agents import PPOAgent, HybridAgent
 from .assets import get_asset_manager
 from .menu import MenuScreen
 from .model_selector import ModelSelector
@@ -157,10 +157,10 @@ class BombermanGame:
             self.ai_type = f"Hybrid ({selection['mode']})"
         
         else:
-            # Fallback to simple agent
-            print(f"🤖 Using Simple Agent (Fallback)")
-            self.ai_agent = SimpleAgent(self.ai_player)
-            self.ai_type = "Simple"
+            # Fallback to heuristic agent
+            print(f"🌱 Using Heuristic Agent (Fallback)")
+            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+            self.ai_type = "Heuristic"
         
         # Set AI info in statistics
         self.stats.set_ai_info(self.ai_type, selection.get('model_path'))
@@ -510,7 +510,7 @@ class BombermanGame:
         elif selection['model_type'] == 'heuristic':
             self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
         else:
-            self.ai_agent = SimpleAgent(self.ai_player)
+            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
         
         # Reset statistics for new game
         self.stats = GameStatistics()
@@ -547,8 +547,8 @@ class BombermanGame:
             
             # Initialize AI agent based on selection
             if selected_ai['type'] == 'simple':
-                self.ai_agent = SimpleAgent(self.ai_player)
-                self.ai_type = "Simple"
+                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+                self.ai_type = "Heuristic"
             elif selected_ai['type'] == 'heuristic':
                 self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
                 self.ai_type = "Improved Heuristic"
