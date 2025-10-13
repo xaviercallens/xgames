@@ -1109,7 +1109,6 @@ class AssetManager:
 ### Communities
 - [r/gamedev](https://reddit.com/r/gamedev)
 - [Python Discord](https://discord.gg/python)
-- [Pygame Community](https://www.pygame.org/wiki/about)
 
 ## 🐛 Troubleshooting
 
