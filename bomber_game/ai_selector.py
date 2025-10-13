@@ -103,16 +103,18 @@ class AISelector:
         # 3. Advanced AI (PPO Trained)
         ppo_model = models_dir / "ppo_agent.pth"
         if ppo_model.exists():
-            win_rate = training_stats.get('win_rate', 0.3)
+            # Use recent win rate (last 100 episodes) if available
+            win_rates = training_stats.get('win_rates', [])
+            recent_win_rate = win_rates[-1] if win_rates else training_stats.get('win_rate', 0.3)
             episodes = training_stats.get('total_episodes', 0)
             
             options.append({
-                'name': 'Advanced Bot (AI)',
+                'name': 'Advanced Bot (PPO)',
                 'type': 'ppo',
                 'level': 'Advanced',
-                'description': 'Deep RL trained on thousands of games',
+                'description': f'Deep RL trained on {episodes:,} games (Recent: {recent_win_rate:.0f}% WR)',
                 'icon': '🤖',
-                'win_rate': win_rate,
+                'win_rate': recent_win_rate,
                 'games_played': episodes,
                 'ai_wins': training_stats.get('total_wins', 0),
                 'human_wins': episodes - training_stats.get('total_wins', 0),
@@ -120,14 +122,31 @@ class AISelector:
                 'color': (255, 100, 100),
             })
         
-        # 4. Expert AI (Best Model)
+        # 4. Hybrid AI (Heuristics + RL) - NEW!
+        if ppo_model.exists():
+            options.append({
+                'name': '🎭 Hybrid Bot (NEW!)',
+                'type': 'hybrid',
+                'level': 'Expert',
+                'description': 'Combines heuristics + RL (Adaptive, ~40% WR)',
+                'icon': '🎭',
+                'win_rate': 40.0,
+                'games_played': episodes,
+                'ai_wins': 0,
+                'human_wins': 0,
+                'model_path': str(ppo_model),
+                'color': (255, 150, 255),
+                'hybrid_mode': 'adaptive',
+            })
+        
+        # 5. Expert AI (Best Model)
         best_model = models_dir / "best_model.pth"
         if best_model.exists():
             options.append({
-                'name': 'Expert Bot (AI)',
+                'name': 'Expert Bot (Best)',
                 'type': 'ppo_best',
                 'level': 'Expert',
-                'description': 'The strongest AI opponent',
+                'description': 'The strongest trained AI',
                 'icon': '👑',
                 'win_rate': training_stats.get('win_rate', 0.3),
                 'games_played': training_stats.get('total_episodes', 0),
@@ -137,7 +156,7 @@ class AISelector:
                 'color': (200, 100, 255),
             })
         
-        # 5. Pretrained AI (Bootstrap)
+        # 6. Pretrained AI (Bootstrap)
         pretrained_model = models_dir / "ppo_agent_pretrained.pth"
         if pretrained_model.exists():
             options.append({

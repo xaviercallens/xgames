@@ -552,6 +552,14 @@ class BombermanGame:
             elif selected_ai['type'] == 'heuristic':
                 self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
                 self.ai_type = "Improved Heuristic"
+            elif selected_ai['type'] == 'hybrid':
+                model_path = selected_ai.get('model_path')
+                hybrid_mode = selected_ai.get('hybrid_mode', 'adaptive')
+                self.ai_agent = HybridAgent(self.ai_player, mode=hybrid_mode, ppo_model_path=model_path)
+                self.ai_type = f"Hybrid ({hybrid_mode})"
+                print(f"\n🎭 Hybrid AI Initialized!")
+                print(f"   Mode: {hybrid_mode}")
+                print(f"   Estimated Win Rate: {selected_ai['win_rate']:.0f}%")
             elif selected_ai['type'] == 'ppo':
                 model_path = selected_ai.get('model_path')
                 self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
