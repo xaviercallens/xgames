@@ -85,26 +85,44 @@ class MenuScreen:
         # Add PPO models if available
         ppo_model = models_dir / "ppo_agent.pth"
         if ppo_model.exists():
-            win_rate = training_stats.get('win_rate', 0.3)
+            # Use recent win rate (last 100 episodes) if available
+            win_rates = training_stats.get('win_rates', [])
+            recent_win_rate = win_rates[-1] if win_rates else training_stats.get('win_rate', 0.3)
+            episodes = training_stats.get('total_episodes', 0)
+            
             options.append({
-                'name': 'Advanced Bot (AI)',
+                'name': 'Advanced Bot (PPO)',
                 'type': 'ppo',
                 'level': 'Advanced',
-                'description': 'Deep RL trained AI',
+                'description': f'Deep RL - {episodes:,} games (Recent: {recent_win_rate:.0f}% WR)',
                 'icon': '🤖',
-                'win_rate': win_rate,
+                'win_rate': recent_win_rate,
                 'color': (255, 100, 100),
                 'model_path': str(ppo_model),
+            })
+        
+        # Add Hybrid AI (Heuristics + RL) - NEW!
+        if ppo_model.exists():
+            options.append({
+                'name': '🎭 Hybrid Bot (NEW!)',
+                'type': 'hybrid',
+                'level': 'Expert',
+                'description': 'Heuristics + RL (Adaptive, ~40% WR)',
+                'icon': '🎭',
+                'win_rate': 40.0,
+                'color': (255, 150, 255),
+                'model_path': str(ppo_model),
+                'hybrid_mode': 'adaptive',
             })
         
         # Add expert model if available
         best_model = models_dir / "best_model.pth"
         if best_model.exists():
             options.append({
-                'name': 'Expert Bot (AI)',
+                'name': 'Expert Bot (Best)',
                 'type': 'ppo_best',
                 'level': 'Expert',
-                'description': 'Strongest AI opponent',
+                'description': 'Strongest trained AI',
                 'icon': '👑',
                 'win_rate': training_stats.get('win_rate', 0.3),
                 'color': (200, 100, 255),
