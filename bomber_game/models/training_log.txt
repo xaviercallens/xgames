@@ -65,3 +65,66 @@
 [2025-10-12 22:29:09] 🆕 Starting fresh training
 [2025-10-12 22:36:24] ❌ Training error: 'PPOAgent' object has no attribute 'save'
 [2025-10-12 22:36:57] ❌ Training error: 'PPOAgent' object has no attribute 'save'
+[2025-10-12 22:39:07] 📊 Loaded existing stats: 3330 episodes
+[2025-10-12 22:39:07] 🆕 Starting fresh training
+[2025-10-12 22:41:23] 💾 Checkpoint saved: checkpoint_ep3400_periodic_20251012_224123.pth
+[2025-10-12 22:42:18] 💾 Checkpoint saved: checkpoint_ep3430_best_20251012_224218.pth
+[2025-10-12 22:42:24] 💾 Checkpoint saved: checkpoint_ep3434_best_20251012_224224.pth
+[2025-10-12 22:42:27] 💾 Checkpoint saved: checkpoint_ep3435_best_20251012_224227.pth
+[2025-10-12 22:42:28] 💾 Checkpoint saved: checkpoint_ep3436_best_20251012_224228.pth
+[2025-10-12 22:43:37] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-12 22:43:37]    Best win rate: 27.00%
+[2025-10-12 22:43:37] 
+🏁 Training completed!
+[2025-10-12 22:43:38] 💾 Checkpoint saved: checkpoint_ep3486_final_20251012_224337.pth
+[2025-10-12 22:43:38] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-12 22:44:36] 📊 Loaded existing stats: 3486 episodes
+[2025-10-12 22:44:36] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-12 22:44:58] 💾 Checkpoint saved: checkpoint_ep3500_periodic_20251012_224458.pth
+[2025-10-12 22:46:54] 💾 Checkpoint saved: checkpoint_ep3586_best_20251012_224654.pth
+[2025-10-12 22:46:56] 💾 Checkpoint saved: checkpoint_ep3587_best_20251012_224656.pth
+[2025-10-12 22:47:22] 💾 Checkpoint saved: checkpoint_ep3600_periodic_20251012_224722.pth
+[2025-10-12 22:47:53] 💾 Checkpoint saved: checkpoint_ep3623_best_20251012_224753.pth
+[2025-10-12 22:47:54] 💾 Checkpoint saved: checkpoint_ep3624_best_20251012_224754.pth
+[2025-10-12 22:49:10] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-12 22:49:10]    Best win rate: 24.00%
+[2025-10-12 22:49:10] 
+🏁 Training completed!
+[2025-10-12 22:49:10] 💾 Checkpoint saved: checkpoint_ep3674_final_20251012_224910.pth
+[2025-10-12 22:49:10] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-12 22:51:57] 📊 Loaded existing stats: 3674 episodes
+[2025-10-12 22:51:57] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-12 22:52:39] 💾 Checkpoint saved: checkpoint_ep3700_periodic_20251012_225239.pth
+[2025-10-12 22:54:28] 💾 Checkpoint saved: checkpoint_ep3774_best_20251012_225428.pth
+[2025-10-12 22:54:30] 💾 Checkpoint saved: checkpoint_ep3775_best_20251012_225430.pth
+[2025-10-12 22:55:04] 💾 Checkpoint saved: checkpoint_ep3800_periodic_20251012_225504.pth
+[2025-10-12 22:55:16] 💾 Checkpoint saved: checkpoint_ep3806_best_20251012_225516.pth
+[2025-10-12 22:55:54] 💾 Checkpoint saved: checkpoint_ep3832_best_20251012_225554.pth
+[2025-10-12 22:57:06] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-12 22:57:06]    Best win rate: 28.00%
+[2025-10-12 22:57:06] 
+🏁 Training completed!
+[2025-10-12 22:57:06] 💾 Checkpoint saved: checkpoint_ep3882_final_20251012_225706.pth
+[2025-10-12 22:57:06] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-13 06:40:24] 📊 Loaded existing stats: 3882 episodes
+[2025-10-13 06:40:24] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-13 06:40:48] 💾 Checkpoint saved: checkpoint_ep3900_periodic_20251013_064048.pth
+[2025-10-13 06:42:48] 💾 Checkpoint saved: checkpoint_ep3982_best_20251013_064248.pth
+[2025-10-13 06:43:07] 💾 Checkpoint saved: checkpoint_ep3993_best_20251013_064307.pth
+[2025-10-13 06:43:19] 💾 Checkpoint saved: checkpoint_ep4000_periodic_20251013_064319.pth
+[2025-10-13 06:44:17] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-13 06:44:17]    Best win rate: 26.00%
+[2025-10-13 06:44:17] 
+🏁 Training completed!
+[2025-10-13 06:44:17] 💾 Checkpoint saved: checkpoint_ep4043_final_20251013_064417.pth
+[2025-10-13 06:44:17] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-13 22:49:44] 📊 Loaded existing stats: 4043 episodes
+[2025-10-13 22:49:44] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-13 22:51:08] 💾 Checkpoint saved: checkpoint_ep4100_periodic_20251013_225108.pth
+[2025-10-13 22:52:16] 💾 Checkpoint saved: checkpoint_ep4143_best_20251013_225216.pth
+[2025-10-13 22:53:39] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-13 22:53:39]    Best win rate: 32.00%
+[2025-10-13 22:53:39] 
+🏁 Training completed!
+[2025-10-13 22:53:39] 💾 Checkpoint saved: checkpoint_ep4193_final_20251013_225339.pth
+[2025-10-13 22:53:39] 💾 Final model saved: bomber_game/models/ppo_agent.pth
