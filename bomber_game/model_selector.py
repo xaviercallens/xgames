@@ -180,9 +180,21 @@ class ModelSelector:
             ppo_episodes = ppo_stats.get('total_episodes', 0)
             ppo_win_rate = ppo_stats.get('win_rate', 0.0)
             
+            # Get recent performance (last 100 episodes)
+            win_rates = ppo_stats.get('win_rates', [])
+            recent_win_rate = win_rates[-1] if win_rates else ppo_win_rate
+            
+            # Calculate improvement
+            training_sessions = ppo_stats.get('training_sessions', [])
+            initial_wr = 2.2  # Starting win rate
+            improvement = recent_win_rate - initial_wr
+            
             print(f"\n📈 PPO Model Performance:")
-            print(f"   Episodes: {ppo_episodes:,}")
-            print(f"   Win Rate: {ppo_win_rate:.1f}%")
+            print(f"   Total Episodes: {ppo_episodes:,}")
+            print(f"   Overall Win Rate: {ppo_win_rate:.1f}%")
+            print(f"   Recent Win Rate: {recent_win_rate:.1f}% (last 100 episodes)")
+            print(f"   Improvement: +{improvement:.1f}% (from {initial_wr}%)")
+            print(f"   Training Sessions: {len(training_sessions)}")
             
             # Not enough data yet - use pretrained or heuristic
             if ppo_episodes < self.min_episodes_for_comparison:
