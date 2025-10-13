@@ -121,13 +121,17 @@ class MenuScreen:
         # Add expert model if available
         best_model = models_dir / "best_model.pth"
         if best_model.exists():
+            # Use recent win rate for best model too
+            win_rates = training_stats.get('win_rates', [])
+            best_win_rate = win_rates[-1] if win_rates else training_stats.get('win_rate', 0.3)
+            
             options.append({
                 'name': 'Expert Bot (Best)',
                 'type': 'ppo_best',
                 'level': 'Expert',
-                'description': 'Strongest trained AI',
+                'description': f'Best checkpoint (Recent: {best_win_rate:.0f}% WR)',
                 'icon': '👑',
-                'win_rate': training_stats.get('win_rate', 0.3),
+                'win_rate': best_win_rate,
                 'color': (200, 100, 255),
                 'model_path': str(best_model),
             })
