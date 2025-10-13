@@ -11,6 +11,7 @@ from .agents import PPOAgent, HybridAgent
 from .assets import get_asset_manager
 from .menu import MenuScreen
 from .model_selector import ModelSelector
+from .player_selector import PlayerSelector
 from .heuristics import HeuristicAgent
 from .heuristics_improved import ImprovedHeuristicAgent
 from .game_statistics import GameStatistics
