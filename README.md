@@ -140,8 +140,11 @@ source setup_terminal.sh
 # Training
 ./bomberman train                   # Quick training (100 episodes)
 ./bomberman train --overnight       # Overnight (10,000 episodes)
-./bomberman train --bootstrap       # Bootstrap with heuristics
+./bomberman train --bootstrap       # Bootstrap with heuristics (NEW! 🎓)
 ./bomberman train --episodes 1000   # Custom training
+
+# Overnight Training with Bootstrap (Recommended for best results!)
+./start_overnight_training.sh       # Interactive launcher with bootstrap option
 
 # Monitoring
 ./bomberman monitor                 # Monitor training progress

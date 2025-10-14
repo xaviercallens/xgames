@@ -12,6 +12,7 @@ Features:
 - Resume from checkpoint support
 - Performance visualization
 - Email/notification support (optional)
+- Bootstrap training with heuristic demonstrations (NEW)
 """
 
 import sys
@@ -19,6 +20,7 @@ import os
 import time
 import json
 import numpy as np
+import argparse
 from datetime import datetime, timedelta
 from collections import deque
 import signal
@@ -35,9 +37,14 @@ from bomber_game.heuristics_improved import ImprovedHeuristicAgent
 # ============================================================================
 
 # Training duration
-TOTAL_EPISODES = 10000
+TOTAL_EPISODES = 1000
 MAX_STEPS_PER_EPISODE = 500
-TRAINING_HOURS = 8
+TRAINING_HOURS = 1
+
+# Bootstrap settings
+BOOTSTRAP_EPISODES = 100  # Number of heuristic demonstrations to collect
+BOOTSTRAP_EPOCHS = 50     # Epochs for behavioral cloning
+BOOTSTRAP_BATCH_SIZE = 64 # Batch size for bootstrap training
 
 # PPO Hyperparameters (optimized for overnight training)
 UPDATE_INTERVAL = 4096  # Update every N steps (larger for stability)
@@ -346,13 +353,195 @@ def print_progress(episode, stats, elapsed_time, eta):
 # MAIN TRAINING LOOP
 # ============================================================================
 
-def train_overnight():
-    """Main overnight training function."""
+def bootstrap_with_heuristics(num_episodes=BOOTSTRAP_EPISODES, epochs=BOOTSTRAP_EPOCHS, batch_size=BOOTSTRAP_BATCH_SIZE):
+    """
+    Bootstrap PPO agent with heuristic demonstrations.
+    Uses behavioral cloning to pre-train the agent.
+    
+    Args:
+        num_episodes: Number of demonstration episodes to collect
+        epochs: Training epochs for behavioral cloning
+        batch_size: Batch size for training
+    
+    Returns:
+        Pre-trained PPO agent or None if bootstrap fails
+    """
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    
+    log_message("\n" + "="*80)
+    log_message("🎓 BOOTSTRAP TRAINING WITH HEURISTIC DEMONSTRATIONS")
+    log_message("="*80)
+    log_message(f"Collecting {num_episodes} demonstration episodes...")
+    
+    demonstrations = []
+    
+    try:
+        # Collect demonstrations from heuristic agent
+        for episode in range(num_episodes):
+            game_state = GameState(GRID_SIZE)
+            player1 = game_state.add_player(1, 1, (0, 255, 0), "Player")
+            player2 = game_state.add_player(GRID_SIZE - 2, GRID_SIZE - 2, (255, 0, 0), "Heuristic")
+            
+            heuristic_agent = ImprovedHeuristicAgent(player2)
+            
+            steps = 0
+            while not game_state.game_over and steps < MAX_STEPS_PER_EPISODE:
+                if player2.alive:
+                    # Get heuristic action
+                    action = heuristic_agent.choose_action(game_state)
+                    
+                    if action:
+                        dx, dy, place_bomb = action
+                        
+                        # Get state representation (simplified for demo)
+                        state = [
+                            player2.grid_x / GRID_SIZE,
+                            player2.grid_y / GRID_SIZE,
+                            player1.grid_x / GRID_SIZE,
+                            player1.grid_y / GRID_SIZE,
+                            len(game_state.bombs) / 10.0,
+                            len(game_state.powerups) / 10.0,
+                        ]
+                        
+                        # Convert action to index
+                        if place_bomb:
+                            action_idx = 4
+                        elif dx == -1:
+                            action_idx = 0  # Left
+                        elif dx == 1:
+                            action_idx = 1  # Right
+                        elif dy == -1:
+                            action_idx = 2  # Up
+                        elif dy == 1:
+                            action_idx = 3  # Down
+                        else:
+                            action_idx = 5  # No action
+                        
+                        demonstrations.append((state, action_idx))
+                        
+                        # Execute action
+                        player2.move(dx, dy, game_state.grid, TILE_SIZE, game_state)
+                        if place_bomb:
+                            game_state.place_bomb(player2)
+                
+                game_state.update(1/FPS)
+                steps += 1
+            
+            if (episode + 1) % 10 == 0:
+                log_message(f"  Collected {episode + 1}/{num_episodes} episodes ({len(demonstrations)} samples)")
+        
+        if len(demonstrations) == 0:
+            log_message("❌ No demonstrations collected. Skipping bootstrap.")
+            return None
+        
+        log_message(f"✅ Collected {len(demonstrations)} demonstration samples")
+        log_message(f"\n🎯 Training with behavioral cloning...")
+        log_message(f"  Epochs: {epochs}, Batch size: {batch_size}")
+        
+        # Create simple network for behavioral cloning
+        state_size = len(demonstrations[0][0])
+        action_size = 6
+        
+        # Simple actor network
+        class SimpleActor(nn.Module):
+            def __init__(self, state_size, action_size):
+                super().__init__()
+                self.fc = nn.Sequential(
+                    nn.Linear(state_size, 128),
+                    nn.ReLU(),
+                    nn.Linear(128, 128),
+                    nn.ReLU(),
+                    nn.Linear(128, action_size)
+                )
+            
+            def forward(self, x):
+                return self.fc(x)
+        
+        model = SimpleActor(state_size, action_size)
+        optimizer = optim.Adam(model.parameters(), lr=3e-4)
+        criterion = nn.CrossEntropyLoss()
+        
+        # Convert to tensors
+        states = torch.FloatTensor([d[0] for d in demonstrations])
+        actions = torch.LongTensor([d[1] for d in demonstrations])
+        
+        # Training loop
+        best_loss = float('inf')
+        for epoch in range(epochs):
+            total_loss = 0
+            num_batches = 0
+            
+            indices = torch.randperm(len(demonstrations))
+            
+            for i in range(0, len(demonstrations), batch_size):
+                batch_indices = indices[i:i+batch_size]
+                batch_states = states[batch_indices]
+                batch_actions = actions[batch_indices]
+                
+                action_logits = model(batch_states)
+                loss = criterion(action_logits, batch_actions)
+                
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+                
+                total_loss += loss.item()
+                num_batches += 1
+            
+            avg_loss = total_loss / num_batches
+            if avg_loss < best_loss:
+                best_loss = avg_loss
+            
+            if (epoch + 1) % 10 == 0:
+                log_message(f"  Epoch {epoch + 1}/{epochs} - Loss: {avg_loss:.4f} (Best: {best_loss:.4f})")
+        
+        log_message(f"✅ Bootstrap training complete! Best loss: {best_loss:.4f}")
+        
+        # Save bootstrapped model
+        bootstrap_path = os.path.join(MODELS_DIR, "ppo_agent_bootstrapped.pth")
+        torch.save({
+            'model_state_dict': model.state_dict(),
+            'bootstrap_method': 'behavioral_cloning',
+            'source': 'improved_heuristic',
+            'timestamp': datetime.now().isoformat(),
+            'demonstrations': len(demonstrations),
+            'best_loss': best_loss,
+        }, bootstrap_path)
+        log_message(f"💾 Saved bootstrapped model to {bootstrap_path}")
+        
+        return bootstrap_path
+        
+    except Exception as e:
+        log_message(f"❌ Bootstrap failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+
+def train_overnight(use_bootstrap=False):
+    """Main overnight training function.
+    
+    Args:
+        use_bootstrap: If True, pre-train agent with heuristic demonstrations
+    """
     global training_start_time, last_autosave_time, best_win_rate
     global episodes_without_improvement, should_stop
     
     ensure_directories()
     print_training_header()
+    
+    # Bootstrap phase (optional)
+    bootstrap_model_path = None
+    if use_bootstrap:
+        bootstrap_model_path = bootstrap_with_heuristics()
+        if bootstrap_model_path:
+            log_message("\n✅ Bootstrap phase completed successfully!")
+            log_message("   Agent has been pre-trained with heuristic knowledge.")
+            log_message("   Starting RL fine-tuning...\n")
+        else:
+            log_message("\n⚠️  Bootstrap failed, starting from scratch...\n")
     
     # Initialize
     training_start_time = time.time()
@@ -372,6 +561,9 @@ def train_overnight():
     if checkpoint_path and start_episode > 0:
         log_message(f"📂 Resuming from checkpoint: {checkpoint_path}")
         agent = PPOAgent(agent_player, model_path=checkpoint_path, training=True)
+    elif bootstrap_model_path:
+        log_message(f"🎓 Starting with bootstrapped model: {bootstrap_model_path}")
+        agent = PPOAgent(agent_player, model_path=bootstrap_model_path, training=True)
     else:
         log_message("🆕 Starting fresh training")
         agent = PPOAgent(agent_player, training=True)
@@ -523,8 +715,24 @@ def train_overnight():
 
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Overnight PPO Training with Optional Bootstrap')
+    parser.add_argument('--bootstrap', action='store_true', 
+                       help='Pre-train agent with heuristic demonstrations before RL training')
+    parser.add_argument('--bootstrap-episodes', type=int, default=BOOTSTRAP_EPISODES,
+                       help=f'Number of demonstration episodes (default: {BOOTSTRAP_EPISODES})')
+    parser.add_argument('--bootstrap-epochs', type=int, default=BOOTSTRAP_EPOCHS,
+                       help=f'Training epochs for behavioral cloning (default: {BOOTSTRAP_EPOCHS})')
+    
+    args = parser.parse_args()
+    
+    # Update bootstrap settings if provided
+    if args.bootstrap:
+        BOOTSTRAP_EPISODES = args.bootstrap_episodes
+        BOOTSTRAP_EPOCHS = args.bootstrap_epochs
+    
     try:
-        train_overnight()
+        train_overnight(use_bootstrap=args.bootstrap)
     except Exception as e:
         log_message(f"❌ Training error: {e}")
         import traceback
