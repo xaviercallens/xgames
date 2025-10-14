@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proutman - Play Now</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .nav {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        code {
+            background: #f8f9fa;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 10px 10px 10px 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💨 Play Proutman 💩</h1>
+            <p>Get started with the game!</p>
+        </div>
+        
+        <div class="nav">
+            <a href="/">← Back to Home</a>
+            <a href="/demo.html">Demo</a>
+            <a href="/api/status">API Status</a>
+            <a href="https://github.com/xaviercallens/xgames" target="_blank">GitHub</a>
+        </div>
+        
+        <div class="content">
+            <div class="warning-box">
+                <h3 style="color: #856404; margin-bottom: 10px;">⚠️ Desktop Game</h3>
+                <p>Proutman is a desktop game built with Pygame. It cannot run directly in the browser. Follow the installation steps below to play on your computer!</p>
+            </div>
+            
+            <h2 style="color: #667eea; margin: 30px 0 20px 0;">🚀 Quick Start</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Clone the Repository</strong>
+                <pre>git clone https://github.com/xaviercallens/xgames.git
+cd xgames</pre>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Install Dependencies</strong>
+                <pre>pip install pygame torch numpy</pre>
+                <p style="margin-top: 10px; color: #6c757d;">Optional: Install FFmpeg for video recording</p>
+                <pre>sudo apt-get install ffmpeg  # Ubuntu/Debian
+brew install ffmpeg          # macOS</pre>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Run the Game</strong>
+                <pre>./play_bomberman.py</pre>
+                <p style="margin-top: 10px; color: #6c757d;">Or use the unified CLI:</p>
+                <pre>./bomberman play</pre>
+            </div>
+            
+            <h2 style="color: #667eea; margin: 40px 0 20px 0;">🎮 Game Controls</h2>
+            
+            <div class="info-box">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 8px 0;"><code>WASD</code> or <code>Arrow Keys</code> - Move your character</li>
+                    <li style="padding: 8px 0;"><code>SPACE</code> - Drop a trump (bomb) 💨</li>
+                    <li style="padding: 8px 0;"><code>C</code> - Drop a caca (wall) 💩</li>
+                    <li style="padding: 8px 0;"><code>P</code> - Pause game</li>
+                    <li style="padding: 8px 0;"><code>R</code> - Start/Stop recording 🎬</li>
+                    <li style="padding: 8px 0;"><code>S</code> - Save statistics 📊</li>
+                    <li style="padding: 8px 0;"><code>ESC</code> - Quit game</li>
+                </ul>
+            </div>
+            
+            <h2 style="color: #667eea; margin: 40px 0 20px 0;">📋 System Requirements</h2>
+            
+            <div class="info-box">
+                <h3 style="color: #667eea; margin-bottom: 10px;">Minimum Requirements</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Python 3.8 or higher</li>
+                    <li>Pygame 2.0+</li>
+                    <li>1GB RAM</li>
+                    <li>100MB disk space</li>
+                </ul>
+                
+                <h3 style="color: #667eea; margin: 20px 0 10px 0;">Recommended</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Python 3.10+</li>
+                    <li>PyTorch (for AI opponents)</li>
+                    <li>FFmpeg (for video recording)</li>
+                    <li>2GB RAM</li>
+                </ul>
+            </div>
+            
+            <h2 style="color: #667eea; margin: 40px 0 20px 0;">🎯 Game Modes</h2>
+            
+            <div class="step">
+                <strong>Single Player</strong>
+                <p style="margin: 10px 0;">Battle against AI opponents trained with reinforcement learning</p>
+                <pre>./bomberman play</pre>
+            </div>
+            
+            <div class="step">
+                <strong>Multiplayer</strong>
+                <p style="margin: 10px 0;">Play with friends (1v1, 1v2, or 1v3)</p>
+                <pre>./bomberman play --multi</pre>
+            </div>
+            
+            <div class="step">
+                <strong>Training Mode</strong>
+                <p style="margin: 10px 0;">Train your own AI agent</p>
+                <pre>./bomberman train --episodes 1000</pre>
+            </div>
+            
+            <h2 style="color: #667eea; margin: 40px 0 20px 0;">📚 Documentation</h2>
+            
+            <p>For complete documentation, guides, and tutorials, visit the GitHub repository:</p>
+            
+            <div style="margin-top: 20px;">
+                <a href="https://github.com/xaviercallens/xgames" class="btn" target="_blank">
+                    📦 View on GitHub
+                </a>
+                <a href="https://github.com/xaviercallens/xgames/blob/main/README.md" class="btn" target="_blank">
+                    📖 Read Documentation
+                </a>
+            </div>
+            
+            <div class="info-box" style="margin-top: 30px;">
+                <h3 style="color: #667eea; margin-bottom: 10px;">💡 Need Help?</h3>
+                <p>Check out these resources:</p>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li><a href="https://github.com/xaviercallens/xgames/blob/main/README.md" target="_blank">README</a> - Getting started guide</li>
+                    <li><a href="https://github.com/xaviercallens/xgames/blob/main/VIDEO_RECORDING_GUIDE.md" target="_blank">Video Recording Guide</a> - How to record gameplay</li>
+                    <li><a href="https://github.com/xaviercallens/xgames/blob/main/SAVE_STATS_GUIDE.md" target="_blank">Stats Guide</a> - Track your performance</li>
+                    <li><a href="https://github.com/xaviercallens/xgames/issues" target="_blank">Issues</a> - Report bugs or ask questions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
