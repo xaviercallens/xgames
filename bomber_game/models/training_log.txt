@@ -131,3 +131,130 @@
 [2025-10-13 23:44:41] 📊 Loaded existing stats: 4193 episodes
 [2025-10-13 23:44:41] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
 [2025-10-13 23:44:56] 💾 Checkpoint saved: checkpoint_ep4200_periodic_20251013_234456.pth
+[2025-10-13 23:47:45] 
+🏁 Training completed!
+[2025-10-13 23:47:45] 💾 Checkpoint saved: checkpoint_ep4264_final_20251013_234745.pth
+[2025-10-13 23:47:45] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 06:45:08] 📊 Loaded existing stats: 4263 episodes
+[2025-10-14 06:45:08] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 06:45:09] 
+🏁 Training completed!
+[2025-10-14 06:45:09] 💾 Checkpoint saved: checkpoint_ep4263_final_20251014_064509.pth
+[2025-10-14 06:45:09] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 06:51:00] 📊 Loaded existing stats: 4263 episodes
+[2025-10-14 06:51:00] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 06:51:00] 
+🏁 Training completed!
+[2025-10-14 06:51:00] 💾 Checkpoint saved: checkpoint_ep4263_final_20251014_065100.pth
+[2025-10-14 06:51:00] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 06:51:18] 📊 Loaded existing stats: 4263 episodes
+[2025-10-14 06:51:18] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 06:52:16] 💾 Checkpoint saved: checkpoint_ep4300_periodic_20251014_065216.pth
+[2025-10-14 06:53:46] 💾 Checkpoint saved: checkpoint_ep4363_best_20251014_065346.pth
+[2025-10-14 06:54:00] 💾 Checkpoint saved: checkpoint_ep4372_best_20251014_065400.pth
+[2025-10-14 06:54:41] 💾 Checkpoint saved: checkpoint_ep4400_periodic_20251014_065441.pth
+[2025-10-14 06:55:13] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-14 06:55:13]    Best win rate: 24.00%
+[2025-10-14 06:55:13] 
+🏁 Training completed!
+[2025-10-14 06:55:13] 💾 Checkpoint saved: checkpoint_ep4422_final_20251014_065513.pth
+[2025-10-14 06:55:13] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 06:56:30] 📊 Loaded existing stats: 4422 episodes
+[2025-10-14 06:56:30] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 06:56:30] 
+🏁 Training completed!
+[2025-10-14 06:56:30] 💾 Checkpoint saved: checkpoint_ep4422_final_20251014_065630.pth
+[2025-10-14 06:56:30] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 07:26:21] 
+================================================================================
+[2025-10-14 07:26:21] 🎓 BOOTSTRAP TRAINING WITH HEURISTIC DEMONSTRATIONS
+[2025-10-14 07:26:21] ================================================================================
+[2025-10-14 07:26:21] Collecting 100 demonstration episodes...
+[2025-10-14 07:26:22]   Collected 10/100 episodes (1633 samples)
+[2025-10-14 07:26:23]   Collected 20/100 episodes (4416 samples)
+[2025-10-14 07:26:25]   Collected 30/100 episodes (6733 samples)
+[2025-10-14 07:26:26]   Collected 40/100 episodes (8303 samples)
+[2025-10-14 07:26:27]   Collected 50/100 episodes (10728 samples)
+[2025-10-14 07:26:28]   Collected 60/100 episodes (13053 samples)
+[2025-10-14 07:26:30]   Collected 70/100 episodes (15983 samples)
+[2025-10-14 07:26:31]   Collected 80/100 episodes (18305 samples)
+[2025-10-14 07:26:32]   Collected 90/100 episodes (20177 samples)
+[2025-10-14 07:26:34]   Collected 100/100 episodes (22778 samples)
+[2025-10-14 07:26:34] ✅ Collected 22778 demonstration samples
+[2025-10-14 07:26:34] 
+🎯 Training with behavioral cloning...
+[2025-10-14 07:26:34]   Epochs: 50, Batch size: 64
+[2025-10-14 07:28:06]   Epoch 10/50 - Loss: 0.6854 (Best: 0.6854)
+[2025-10-14 07:29:51]   Epoch 20/50 - Loss: 0.6240 (Best: 0.6240)
+[2025-10-14 07:33:22]   Epoch 30/50 - Loss: 0.5938 (Best: 0.5938)
+[2025-10-14 07:36:15]   Epoch 40/50 - Loss: 0.5700 (Best: 0.5700)
+[2025-10-14 07:38:04]   Epoch 50/50 - Loss: 0.5510 (Best: 0.5510)
+[2025-10-14 07:38:04] ✅ Bootstrap training complete! Best loss: 0.5510
+[2025-10-14 07:38:04] 💾 Saved bootstrapped model to bomber_game/models/ppo_agent_bootstrapped.pth
+[2025-10-14 07:38:04] 
+✅ Bootstrap phase completed successfully!
+[2025-10-14 07:38:04]    Agent has been pre-trained with heuristic knowledge.
+[2025-10-14 07:38:04]    Starting RL fine-tuning...
+
+[2025-10-14 07:38:04] 📊 Loaded existing stats: 4422 episodes
+[2025-10-14 07:38:04] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 07:38:04] 
+🏁 Training completed!
+[2025-10-14 07:38:04] 💾 Checkpoint saved: checkpoint_ep4422_final_20251014_073804.pth
+[2025-10-14 07:38:04] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 07:39:25] 
+================================================================================
+[2025-10-14 07:39:25] 🎓 BOOTSTRAP TRAINING WITH HEURISTIC DEMONSTRATIONS
+[2025-10-14 07:39:25] ================================================================================
+[2025-10-14 07:39:25] Collecting 100 demonstration episodes...
+[2025-10-14 07:39:26]   Collected 10/100 episodes (2827 samples)
+[2025-10-14 07:39:28]   Collected 20/100 episodes (4734 samples)
+[2025-10-14 07:39:29]   Collected 30/100 episodes (7687 samples)
+[2025-10-14 07:39:31]   Collected 40/100 episodes (10469 samples)
+[2025-10-14 07:39:32]   Collected 50/100 episodes (12615 samples)
+[2025-10-14 07:39:34]   Collected 60/100 episodes (15068 samples)
+[2025-10-14 07:39:35]   Collected 70/100 episodes (17713 samples)
+[2025-10-14 07:39:37]   Collected 80/100 episodes (19481 samples)
+[2025-10-14 07:39:38]   Collected 90/100 episodes (21184 samples)
+[2025-10-14 07:39:39]   Collected 100/100 episodes (22427 samples)
+[2025-10-14 07:39:39] ✅ Collected 22427 demonstration samples
+[2025-10-14 07:39:39] 
+🎯 Training with behavioral cloning...
+[2025-10-14 07:39:39]   Epochs: 50, Batch size: 64
+[2025-10-14 07:42:16]   Epoch 10/50 - Loss: 0.7199 (Best: 0.7199)
+[2025-10-14 07:44:43]   Epoch 20/50 - Loss: 0.6416 (Best: 0.6416)
+[2025-10-14 07:46:49]   Epoch 30/50 - Loss: 0.5784 (Best: 0.5784)
+[2025-10-14 07:48:56]   Epoch 40/50 - Loss: 0.5290 (Best: 0.5290)
+[2025-10-14 07:51:10]   Epoch 50/50 - Loss: 0.4928 (Best: 0.4928)
+[2025-10-14 07:51:10] ✅ Bootstrap training complete! Best loss: 0.4928
+[2025-10-14 07:51:10] 💾 Saved bootstrapped model to bomber_game/models/ppo_agent_bootstrapped.pth
+[2025-10-14 07:51:10] 
+✅ Bootstrap phase completed successfully!
+[2025-10-14 07:51:10]    Agent has been pre-trained with heuristic knowledge.
+[2025-10-14 07:51:10]    Starting RL fine-tuning...
+
+[2025-10-14 07:51:10] 📊 Loaded existing stats: 4422 episodes
+[2025-10-14 07:51:10] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 07:51:10] 
+🏁 Training completed!
+[2025-10-14 07:51:10] 💾 Checkpoint saved: checkpoint_ep4422_final_20251014_075110.pth
+[2025-10-14 07:51:10] 💾 Final model saved: bomber_game/models/ppo_agent.pth
+[2025-10-14 08:01:01] 
+================================================================================
+[2025-10-14 08:01:01] 🎓 BOOTSTRAP TRAINING WITH HEURISTIC DEMONSTRATIONS
+[2025-10-14 08:01:01] ================================================================================
+[2025-10-14 08:01:01] Collecting 100 demonstration episodes...
+[2025-10-14 08:01:04]   Collected 10/100 episodes (3222 samples)
+[2025-10-14 08:01:05]   Collected 20/100 episodes (4827 samples)
+[2025-10-14 08:01:06]   Collected 30/100 episodes (6578 samples)
+[2025-10-14 08:01:07]   Collected 40/100 episodes (8459 samples)
+[2025-10-14 08:01:09]   Collected 50/100 episodes (10861 samples)
+[2025-10-14 08:01:10]   Collected 60/100 episodes (13370 samples)
+[2025-10-14 08:01:11]   Collected 70/100 episodes (15640 samples)
+[2025-10-14 08:01:13]   Collected 80/100 episodes (18311 samples)
+[2025-10-14 08:01:14]   Collected 90/100 episodes (20286 samples)
+[2025-10-14 08:01:16]   Collected 100/100 episodes (23473 samples)
+[2025-10-14 08:01:16] ✅ Collected 23473 demonstration samples
+[2025-10-14 08:01:16] 
+🎯 Training with behavioral cloning...
+[2025-10-14 08:01:16]   Epochs: 50, Batch size: 64

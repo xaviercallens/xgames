@@ -1,0 +1,13 @@
+# Game Statistics Directory
+
+This directory stores gameplay statistics saved with the 'S' key.
+
+## Files Generated
+
+- `game_stats_TIMESTAMP.txt` - Comprehensive game statistics
+
+## Usage
+
+Press 'S' during gameplay to save statistics to this directory.
+
+See [SAVE_STATS_GUIDE.md](../SAVE_STATS_GUIDE.md) for full documentation.

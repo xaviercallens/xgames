@@ -44,6 +44,8 @@ if __name__ == "__main__":
     print("  - C: Drop a caca (poop block) 💩")
     print("  - P: Pause")
     print("  - ESC: Quit")
+    print("  - R: Record gameplay (toggle) 🎬")
+    print("  - S: Save recording with game stats 📊")
     print("  - R: Restart (when game over)")
     print("\n" + "=" * 70)
     print("🤖 AI OPPONENT INFORMATION")

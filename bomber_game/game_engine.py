@@ -17,6 +17,7 @@ from .heuristics_improved import ImprovedHeuristicAgent
 from .game_statistics import GameStatistics
 from .stats_panel import StatsPanel
 from .educational_stats import EducationalStatsScreen
+from .video_recorder import VideoRecorder
 import os
 
 
@@ -47,6 +48,10 @@ class BombermanGame:
         # Menu system
         self.menu = MenuScreen(self.screen)
         self.show_splash = show_splash
+        
+        # Video recording
+        self.video_recorder = VideoRecorder(output_dir="recordings", fps=FPS)
+        self.show_recording_hint = True  # Show hint on first run
         
         # Game state
         self.game_state = GameState(GRID_SIZE)
@@ -236,8 +241,15 @@ class BombermanGame:
                         self._restart_game()
                 elif event.key == pygame.K_p:
                     self.paused = not self.paused
-                elif event.key == pygame.K_r and self.game_state.game_over:
-                    self._restart_game()
+                elif event.key == pygame.K_r:
+                    if self.game_state.game_over:
+                        self._restart_game()
+                    else:
+                        # Toggle recording when game is active
+                        session_name = f"game_{self.stats.history['total_games'] + 1}"
+                        is_recording = self.video_recorder.toggle_recording(session_name)
+                        if is_recording:
+                            self.show_recording_hint = False
                 elif event.key == pygame.K_SPACE:
                     if self.human_player.alive:
                         self.game_state.place_bomb(self.human_player)
@@ -245,6 +257,14 @@ class BombermanGame:
                 elif event.key == pygame.K_c:
                     if self.human_player.alive:
                         self.game_state.place_caca(self.human_player)
+                elif event.key == pygame.K_s:
+                    # Save recording with game statistics
+                    if self.video_recorder.is_recording:
+                        game_stats = self._collect_game_statistics()
+                        self.video_recorder.stop_recording(game_stats)
+                    else:
+                        # Just save statistics without recording
+                        self._save_game_statistics_only()
     
     def update(self, dt):
         """Update game state."""
@@ -299,6 +319,10 @@ class BombermanGame:
     def render(self):
         """Render the game."""
         self.screen.fill(BLACK)
+        
+        # Capture frame if recording
+        if self.video_recorder.is_recording:
+            self.video_recorder.capture_frame(self.screen)
         
         # Draw grid
         self._draw_grid()
@@ -421,10 +445,22 @@ class BombermanGame:
             self.screen.blit(text_surf, (10, ui_y + 25))
         
         # Controls
-        controls = "Controls: WASD=Move, Space=Trump💨, C=Caca💩, P=Pause"
+        controls = "Controls: WASD=Move, Space=Trump💨, C=Caca💩, P=Pause, R=Record, S=Save Stats"
         text_surf = self.font.render(controls, True, WHITE)
         text_rect = text_surf.get_rect(right=SCREEN_WIDTH - 10, top=ui_y)
         self.screen.blit(text_surf, text_rect)
+        
+        # Recording status
+        if self.video_recorder.is_recording:
+            rec_text = self.video_recorder.get_status_text()
+            rec_surf = self.font.render(rec_text, True, RED)
+            rec_rect = rec_surf.get_rect(right=SCREEN_WIDTH - 10, top=ui_y + 25)
+            self.screen.blit(rec_surf, rec_rect)
+        elif self.show_recording_hint and not self.game_state.game_over:
+            hint_text = "💡 Press R to record gameplay!"
+            hint_surf = self.font.render(hint_text, True, (255, 255, 100))
+            hint_rect = hint_surf.get_rect(right=SCREEN_WIDTH - 10, top=ui_y + 25)
+            self.screen.blit(hint_surf, hint_rect)
     
     def _draw_game_over(self):
         """Draw game over screen with AI statistics."""
@@ -485,6 +521,176 @@ class BombermanGame:
         restart_surf = self.font.render("Press R to Restart", True, WHITE)
         restart_rect = restart_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
         self.screen.blit(restart_surf, restart_rect)
+    
+    def _collect_game_statistics(self) -> dict:
+        """Collect comprehensive game statistics for saving."""
+        # Get AI info
+        ai_info = {
+            'type': self.ai_type,
+            'model_path': getattr(self, 'ai_model_path', 'N/A'),
+            'skill_level': 'Unknown'
+        }
+        
+        # Try to get AI skill level from stats
+        if self.ai_stats:
+            ai_info['skill_level'] = self.ai_stats.get('current_level', 'Unknown')
+        
+        # Get game result
+        game_result = {
+            'winner': self.game_state.winner.name if self.game_state.winner else 'In Progress',
+            'duration': time.time() - self.stats.game_start_time,
+            'turns': self.game_state.turn_count if hasattr(self.game_state, 'turn_count') else 0
+        }
+        
+        # Get performance statistics from history
+        performance = {
+            'total_games': self.stats.history['total_games'],
+            'human_wins': self.stats.history['human_wins'],
+            'ai_wins': self.stats.history['ai_wins'],
+            'draws': self.stats.history['draws'],
+            'human_win_rate': self.stats.get_win_rate(True),
+            'ai_win_rate': self.stats.get_win_rate(False),
+            'human_current_streak': self.stats.history['human_stats']['current_win_streak'],
+            'human_best_streak': self.stats.history['human_stats']['best_win_streak'],
+            'ai_current_streak': self.stats.history['ai_stats']['current_win_streak'],
+            'ai_best_streak': self.stats.history['ai_stats']['best_win_streak']
+        }
+        
+        # Get current game stats
+        current_game = {
+            'human': {
+                'moves': self.stats.human_moves,
+                'bombs': self.stats.human_bombs_placed,
+                'walls': self.stats.walls_destroyed_human,
+                'powerups': self.stats.powerups_collected_human,
+                'near_death': self.stats.human_near_death,
+                'strategy': self.stats.get_strategy(True),
+                'avg_risk': self.stats.get_current_risk(True),
+                'performance': self.stats.get_performance_score(True)
+            },
+            'ai': {
+                'moves': self.stats.ai_moves,
+                'bombs': self.stats.ai_bombs_placed,
+                'walls': self.stats.walls_destroyed_ai,
+                'powerups': self.stats.powerups_collected_ai,
+                'near_death': self.stats.ai_near_death,
+                'strategy': self.stats.get_strategy(False),
+                'avg_risk': self.stats.get_current_risk(False),
+                'performance': self.stats.get_performance_score(False)
+            }
+        }
+        
+        # Get recommendations
+        recommendations = self.stats.get_recommendations()
+        
+        return {
+            'ai_info': ai_info,
+            'game_result': game_result,
+            'performance': performance,
+            'current_game': current_game,
+            'recommendations': recommendations
+        }
+    
+    def _save_game_statistics_only(self):
+        """Save game statistics to a text file without recording."""
+        import time
+        from datetime import datetime
+        from pathlib import Path
+        
+        # Create stats directory
+        stats_dir = Path("game_stats")
+        stats_dir.mkdir(exist_ok=True)
+        
+        # Generate filename
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        stats_file = stats_dir / f"game_stats_{timestamp}.txt"
+        
+        # Collect statistics
+        game_stats = self._collect_game_statistics()
+        
+        # Write to file
+        with open(stats_file, 'w') as f:
+            f.write("=" * 80 + "\n")
+            f.write("PROUTMAN GAMEPLAY STATISTICS\n")
+            f.write("=" * 80 + "\n\n")
+            
+            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            
+            # AI Information
+            ai_info = game_stats['ai_info']
+            f.write("🤖 AI OPPONENT INFORMATION\n")
+            f.write("-" * 80 + "\n")
+            f.write(f"AI Type:         {ai_info['type']}\n")
+            f.write(f"Model Path:      {ai_info['model_path']}\n")
+            f.write(f"Skill Level:     {ai_info['skill_level']}\n\n")
+            
+            # Game Results
+            result = game_stats['game_result']
+            f.write("🏆 GAME RESULT\n")
+            f.write("-" * 80 + "\n")
+            f.write(f"Winner:          {result['winner']}\n")
+            f.write(f"Game Duration:   {result['duration']:.2f} seconds\n")
+            f.write(f"Total Turns:     {result['turns']}\n\n")
+            
+            # Performance Statistics
+            perf = game_stats['performance']
+            f.write("📊 PERFORMANCE STATISTICS\n")
+            f.write("-" * 80 + "\n")
+            f.write(f"Total Games:     {perf['total_games']}\n")
+            f.write(f"Human Wins:      {perf['human_wins']}\n")
+            f.write(f"AI Wins:         {perf['ai_wins']}\n")
+            f.write(f"Draws:           {perf['draws']}\n")
+            f.write(f"Human Win Rate:  {perf['human_win_rate']:.1f}%\n")
+            f.write(f"AI Win Rate:     {perf['ai_win_rate']:.1f}%\n\n")
+            
+            # Win streaks
+            f.write("🔥 WIN STREAKS\n")
+            f.write("-" * 80 + "\n")
+            f.write(f"Human Current:   {perf['human_current_streak']}\n")
+            f.write(f"Human Best:      {perf['human_best_streak']}\n")
+            f.write(f"AI Current:      {perf['ai_current_streak']}\n")
+            f.write(f"AI Best:         {perf['ai_best_streak']}\n\n")
+            
+            # Current Game Stats
+            current = game_stats['current_game']
+            f.write("🎮 CURRENT GAME STATISTICS\n")
+            f.write("-" * 80 + "\n")
+            
+            human = current['human']
+            f.write("\nPlayer (Human):\n")
+            f.write(f"  Moves:         {human['moves']}\n")
+            f.write(f"  Bombs Placed:  {human['bombs']}\n")
+            f.write(f"  Walls Broken:  {human['walls']}\n")
+            f.write(f"  Powerups:      {human['powerups']}\n")
+            f.write(f"  Near Deaths:   {human['near_death']}\n")
+            f.write(f"  Strategy:      {human['strategy']}\n")
+            f.write(f"  Avg Risk:      {human['avg_risk']:.1f}\n")
+            f.write(f"  Performance:   {human['performance']:.1f}/100\n")
+            
+            ai = current['ai']
+            f.write("\nAI Opponent:\n")
+            f.write(f"  Moves:         {ai['moves']}\n")
+            f.write(f"  Bombs Placed:  {ai['bombs']}\n")
+            f.write(f"  Walls Broken:  {ai['walls']}\n")
+            f.write(f"  Powerups:      {ai['powerups']}\n")
+            f.write(f"  Near Deaths:   {ai['near_death']}\n")
+            f.write(f"  Strategy:      {ai['strategy']}\n")
+            f.write(f"  Avg Risk:      {ai['avg_risk']:.1f}\n")
+            f.write(f"  Performance:   {ai['performance']:.1f}/100\n\n")
+            
+            # Recommendations
+            f.write("💡 RECOMMENDATIONS\n")
+            f.write("-" * 80 + "\n")
+            for i, rec in enumerate(game_stats['recommendations'], 1):
+                f.write(f"{i}. {rec}\n")
+            
+            f.write("\n" + "=" * 80 + "\n")
+            f.write("Generated by Proutman\n")
+            f.write("=" * 80 + "\n")
+        
+        print(f"\n📊 Game statistics saved!")
+        print(f"   📁 Location: {stats_file}")
+        print(f"   💾 File: {stats_file.name}")
     
     def _restart_game(self):
         """Restart the game."""

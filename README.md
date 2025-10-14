@@ -150,6 +150,11 @@ source setup_terminal.sh
 ./bomberman monitor                 # Monitor training progress
 ./bomberman stats                   # View statistics
 
+# Video Recording (NEW! 🎬)
+# Press 'R' during gameplay to record!
+# Exports to WebM, MP4, and GIF formats
+# Perfect for GitHub Pages and sharing
+
 # Utilities
 ./bomberman test                    # Test setup
 ./bomberman pretrain                # Create pretrained model
@@ -157,6 +162,48 @@ source setup_terminal.sh
 ```
 
 **See [CLI_GUIDE.md](CLI_GUIDE.md) for complete documentation.**
+
+### **🎬 Video Recording** (NEW!)
+
+Record and share your epic gameplay moments!
+
+```bash
+# 1. Install FFmpeg (one-time setup)
+sudo apt-get install ffmpeg  # Ubuntu/Debian
+brew install ffmpeg          # macOS
+
+# 2. Play game
+./play_bomberman.py
+
+# 3. Press 'R' to start/stop recording
+```
+
+**Features:**
+- ✅ One-key recording (press 'R')
+- ✅ Web-optimized formats (WebM, MP4, GIF)
+- ✅ Auto-generated HTML embed code
+- ✅ GitHub Pages ready
+- ✅ **NEW!** Press 'S' to save with game statistics 📊
+
+**See [VIDEO_RECORDING_GUIDE.md](VIDEO_RECORDING_GUIDE.md) for full documentation.**
+
+### **📊 Save Game Statistics** (NEW!)
+
+Track your performance and AI opponent stats!
+
+```bash
+# During gameplay, press 'S' to save statistics
+# Works with or without recording!
+```
+
+**Statistics Include:**
+- 🤖 AI opponent information (type, skill level)
+- 🏆 Game results (winner, duration, turns)
+- 📊 Performance metrics (win rate, streaks)
+- 🎮 Detailed gameplay stats (moves, bombs, strategy)
+- 💡 Personalized recommendations
+
+**See [SAVE_STATS_GUIDE.md](SAVE_STATS_GUIDE.md) for full documentation.**
 
 ---
 

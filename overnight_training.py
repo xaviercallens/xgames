@@ -37,9 +37,9 @@ from bomber_game.heuristics_improved import ImprovedHeuristicAgent
 # ============================================================================
 
 # Training duration
-TOTAL_EPISODES = 1000
+TOTAL_EPISODES = 10000
 MAX_STEPS_PER_EPISODE = 500
-TRAINING_HOURS = 1
+TRAINING_HOURS = 8
 
 # Bootstrap settings
 BOOTSTRAP_EPISODES = 100  # Number of heuristic demonstrations to collect

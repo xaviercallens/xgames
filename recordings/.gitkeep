@@ -1,0 +1,17 @@
+# Recordings Directory
+
+This directory stores gameplay recordings.
+
+## Files Generated
+
+- `*.webm` - Web-optimized videos
+- `*.mp4` - Compatible videos
+- `*.gif` - Preview animations
+- `*_metadata.json` - Recording information
+- `*_embed.html` - Ready-to-use embed pages
+
+## Usage
+
+Press 'R' during gameplay to start/stop recording.
+
+See [VIDEO_RECORDING_GUIDE.md](../VIDEO_RECORDING_GUIDE.md) for full documentation.
