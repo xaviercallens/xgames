@@ -1,0 +1,22 @@
+{
+  "recording_name": "game_13001_20251014_082515",
+  "timestamp": "2025-10-14T08:25:15.679396",
+  "duration_seconds": 7.066666666666666,
+  "fps": 30,
+  "frame_count": 212,
+  "dropped_frames": 0,
+  "resolution": {
+    "width": 1132,
+    "height": 896
+  },
+  "files": {
+    "webm": "game_13001_20251014_082515.webm",
+    "mp4": "game_13001_20251014_082515.mp4",
+    "gif_preview": "game_13001_20251014_082515_preview.gif"
+  },
+  "file_sizes": {
+    "webm_mb": 0.009606361389160156,
+    "mp4_mb": 0.012714385986328125,
+    "gif_mb": 0.0042285919189453125
+  }
+}

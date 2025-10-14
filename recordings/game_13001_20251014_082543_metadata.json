@@ -1,0 +1,73 @@
+{
+  "recording_name": "game_13001_20251014_082543",
+  "timestamp": "2025-10-14T08:25:43.126093",
+  "duration_seconds": 11.533333333333333,
+  "fps": 30,
+  "frame_count": 346,
+  "dropped_frames": 0,
+  "resolution": {
+    "width": 1132,
+    "height": 896
+  },
+  "files": {
+    "webm": "game_13001_20251014_082543.webm",
+    "mp4": "game_13001_20251014_082543.mp4",
+    "gif_preview": "game_13001_20251014_082543_preview.gif"
+  },
+  "file_sizes": {
+    "webm_mb": 0.015355110168457031,
+    "mp4_mb": 0.019887924194335938,
+    "gif_mb": 0.0052776336669921875
+  },
+  "game_statistics": {
+    "ai_info": {
+      "type": "Improved Heuristic",
+      "model_path": "N/A",
+      "skill_level": "Beginner"
+    },
+    "game_result": {
+      "winner": "Player",
+      "duration": 47.54010224342346,
+      "turns": 0
+    },
+    "performance": {
+      "total_games": 13071,
+      "human_wins": 10755,
+      "ai_wins": 2316,
+      "draws": 0,
+      "human_win_rate": 82.28138627495983,
+      "ai_win_rate": 17.718613725040168,
+      "human_current_streak": 157,
+      "human_best_streak": 3275,
+      "ai_current_streak": 0,
+      "ai_best_streak": 1259
+    },
+    "current_game": {
+      "human": {
+        "moves": 46,
+        "bombs": 6,
+        "walls": 0,
+        "powerups": 0,
+        "near_death": 0,
+        "strategy": "Defensive",
+        "avg_risk": 0.21702898550724686,
+        "performance": 63.04347826086956
+      },
+      "ai": {
+        "moves": 36,
+        "bombs": 10,
+        "walls": 0,
+        "powerups": 0,
+        "near_death": 0,
+        "strategy": "Defensive",
+        "avg_risk": 0.25324074074074,
+        "performance": 77.77777777777777
+      }
+    },
+    "recommendations": [
+      "\ud83d\udca1 LOW RISK: You can be more aggressive",
+      "\u2b50 Collect more power-ups for advantage",
+      "\ud83d\udd25 ON FIRE! Keep up the great play!"
+    ]
+  }
+}

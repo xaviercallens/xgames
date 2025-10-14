@@ -8,7 +8,7 @@
 
 ---
 
-## 🎮 **[TRY LIVE DEMO](https://xaviercallens.github.io/xgames/demo.html)** | 📥 **[DOWNLOAD](https://github.com/xaviercallens/xgames)**
+## 🎮 **[TRY LIVE DEMO](https://xaviercallens.github.io/xgames/demo.html)** | 🎬 **[WATCH GAMEPLAY](https://xaviercallens.github.io/xgames/docs/gameplay.html)** | 📥 **[DOWNLOAD](https://github.com/xaviercallens/xgames)**
 
 **Play Proutman Online - No Installation Required!**
 
@@ -204,6 +204,24 @@ Track your performance and AI opponent stats!
 - 💡 Personalized recommendations
 
 **See [SAVE_STATS_GUIDE.md](SAVE_STATS_GUIDE.md) for full documentation.**
+
+---
+
+<div align="center">
+
+## 🎬 **Gameplay Recordings**
+
+**[📺 Watch Live Gameplay Videos](https://xaviercallens.github.io/xgames/docs/gameplay.html)**
+
+</div>
+
+See the AI in action! Watch real gameplay recordings featuring:
+- 🤖 **AI Opponents** - Intelligent agents trained with Reinforcement Learning
+- 💨 **Strategic Gameplay** - Bomb placement and tactical movement
+- 📊 **Performance Stats** - Real-time tracking and analytics
+- 🎬 **Multiple Formats** - WebM, MP4, and GIF previews
+
+**[🎥 View All Recordings →](https://xaviercallens.github.io/xgames/docs/gameplay.html)**
 
 ---
 
