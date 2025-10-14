@@ -4,6 +4,10 @@ Main game engine for Bomberman.
 
 import pygame
 import sys
+import os
+import time
+from datetime import datetime
+from pathlib import Path
 from . import (GRID_SIZE, TILE_SIZE, FPS, SCREEN_WIDTH, SCREEN_HEIGHT,
                BLACK, WHITE, GRAY, DARK_GRAY, GREEN, RED, BROWN)
 from .game_state import GameState
@@ -18,7 +22,6 @@ from .game_statistics import GameStatistics
 from .stats_panel import StatsPanel
 from .educational_stats import EducationalStatsScreen
 from .video_recorder import VideoRecorder
-import os
 
 
 class BombermanGame:
@@ -593,10 +596,6 @@ class BombermanGame:
     
     def _save_game_statistics_only(self):
         """Save game statistics to a text file without recording."""
-        import time
-        from datetime import datetime
-        from pathlib import Path
-        
         # Create stats directory
         stats_dir = Path("game_stats")
         stats_dir.mkdir(exist_ok=True)
