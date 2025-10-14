@@ -1,0 +1,17 @@
+# Web Deployment Requirements for Proutman
+# Use this for PythonAnywhere and other web hosting
+
+# Core web framework
+Flask==3.0.0
+Werkzeug==3.0.1
+
+# Optional: For enhanced features
+# pygame==2.5.2  # Not needed for web demo
+# numpy==1.24.3  # Only if using AI features
+# torch==2.1.0   # Only if using RL models
+
+# Production server (optional)
+gunicorn==21.2.0
+
+# Utilities
+python-dotenv==1.0.0
