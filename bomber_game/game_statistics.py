@@ -102,6 +102,32 @@ class GameStatistics:
         self.ai_type = ai_type
         self.ai_model_path = model_path
     
+    def reset(self):
+        """Reset current game statistics for a new game."""
+        self.game_start_time = time.time()
+        self.human_moves = 0
+        self.ai_moves = 0
+        self.human_bombs_placed = 0
+        self.ai_bombs_placed = 0
+        self.human_kills = 0
+        self.ai_kills = 0
+        self.human_near_death = 0
+        self.ai_near_death = 0
+        self.powerups_collected_human = 0
+        self.powerups_collected_ai = 0
+        self.walls_destroyed_human = 0
+        self.walls_destroyed_ai = 0
+        
+        # Strategy tracking
+        self.human_aggressive_moves = 0
+        self.human_defensive_moves = 0
+        self.ai_aggressive_moves = 0
+        self.ai_defensive_moves = 0
+        
+        # Risk tracking
+        self.human_risk_history.clear()
+        self.ai_risk_history.clear()
+    
     def record_move(self, is_human, position, game_state):
         """Record a player move and analyze strategy."""
         if is_human:
