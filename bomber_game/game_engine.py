@@ -97,6 +97,12 @@ class BombermanGame:
         self.running = True
         self.paused = False
         
+        # Multiplayer support
+        self.is_multiplayer = False
+        self.multiplayer_config = None
+        self.players = []
+        self.ai_agents = []
+        
         # Load assets
         self.assets = get_asset_manager()
         self.wall_sprite = None
@@ -193,6 +199,104 @@ class BombermanGame:
             return f"{minutes}m"
         else:
             return f"{int(seconds)}s"
+    
+    def setup_multiplayer_game(self, config):
+        """
+        Setup multiplayer game with configuration.
+        
+        Args:
+            config: GameConfig instance with player configuration
+        """
+        from .multiplayer_config import GameConfig
+        
+        if not isinstance(config, GameConfig):
+            raise ValueError("config must be a GameConfig instance")
+        
+        if not config.is_valid():
+            raise ValueError("Invalid game configuration")
+        
+        print(f"\n{'='*70}")
+        print(f"🎮 MULTIPLAYER GAME SETUP")
+        print(f"{'='*70}")
+        print(f"Total Players: {config.get_player_count()}")
+        print(f"Human Players: {config.get_human_count()}")
+        print(f"AI Players: {config.get_ai_count()}")
+        print(f"{'='*70}\n")
+        
+        # Store configuration
+        self.multiplayer_config = config
+        self.is_multiplayer = True
+        
+        # Clear existing game state
+        self.game_state = GameState(GRID_SIZE)
+        
+        # Create players from configuration
+        player_positions = [
+            (1, 1),                          # Top-left
+            (GRID_SIZE - 2, 1),              # Top-right
+            (GRID_SIZE - 2, GRID_SIZE - 2),  # Bottom-right
+            (1, GRID_SIZE - 2)               # Bottom-left
+        ]
+        
+        self.players = []
+        self.ai_agents = []
+        
+        for i, player_config in enumerate(config.players):
+            if i >= len(player_positions):
+                break
+            
+            x, y = player_positions[i]
+            player = self.game_state.add_player(x, y, player_config.color, player_config.name)
+            self.players.append(player)
+            
+            print(f"Player {player_config.player_id}: {player_config.name}")
+            if player_config.is_human():
+                print(f"  Type: Human")
+            else:
+                print(f"  Type: AI ({player_config.ai_mode})")
+                # Create AI agent
+                ai_agent = self._create_ai_agent_for_player(player, player_config.ai_mode)
+                self.ai_agents.append((player, ai_agent))
+        
+        # Set first human player as main player
+        human_players = config.get_human_players()
+        if human_players:
+            self.human_player = self.players[config.players.index(human_players[0])]
+        else:
+            self.human_player = self.players[0]
+        
+        # Update statistics
+        self.stats.reset()
+        self.stats.set_ai_info(f"Multiplayer ({config.get_ai_count()} AI)", None)
+        
+        print(f"\n✅ Multiplayer game ready!")
+        print(f"   Press SPACE to place bombs")
+        print(f"   Press C to place blocks")
+        print(f"   Press P to pause")
+        print(f"   Press ESC to quit\n")
+    
+    def _create_ai_agent_for_player(self, player, ai_mode):
+        """
+        Create AI agent for a player.
+        
+        Args:
+            player: Player object
+            ai_mode: AI mode type
+            
+        Returns:
+            AI agent instance
+        """
+        if ai_mode == 'simple':
+            return ImprovedHeuristicAgent(player)
+        elif ai_mode == 'heuristic':
+            return ImprovedHeuristicAgent(player)
+        elif ai_mode == 'intermediate_heuristic':
+            return IntermediateSmartHeuristic(player)
+        elif ai_mode == 'advanced_heuristic':
+            return AdvancedSmartHeuristic(player)
+        else:
+            # Default to improved heuristic
+            return ImprovedHeuristicAgent(player)
         
     def handle_events(self):
         """Handle pygame events."""
@@ -248,6 +352,16 @@ class BombermanGame:
         if self.paused or self.game_state.game_over:
             return
         
+        if self.is_multiplayer:
+            self._update_multiplayer(dt)
+        else:
+            self._update_single_player(dt)
+        
+        # Update game state
+        self.game_state.update(dt)
+    
+    def _update_single_player(self, dt):
+        """Update single player game."""
         # Handle human player movement
         keys = pygame.key.get_pressed()
         dx, dy = 0, 0
@@ -289,9 +403,37 @@ class BombermanGame:
                     self.game_state.place_bomb(self.ai_player)
                     self.stats.record_bomb(False)
             self.ai_player.update(dt)  # Update animation
+    
+    def _update_multiplayer(self, dt):
+        """Update multiplayer game."""
+        # Handle human player movement
+        keys = pygame.key.get_pressed()
+        dx, dy = 0, 0
         
-        # Update game state
-        self.game_state.update(dt)
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+            dy = -1
+        elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            dy = 1
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            dx = -1
+        elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            dx = 1
+        
+        # Update human player
+        if self.human_player.alive:
+            self.human_player.move(dx, dy, self.game_state.grid, TILE_SIZE, self.game_state)
+            self.human_player.update(dt)
+        
+        # Update AI players
+        for player, ai_agent in self.ai_agents:
+            if player.alive:
+                action = ai_agent.update(dt, self.game_state)
+                if action:
+                    ai_dx, ai_dy, place_bomb = action
+                    player.move(ai_dx, ai_dy, self.game_state.grid, TILE_SIZE, self.game_state)
+                    if place_bomb:
+                        self.game_state.place_bomb(player)
+                player.update(dt)
     
     def render(self):
         """Render the game."""
