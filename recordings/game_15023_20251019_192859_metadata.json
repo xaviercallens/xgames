@@ -1,0 +1,22 @@
+{
+  "recording_name": "game_15023_20251019_192859",
+  "timestamp": "2025-10-19T19:28:59.116888",
+  "duration_seconds": 0.8666666666666667,
+  "fps": 30,
+  "frame_count": 26,
+  "dropped_frames": 0,
+  "resolution": {
+    "width": 1132,
+    "height": 896
+  },
+  "files": {
+    "webm": "game_15023_20251019_192859.webm",
+    "mp4": "game_15023_20251019_192859.mp4",
+    "gif_preview": "game_15023_20251019_192859_preview.gif"
+  },
+  "file_sizes": {
+    "webm_mb": 0.0016756057739257812,
+    "mp4_mb": 0.0030126571655273438,
+    "gif_mb": 0.0020112991333007812
+  }
+}

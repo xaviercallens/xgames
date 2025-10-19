@@ -83,6 +83,15 @@ class MenuScreen:
                 'win_rate': 35.0,
                 'color': (255, 200, 100),
             },
+            {
+                'name': 'Advanced Bot (Smart)',
+                'type': 'advanced_heuristic',
+                'level': 'Advanced',
+                'description': 'Advanced Smart Heuristic - Predictive & Strategic',
+                'icon': '🧠',
+                'win_rate': 60.0,
+                'color': (100, 200, 255),
+            },
         ]
         
         # Add PPO models if available

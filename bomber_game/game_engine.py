@@ -18,10 +18,13 @@ from .model_selector import ModelSelector
 from .player_selector import PlayerSelector
 from .heuristics import HeuristicAgent
 from .heuristics_improved import ImprovedHeuristicAgent
+from .heuristics_intermediate import IntermediateSmartHeuristic
+from .heuristics_advanced import AdvancedSmartHeuristic
 from .game_statistics import GameStatistics
 from .stats_panel import StatsPanel
 from .educational_stats import EducationalStatsScreen
 from .video_recorder import VideoRecorder
+from .enhanced_graphics import ProutManGraphics
 
 
 class BombermanGame:
@@ -380,7 +383,7 @@ class BombermanGame:
                 
                 tile = self.game_state.grid[y][x]
                 
-                # Draw tile background
+                # Draw tile background with alternating pattern
                 if (x + y) % 2 == 0:
                     color = (34, 139, 34)  # Forest green
                 else:
@@ -389,20 +392,18 @@ class BombermanGame:
                 pygame.draw.rect(self.screen, color,
                                (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
                 
-                # Draw walls
+                # Draw walls using enhanced graphics
                 if tile == 1:  # Indestructible wall
                     if self.wall_sprite:
                         self.screen.blit(self.wall_sprite, (pixel_x, pixel_y))
                     else:
-                        pygame.draw.rect(self.screen, DARK_GRAY,
-                                       (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
-                        pygame.draw.rect(self.screen, GRAY,
-                                       (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE), 2)
-                elif tile == 2:  # Soft wall
-                    pygame.draw.rect(self.screen, BROWN,
-                                   (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
-                    pygame.draw.rect(self.screen, (101, 67, 33),
-                                   (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE), 2)
+                        ProutManGraphics.draw_enhanced_wall(
+                            self.screen, pixel_x, pixel_y, TILE_SIZE, wall_type=1
+                        )
+                elif tile == 2:  # Soft wall (destructible)
+                    ProutManGraphics.draw_enhanced_wall(
+                        self.screen, pixel_x, pixel_y, TILE_SIZE, wall_type=2
+                    )
     
     def _draw_ui(self):
         """Draw user interface."""
@@ -758,6 +759,17 @@ class BombermanGame:
             elif selected_ai['type'] == 'heuristic':
                 self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
                 self.ai_type = "Improved Heuristic"
+            elif selected_ai['type'] == 'advanced_heuristic':
+                self.ai_agent = AdvancedSmartHeuristic(self.ai_player)
+                self.ai_type = "Advanced Smart Heuristic"
+                print(f"\n🧠 Advanced Smart Heuristic AI Initialized!")
+                print(f"   Features:")
+                print(f"   • Predictive bomb placement analysis")
+                print(f"   • Game tree evaluation (minimax)")
+                print(f"   • Strategic positioning")
+                print(f"   • Opponent behavior prediction")
+                print(f"   • Dynamic strategy selection (4 strategies)")
+                print(f"   Expected Win Rate: {selected_ai['win_rate']:.0f}%")
             elif selected_ai['type'] == 'hybrid':
                 model_path = selected_ai.get('model_path')
                 hybrid_mode = selected_ai.get('hybrid_mode', 'adaptive')

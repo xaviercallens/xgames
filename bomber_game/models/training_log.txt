@@ -258,3 +258,30 @@
 [2025-10-14 08:01:16] 
 🎯 Training with behavioral cloning...
 [2025-10-14 08:01:16]   Epochs: 50, Batch size: 64
+[2025-10-14 08:04:06]   Epoch 10/50 - Loss: 0.6117 (Best: 0.6117)
+[2025-10-14 08:06:49]   Epoch 20/50 - Loss: 0.4823 (Best: 0.4823)
+[2025-10-14 08:08:49]   Epoch 30/50 - Loss: 0.4333 (Best: 0.4333)
+[2025-10-14 08:10:44]   Epoch 40/50 - Loss: 0.4010 (Best: 0.4010)
+[2025-10-14 08:12:36]   Epoch 50/50 - Loss: 0.3809 (Best: 0.3809)
+[2025-10-14 08:12:36] ✅ Bootstrap training complete! Best loss: 0.3809
+[2025-10-14 08:12:36] 💾 Saved bootstrapped model to bomber_game/models/ppo_agent_bootstrapped.pth
+[2025-10-14 08:12:36] 
+✅ Bootstrap phase completed successfully!
+[2025-10-14 08:12:36]    Agent has been pre-trained with heuristic knowledge.
+[2025-10-14 08:12:36]    Starting RL fine-tuning...
+
+[2025-10-14 08:12:36] 📊 Loaded existing stats: 4422 episodes
+[2025-10-14 08:12:36] 📂 Resuming from checkpoint: bomber_game/models/checkpoints/latest_checkpoint.pth
+[2025-10-14 08:15:34] 💾 Checkpoint saved: checkpoint_ep4500_periodic_20251014_081534.pth
+[2025-10-14 08:16:16] 💾 Checkpoint saved: checkpoint_ep4522_best_20251014_081616.pth
+[2025-10-14 08:16:53] 💾 Checkpoint saved: checkpoint_ep4539_best_20251014_081653.pth
+[2025-10-14 08:16:59] 💾 Checkpoint saved: checkpoint_ep4543_best_20251014_081659.pth
+[2025-10-14 08:17:28] 💾 Checkpoint saved: checkpoint_ep4558_best_20251014_081728.pth
+[2025-10-14 08:17:40] 💾 Checkpoint saved: checkpoint_ep4565_best_20251014_081740.pth
+[2025-10-14 08:18:50] 💾 Checkpoint saved: checkpoint_ep4600_periodic_20251014_081850.pth
+[2025-10-14 08:19:20] ⚠️  Performance plateau detected (50 episodes without improvement)
+[2025-10-14 08:19:20]    Best win rate: 26.00%
+[2025-10-14 08:19:20] 
+🏁 Training completed!
+[2025-10-14 08:19:20] 💾 Checkpoint saved: checkpoint_ep4615_final_20251014_081920.pth
+[2025-10-14 08:19:20] 💾 Final model saved: bomber_game/models/ppo_agent.pth

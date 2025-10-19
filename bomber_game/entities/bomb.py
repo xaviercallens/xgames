@@ -6,6 +6,7 @@ A smelly trump instead of a bomb!
 import pygame
 from .entity import Entity
 from ..assets import get_asset_manager
+from ..enhanced_graphics import ProutManGraphics
 
 
 class Bomb(Entity):
@@ -54,7 +55,7 @@ class Bomb(Entity):
                 self.owner.active_bombs -= 1
     
     def render(self, screen, tile_size):
-        """Render trump (prout) on screen - uses sprite or fallback!"""
+        """Render trump (prout) on screen - uses sprite or enhanced graphics!"""
         # Position at center of grid cell for consistency with players
         pixel_x = (self.grid_x + 0.5) * tile_size
         pixel_y = (self.grid_y + 0.5) * tile_size
@@ -80,28 +81,7 @@ class Bomb(Entity):
             else:
                 screen.blit(self.sprite, sprite_rect)
         else:
-            # Fallback: green and brown smelly cloud
-            trump_rect = pygame.Rect(
-                pixel_x + 4,
-                pixel_y + 4,
-                tile_size - 8,
-                tile_size - 8
+            # Use enhanced graphics for better visuals
+            ProutManGraphics.draw_enhanced_prout(
+                screen, pixel_x, pixel_y, self.timer, tile_size
             )
-            
-            # Pulsing effect based on timer - alternating green and brown
-            pulse = int((self.timer * 4) % 2)
-            color = (100, 150, 50) if pulse == 0 else (139, 90, 43)  # Green / Brown
-            
-            pygame.draw.ellipse(screen, color, trump_rect)
-            
-            # Add stink lines
-            stink_color = (150, 200, 100) if self.timer < 1.0 else (100, 150, 50)
-            for i in range(3):
-                offset = i * 16
-                pygame.draw.line(screen, stink_color, 
-                               (pixel_x + 16 + offset, pixel_y + 4),
-                               (pixel_x + 14 + offset, pixel_y - 8), 2)
-            
-            # Add brown spots
-            pygame.draw.circle(screen, (101, 67, 33), (pixel_x + 20, pixel_y + 24), 4)
-            pygame.draw.circle(screen, (101, 67, 33), (pixel_x + 40, pixel_y + 32), 3)

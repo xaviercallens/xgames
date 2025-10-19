@@ -5,6 +5,7 @@ Player entity for Trump Man game.
 import pygame
 from .entity import Entity
 from ..assets import get_asset_manager
+from ..enhanced_graphics import ProutManGraphics
 
 
 class Player(Entity):
@@ -195,7 +196,7 @@ class Player(Entity):
         pixel_x = self.x * tile_size
         pixel_y = self.y * tile_size
         
-        # Use sprite if available, otherwise draw simple shape
+        # Use sprite if available, otherwise use enhanced graphics
         if self.sprite:
             # Center the sprite directly on the pixel position
             # Use float positioning for smooth movement
@@ -204,20 +205,10 @@ class Player(Entity):
             sprite_rect.centery = pixel_y
             screen.blit(self.sprite, sprite_rect)
         else:
-            # Fallback to simple colored rectangle centered on position
-            body_rect = pygame.Rect(
-                pixel_x - self.width // 2,
-                pixel_y - self.height // 2,
-                self.width,
-                self.height
+            # Use enhanced graphics for better visuals
+            ProutManGraphics.draw_enhanced_player(
+                screen, pixel_x, pixel_y, self.color,
+                direction=self.direction,
+                animation_frame=self.animation_frame,
+                tile_size=tile_size
             )
-            pygame.draw.rect(screen, self.color, body_rect, border_radius=4)
-            
-            # Draw eyes based on direction (centered on sprite)
-            eye_color = (255, 255, 255)
-            if self.direction == 'down':
-                pygame.draw.circle(screen, eye_color, (pixel_x - 8, pixel_y + 4), 3)
-                pygame.draw.circle(screen, eye_color, (pixel_x + 8, pixel_y + 4), 3)
-            elif self.direction == 'up':
-                pygame.draw.circle(screen, eye_color, (pixel_x - 8, pixel_y - 4), 3)
-                pygame.draw.circle(screen, eye_color, (pixel_x + 8, pixel_y - 4), 3)
