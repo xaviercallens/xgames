@@ -75,8 +75,11 @@ class BombermanGame:
         # Load AI training stats
         self.ai_stats = self._load_ai_stats()
         
-        # Only auto-select model if not showing splash (splash will handle selection)
-        if not show_splash:
+        # Only auto-select model if not showing splash AND not using multiplayer
+        # Check if multiplayer mode is requested via environment variable
+        skip_model_selector = os.environ.get('BOMBERMAN_SKIP_MODEL_SELECTOR', '').lower() in ['true', '1', 'yes']
+        
+        if not show_splash and not skip_model_selector:
             models_dir = os.path.join(os.path.dirname(__file__), "models")
             selector = ModelSelector(models_dir)
             
@@ -811,32 +814,38 @@ class BombermanGame:
         if self.game_state.game_over and self.game_state.winner:
             self.stats.finish_game(self.game_state.winner.name)
         
-        # Reset game state
-        self.game_state = GameState(GRID_SIZE)
-        self.human_player = self.game_state.add_player(1, 1, GREEN, "Player")
-        self.ai_player = self.game_state.add_player(
-            GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
-        )
-        
-        # Reload AI with same type
-        models_dir = os.path.join(os.path.dirname(__file__), "models")
-        selector = ModelSelector(models_dir)
-        selection = selector.select_best_model()
-        
-        if selection['model_type'] == 'ppo':
-            self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
-        elif selection['model_type'] == 'ppo_pretrained':
-            self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
-        elif selection['model_type'] == 'heuristic':
-            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+        # Check if multiplayer mode
+        if self.is_multiplayer and self.multiplayer_config:
+            # Restart with same multiplayer configuration
+            self.setup_multiplayer_game(self.multiplayer_config)
+            print("\n🔄 Multiplayer game restarted!")
         else:
-            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
-        
-        # Reset statistics for new game
-        self.stats = GameStatistics()
-        self.stats.set_ai_info(self.ai_type, selection.get('model_path'))
-        self.stats_panel.human_perf_history = []
-        self.stats_panel.ai_perf_history = []
+            # Reset game state for single player
+            self.game_state = GameState(GRID_SIZE)
+            self.human_player = self.game_state.add_player(1, 1, GREEN, "Player")
+            self.ai_player = self.game_state.add_player(
+                GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
+            )
+            
+            # Reload AI with same type
+            models_dir = os.path.join(os.path.dirname(__file__), "models")
+            selector = ModelSelector(models_dir)
+            selection = selector.select_best_model()
+            
+            if selection['model_type'] == 'ppo':
+                self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
+            elif selection['model_type'] == 'ppo_pretrained':
+                self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
+            elif selection['model_type'] == 'heuristic':
+                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+            else:
+                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+            
+            # Reset statistics for new game
+            self.stats = GameStatistics()
+            self.stats.set_ai_info(self.ai_type, selection.get('model_path'))
+            self.stats_panel.human_perf_history = []
+            self.stats_panel.ai_perf_history = []
         
         self._load_sprites()  # Reload sprites
     

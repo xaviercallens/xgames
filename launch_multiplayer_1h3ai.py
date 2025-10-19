@@ -73,8 +73,9 @@ def main():
     """Main entry point."""
     import pygame
     from bomber_game.game_engine import BombermanGame
-    import io
-    from contextlib import redirect_stdout, redirect_stderr
+    
+    # Skip model selector for multiplayer
+    os.environ['BOMBERMAN_SKIP_MODEL_SELECTOR'] = '1'
     
     # Create configuration
     print("\n🎮 Creating 1 Human + 3 AI configuration...")
@@ -98,11 +99,8 @@ def main():
         # Initialize pygame
         pygame.init()
         
-        # Suppress model selector output during initialization
-        f = io.StringIO()
-        with redirect_stdout(f), redirect_stderr(f):
-            # Create game instance (this will run model selector but we suppress output)
-            game = BombermanGame(show_splash=False)
+        # Create game instance (model selector will be skipped)
+        game = BombermanGame(show_splash=False)
         
         # Setup multiplayer game with configuration
         game.setup_multiplayer_game(config)
