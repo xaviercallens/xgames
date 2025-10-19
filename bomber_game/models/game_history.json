@@ -1,14 +1,14 @@
 {
-  "total_games": 40739,
-  "human_wins": 37803,
+  "total_games": 40965,
+  "human_wins": 38029,
   "ai_wins": 2816,
   "draws": 120,
   "games": [
     {
-      "timestamp": "2025-10-19T22:19:58.500623",
-      "duration": 17.067280054092407,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:37.987933",
+      "duration": 24.619259119033813,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -31,10 +31,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.536075",
-      "duration": 17.102731704711914,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.025783",
+      "duration": 24.657109260559082,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -57,10 +57,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.564261",
-      "duration": 17.130918979644775,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.059771",
+      "duration": 24.691097497940063,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -83,10 +83,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.605679",
-      "duration": 17.17233395576477,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.091958",
+      "duration": 24.723285675048828,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -109,10 +109,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.631920",
-      "duration": 17.19857382774353,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.126480",
+      "duration": 24.757805824279785,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -135,10 +135,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.664278",
-      "duration": 17.23093557357788,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.152836",
+      "duration": 24.78416109085083,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -161,10 +161,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.699840",
-      "duration": 17.266496419906616,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.191174",
+      "duration": 24.82250142097473,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -187,10 +187,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.748010",
-      "duration": 17.314663648605347,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.223490",
+      "duration": 24.854817867279053,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -213,10 +213,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.773887",
-      "duration": 17.34054160118103,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.257501",
+      "duration": 24.888829231262207,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -239,10 +239,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.804421",
-      "duration": 17.371076583862305,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.284740",
+      "duration": 24.916067123413086,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -265,10 +265,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.839636",
-      "duration": 17.406290769577026,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.335952",
+      "duration": 24.96727967262268,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -291,10 +291,10 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:19:58.863662",
-      "duration": 17.430316925048828,
-      "winner": "AI 3",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.364162",
+      "duration": 24.995489835739136,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
         "bombs": 2,
@@ -317,13 +317,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.040940",
-      "duration": 17.168718099594116,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.413980",
+      "duration": 25.045307159423828,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -343,13 +343,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.073102",
-      "duration": 17.200886487960815,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.437551",
+      "duration": 25.068873405456543,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -369,13 +369,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.108843",
-      "duration": 17.23662543296814,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.471131",
+      "duration": 25.10245966911316,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -395,13 +395,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.145236",
-      "duration": 17.273021936416626,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.498239",
+      "duration": 25.129565477371216,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -421,13 +421,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.175180",
-      "duration": 17.302964448928833,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.533295",
+      "duration": 25.164621353149414,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -447,13 +447,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.209658",
-      "duration": 17.337442874908447,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.568375",
+      "duration": 25.19970154762268,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -473,13 +473,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.241935",
-      "duration": 17.36971926689148,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.607443",
+      "duration": 25.23876976966858,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -499,13 +499,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.274248",
-      "duration": 17.40203022956848,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.639067",
+      "duration": 25.27039337158203,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -525,13 +525,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.318106",
-      "duration": 17.44588851928711,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.671379",
+      "duration": 25.30270504951477,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -551,13 +551,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.338944",
-      "duration": 17.466728925704956,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.705317",
+      "duration": 25.33664584159851,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -577,13 +577,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.391300",
-      "duration": 17.519084692001343,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.738022",
+      "duration": 25.369346857070923,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -603,13 +603,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.413788",
-      "duration": 17.541573524475098,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.767776",
+      "duration": 25.399101495742798,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -629,13 +629,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.439949",
-      "duration": 17.567734241485596,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.811317",
+      "duration": 25.442644119262695,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -655,13 +655,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.473237",
-      "duration": 17.601022720336914,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.834523",
+      "duration": 25.465850114822388,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -681,13 +681,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.522856",
-      "duration": 17.650639295578003,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.879380",
+      "duration": 25.51070809364319,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -707,13 +707,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.539823",
-      "duration": 17.66760778427124,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.905828",
+      "duration": 25.537155151367188,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -733,13 +733,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.575080",
-      "duration": 17.702864408493042,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.941621",
+      "duration": 25.572948455810547,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -759,13 +759,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.610460",
-      "duration": 17.73824405670166,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:38.977189",
+      "duration": 25.608517169952393,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -785,13 +785,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.643729",
-      "duration": 17.77151393890381,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.004623",
+      "duration": 25.635950565338135,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -811,13 +811,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.674275",
-      "duration": 17.802058935165405,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.035790",
+      "duration": 25.667118549346924,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -837,13 +837,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.710005",
-      "duration": 17.837789058685303,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.072342",
+      "duration": 25.70366907119751,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -863,13 +863,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.740143",
-      "duration": 17.86792778968811,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.106855",
+      "duration": 25.738182306289673,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -889,13 +889,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.776071",
-      "duration": 17.903855323791504,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.138741",
+      "duration": 25.770061016082764,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -915,13 +915,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.806416",
-      "duration": 17.93420124053955,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.174666",
+      "duration": 25.80599308013916,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -941,13 +941,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.840797",
-      "duration": 17.96857976913452,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.201648",
+      "duration": 25.832971334457397,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -967,13 +967,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.877942",
-      "duration": 18.005725383758545,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.234680",
+      "duration": 25.866007566452026,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -993,13 +993,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.909534",
-      "duration": 18.037317752838135,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.273507",
+      "duration": 25.904833555221558,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1019,13 +1019,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.956080",
-      "duration": 18.083863258361816,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.302406",
+      "duration": 25.933732509613037,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1045,13 +1045,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:16.974570",
-      "duration": 18.102352619171143,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.334263",
+      "duration": 25.965590000152588,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1071,13 +1071,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.008550",
-      "duration": 18.136126279830933,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.374433",
+      "duration": 26.005760192871094,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1097,13 +1097,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.042450",
-      "duration": 18.170233249664307,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.401678",
+      "duration": 26.03300642967224,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1123,13 +1123,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.077724",
-      "duration": 18.205507516860962,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.434755",
+      "duration": 26.066083192825317,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1149,13 +1149,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.111561",
-      "duration": 18.23932981491089,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.467969",
+      "duration": 26.09929585456848,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1175,13 +1175,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.140532",
-      "duration": 18.268316507339478,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.503578",
+      "duration": 26.134905338287354,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1201,13 +1201,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.178057",
-      "duration": 18.30584168434143,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.532660",
+      "duration": 26.16398549079895,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1227,13 +1227,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.212210",
-      "duration": 18.33999514579773,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.562909",
+      "duration": 26.19423770904541,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1253,13 +1253,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.244430",
-      "duration": 18.3722140789032,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.595919",
+      "duration": 26.227247714996338,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1279,13 +1279,13 @@
       }
     },
     {
-      "timestamp": "2025-10-19T22:20:17.266641",
-      "duration": 18.394423007965088,
-      "winner": "AI",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T22:25:39.629496",
+      "duration": 26.26082491874695,
+      "winner": "Player",
+      "ai_type": "Multiplayer (3 AI)",
       "human": {
         "moves": 0,
-        "bombs": 5,
+        "bombs": 2,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
@@ -1307,11 +1307,11 @@
   ],
   "human_stats": {
     "total_moves": 366245,
-    "total_bombs": 33819,
+    "total_bombs": 34083,
     "total_kills": 0,
     "avg_game_time": 0,
     "best_win_streak": 22409,
-    "current_win_streak": 0
+    "current_win_streak": 226
   },
   "ai_stats": {
     "total_moves": 1120442,
@@ -1319,6 +1319,6 @@
     "total_kills": 0,
     "avg_game_time": 0,
     "best_win_streak": 1259,
-    "current_win_streak": 38
+    "current_win_streak": 0
   }
 }

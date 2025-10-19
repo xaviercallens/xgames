@@ -808,6 +808,44 @@ class BombermanGame:
         print(f"   📁 Location: {stats_file}")
         print(f"   💾 File: {stats_file.name}")
     
+    def _setup_multiplayer_from_menu(self, player_count):
+        """
+        Setup multiplayer game from menu selection.
+        
+        Args:
+            player_count: Dictionary with 'humans' and 'ais' keys
+        """
+        from .multiplayer_config import GameConfigBuilder
+        
+        # Player colors: Green, Red, Blue, Yellow
+        colors = [(0, 255, 0), (255, 0, 0), (0, 0, 255), (255, 255, 0)]
+        
+        builder = GameConfigBuilder()
+        
+        # Add human players
+        for i in range(player_count['humans']):
+            builder.add_human_player(f'Player {i + 1}', colors[i])
+        
+        # Add AI players - show AI selection for each
+        ai_modes = []
+        for i in range(player_count['ais']):
+            selected_ai = self.menu.show_ai_selection()
+            if selected_ai is None:
+                # Default to intermediate if cancelled
+                ai_modes.append('heuristic')
+            else:
+                ai_modes.append(selected_ai['type'])
+        
+        # Add AI players with selected modes
+        for i, ai_mode in enumerate(ai_modes):
+            builder.add_ai_player(f'AI {i + 1}', ai_mode, colors[player_count['humans'] + i])
+        
+        # Build configuration
+        config = builder.build()
+        
+        # Setup multiplayer game
+        self.setup_multiplayer_game(config)
+    
     def _restart_game(self):
         """Restart the game."""
         # Save previous game stats if game was finished
@@ -858,59 +896,72 @@ class BombermanGame:
                 pygame.quit()
                 sys.exit()
             
-            # Show AI selection menu
-            selected_ai = self.menu.show_ai_selection()
-            if selected_ai is None:
+            # Show player count selection menu
+            player_count = self.menu.show_player_count_selection()
+            if player_count is None:
                 pygame.quit()
                 sys.exit()
             
-            # Create AI agent based on selection
-            print(f"\n{'='*70}")
-            print(f"🎮 SELECTED OPPONENT: {selected_ai['icon']} {selected_ai['name']}")
-            print(f"{'='*70}")
-            print(f"   Level: {selected_ai['level']}")
-            print(f"   Type: {selected_ai['type']}")
-            print(f"   Expected Win Rate: {selected_ai['win_rate']:.1f}%")
-            print(f"   Description: {selected_ai['description']}")
-            print(f"{'='*70}\n")
+            # Check if multiplayer (more than 1 human or more than 1 AI)
+            total_players = player_count['humans'] + player_count['ais']
             
-            # Initialize AI agent based on selection
-            if selected_ai['type'] == 'simple':
-                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
-                self.ai_type = "Heuristic"
-            elif selected_ai['type'] == 'heuristic':
-                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
-                self.ai_type = "Improved Heuristic"
-            elif selected_ai['type'] == 'advanced_heuristic':
-                self.ai_agent = AdvancedSmartHeuristic(self.ai_player)
-                self.ai_type = "Advanced Smart Heuristic"
-                print(f"\n🧠 Advanced Smart Heuristic AI Initialized!")
-                print(f"   Features:")
-                print(f"   • Predictive bomb placement analysis")
-                print(f"   • Game tree evaluation (minimax)")
-                print(f"   • Strategic positioning")
-                print(f"   • Opponent behavior prediction")
-                print(f"   • Dynamic strategy selection (4 strategies)")
-                print(f"   Expected Win Rate: {selected_ai['win_rate']:.0f}%")
-            elif selected_ai['type'] == 'hybrid':
-                model_path = selected_ai.get('model_path')
-                hybrid_mode = selected_ai.get('hybrid_mode', 'adaptive')
-                self.ai_agent = HybridAgent(self.ai_player, mode=hybrid_mode, ppo_model_path=model_path)
-                self.ai_type = f"Hybrid ({hybrid_mode})"
-                print(f"\n🎭 Hybrid AI Initialized!")
-                print(f"   Mode: {hybrid_mode}")
-                print(f"   Estimated Win Rate: {selected_ai['win_rate']:.0f}%")
-            elif selected_ai['type'] == 'ppo':
-                model_path = selected_ai.get('model_path')
-                self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
-                self.ai_type = "PPO"
-            elif selected_ai['type'] == 'ppo_best':
-                model_path = selected_ai.get('model_path')
-                self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
-                self.ai_type = "PPO (Best)"
-            
-            # Update statistics with selected AI
-            self.stats.set_ai_info(self.ai_type, selected_ai.get('model_path'))
+            if total_players > 2 or player_count['humans'] > 1:
+                # Multiplayer mode - setup multiplayer game
+                self._setup_multiplayer_from_menu(player_count)
+            else:
+                # Single player mode (1v1) - show AI selection
+                selected_ai = self.menu.show_ai_selection()
+                if selected_ai is None:
+                    pygame.quit()
+                    sys.exit()
+                
+                # Create AI agent based on selection
+                print(f"\n{'='*70}")
+                print(f"🎮 SELECTED OPPONENT: {selected_ai['icon']} {selected_ai['name']}")
+                print(f"{'='*70}")
+                print(f"   Level: {selected_ai['level']}")
+                print(f"   Type: {selected_ai['type']}")
+                print(f"   Expected Win Rate: {selected_ai['win_rate']:.1f}%")
+                print(f"   Description: {selected_ai['description']}")
+                print(f"{'='*70}\n")
+                
+                # Initialize AI agent based on selection
+                if selected_ai['type'] == 'simple':
+                    self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+                    self.ai_type = "Heuristic"
+                elif selected_ai['type'] == 'heuristic':
+                    self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+                    self.ai_type = "Improved Heuristic"
+                elif selected_ai['type'] == 'advanced_heuristic':
+                    self.ai_agent = AdvancedSmartHeuristic(self.ai_player)
+                    self.ai_type = "Advanced Smart Heuristic"
+                    print(f"\n🧠 Advanced Smart Heuristic AI Initialized!")
+                    print(f"   Features:")
+                    print(f"   • Predictive bomb placement analysis")
+                    print(f"   • Game tree evaluation (minimax)")
+                    print(f"   • Strategic positioning")
+                    print(f"   • Opponent behavior prediction")
+                    print(f"   • Dynamic strategy selection (4 strategies)")
+                    print(f"   Expected Win Rate: {selected_ai['win_rate']:.0f}%")
+                elif selected_ai['type'] == 'hybrid':
+                    model_path = selected_ai.get('model_path')
+                    hybrid_mode = selected_ai.get('hybrid_mode', 'adaptive')
+                    self.ai_agent = HybridAgent(self.ai_player, mode=hybrid_mode, ppo_model_path=model_path)
+                    self.ai_type = f"Hybrid ({hybrid_mode})"
+                    print(f"\n🎭 Hybrid AI Initialized!")
+                    print(f"   Mode: {hybrid_mode}")
+                    print(f"   Estimated Win Rate: {selected_ai['win_rate']:.0f}%")
+                elif selected_ai['type'] == 'ppo':
+                    model_path = selected_ai.get('model_path')
+                    self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
+                    self.ai_type = "PPO"
+                elif selected_ai['type'] == 'ppo_best':
+                    model_path = selected_ai.get('model_path')
+                    self.ai_agent = PPOAgent(self.ai_player, model_path=model_path, training=False)
+                    self.ai_type = "PPO (Best)"
+                
+                # Update statistics with selected AI
+                self.stats.set_ai_info(self.ai_type, selected_ai.get('model_path'))
         
         # If AI agent not initialized yet, use default
         if self.ai_agent is None:
