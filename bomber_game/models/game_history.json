@@ -1,1324 +1,1324 @@
 {
-  "total_games": 37309,
-  "human_wins": 34767,
-  "ai_wins": 2542,
+  "total_games": 37633,
+  "human_wins": 34955,
+  "ai_wins": 2678,
   "draws": 0,
   "games": [
     {
-      "timestamp": "2025-10-19T20:34:34.929768",
-      "duration": 20.325387239456177,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.483236",
+      "duration": 7.13187313079834,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:34.966472",
-      "duration": 20.36209011077881,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.517855",
+      "duration": 7.1664910316467285,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.005224",
-      "duration": 20.40084147453308,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.552213",
+      "duration": 7.200850009918213,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.030414",
-      "duration": 20.426032543182373,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.583852",
+      "duration": 7.2324888706207275,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.067460",
-      "duration": 20.463075160980225,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.625606",
+      "duration": 7.274243116378784,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.098198",
-      "duration": 20.493816614151,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.662756",
+      "duration": 7.311388254165649,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.132336",
-      "duration": 20.5279541015625,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.693266",
+      "duration": 7.341903448104858,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.165480",
-      "duration": 20.5610990524292,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.720965",
+      "duration": 7.369601726531982,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.200588",
-      "duration": 20.59620761871338,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.752885",
+      "duration": 7.4015209674835205,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.233460",
-      "duration": 20.62907910346985,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.784674",
+      "duration": 7.433311223983765,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.265538",
-      "duration": 20.661154747009277,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.817587",
+      "duration": 7.4662230014801025,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.297585",
-      "duration": 20.69320273399353,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.849834",
+      "duration": 7.4984705448150635,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.329618",
-      "duration": 20.725236415863037,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.882838",
+      "duration": 7.531474828720093,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.368727",
-      "duration": 20.76434636116028,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.917127",
+      "duration": 7.565763473510742,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.397060",
-      "duration": 20.792678356170654,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.949914",
+      "duration": 7.598550081253052,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.431733",
-      "duration": 20.827351331710815,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:11.993484",
+      "duration": 7.6421217918396,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.466434",
-      "duration": 20.862053632736206,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.015187",
+      "duration": 7.663823366165161,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.499703",
-      "duration": 20.89532160758972,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.053004",
+      "duration": 7.701639652252197,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.535639",
-      "duration": 20.931257963180542,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.088904",
+      "duration": 7.7375404834747314,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.561708",
-      "duration": 20.957326889038086,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.117627",
+      "duration": 7.766261100769043,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.601290",
-      "duration": 20.996907949447632,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.146654",
+      "duration": 7.795290470123291,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.628068",
-      "duration": 21.023686408996582,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.181086",
+      "duration": 7.829722881317139,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.668731",
-      "duration": 21.06434679031372,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.213592",
+      "duration": 7.862228155136108,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.694456",
-      "duration": 21.090074062347412,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.250443",
+      "duration": 7.899079084396362,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.731897",
-      "duration": 21.127514362335205,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.279148",
+      "duration": 7.92778468132019,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.761975",
-      "duration": 21.15759301185608,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.311762",
+      "duration": 7.960399389266968,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.793591",
-      "duration": 21.18916964530945,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.346404",
+      "duration": 7.9950408935546875,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.826591",
-      "duration": 21.22221064567566,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.379025",
+      "duration": 8.027661561965942,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.859115",
-      "duration": 21.25473403930664,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.415618",
+      "duration": 8.06425428390503,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.891588",
-      "duration": 21.28720712661743,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.444613",
+      "duration": 8.093249082565308,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.936930",
-      "duration": 21.3325355052948,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.479487",
+      "duration": 8.128123044967651,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.961488",
-      "duration": 21.35710597038269,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.511260",
+      "duration": 8.15989637374878,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:35.993790",
-      "duration": 21.389406204223633,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.546999",
+      "duration": 8.195634603500366,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.026786",
-      "duration": 21.422404527664185,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.577203",
+      "duration": 8.225839138031006,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.065864",
-      "duration": 21.461483001708984,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.610215",
+      "duration": 8.258851766586304,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.092351",
-      "duration": 21.48796796798706,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.646569",
+      "duration": 8.295205116271973,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.124396",
-      "duration": 21.520012855529785,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.675967",
+      "duration": 8.324603080749512,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.162728",
-      "duration": 21.558344841003418,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.714080",
+      "duration": 8.362716913223267,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.193585",
-      "duration": 21.589202404022217,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.753750",
+      "duration": 8.402384996414185,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.224335",
-      "duration": 21.619951963424683,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.791487",
+      "duration": 8.440123319625854,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.259036",
-      "duration": 21.654653310775757,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.821864",
+      "duration": 8.470500469207764,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.292089",
-      "duration": 21.68770742416382,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.861342",
+      "duration": 8.509978532791138,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.324720",
-      "duration": 21.720339059829712,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.892613",
+      "duration": 8.541249513626099,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.354909",
-      "duration": 21.750526428222656,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.924238",
+      "duration": 8.572874784469604,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.391429",
-      "duration": 21.787046194076538,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.957914",
+      "duration": 8.606550455093384,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.427985",
-      "duration": 21.823601961135864,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:12.987701",
+      "duration": 8.636337757110596,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.455070",
-      "duration": 21.850687980651855,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:13.020531",
+      "duration": 8.669167757034302,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.490994",
-      "duration": 21.88661217689514,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:13.052593",
+      "duration": 8.701229572296143,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.524408",
-      "duration": 21.920026302337646,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:13.090001",
+      "duration": 8.738635778427124,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     },
     {
-      "timestamp": "2025-10-19T20:34:36.546742",
-      "duration": 21.942357778549194,
-      "winner": "Player",
-      "ai_type": "Improved Heuristic",
+      "timestamp": "2025-10-19T21:32:14.629999",
+      "duration": 10.27863073348999,
+      "winner": "AI",
+      "ai_type": "Advanced Smart Heuristic",
       "human": {
-        "moves": 41,
-        "bombs": 5,
+        "moves": 0,
+        "bombs": 0,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
-        "strategy": "Defensive",
-        "avg_risk": 0.47317073170731594,
-        "performance": 62.19512195121951
+        "strategy": "Balanced",
+        "avg_risk": 0,
+        "performance": 50
       },
       "ai": {
-        "moves": 22,
+        "moves": 31,
         "bombs": 5,
         "near_death": 0,
         "powerups": 0,
         "walls": 0,
         "strategy": "Defensive",
-        "avg_risk": 0.06325757575757551,
-        "performance": 72.72727272727272
+        "avg_risk": 0.06236559139784928,
+        "performance": 66.12903225806451
       }
     }
   ],
   "human_stats": {
-    "total_moves": 359116,
-    "total_bombs": 32316,
+    "total_moves": 361170,
+    "total_bombs": 32517,
     "total_kills": 0,
     "avg_game_time": 0,
-    "best_win_streak": 22221,
-    "current_win_streak": 22221
+    "best_win_streak": 22409,
+    "current_win_streak": 0
   },
   "ai_stats": {
-    "total_moves": 1087462,
-    "total_bombs": 981696,
+    "total_moves": 1096047,
+    "total_bombs": 984246,
     "total_kills": 0,
     "avg_game_time": 0,
     "best_win_streak": 1259,
-    "current_win_streak": 0
+    "current_win_streak": 136
   }
 }
