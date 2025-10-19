@@ -450,6 +450,11 @@ class AdvancedSmartHeuristic:
         self.actions_taken = 0
         self.bombs_placed = 0
         self.strategy_history = []
+        
+        # Timing
+        self.think_timer = 0
+        self.think_delay = 0.15  # Thinking delay in seconds
+        self.current_action = None
     
     def choose_action(self, player, opponent, game_state) -> Tuple[int, int, bool]:
         """
@@ -473,6 +478,35 @@ class AdvancedSmartHeuristic:
             return self._evasive_strategy(player, opponent, game_state)
         else:
             return self._balanced_strategy(player, opponent, game_state)
+    
+    def update(self, dt, game_state):
+        """
+        Update agent with timing control.
+        
+        Args:
+            dt: Delta time in seconds
+            game_state: Current game state
+            
+        Returns:
+            Current action tuple (dx, dy, place_bomb)
+        """
+        self.think_timer += dt
+        
+        if self.think_timer >= self.think_delay:
+            self.think_timer = 0
+            # Get opponent from game state
+            opponent = None
+            for player in game_state.players:
+                if player != self.player:
+                    opponent = player
+                    break
+            
+            if opponent:
+                self.current_action = self.choose_action(self.player, opponent, game_state)
+            else:
+                self.current_action = (0, 0, False)
+        
+        return self.current_action if self.current_action else (0, 0, False)
     
     def _aggressive_strategy(self, player, opponent, game_state) -> Tuple[int, int, bool]:
         """Aggressive strategy: pursue and attack opponent."""
