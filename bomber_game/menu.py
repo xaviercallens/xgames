@@ -444,6 +444,134 @@ class MenuScreen:
             self.screen.blit(text, text_rect)
             y += 25
     
+    def show_player_count_selection(self):
+        """
+        Show player count selection menu (humans vs AI).
+        
+        Returns:
+            Dictionary with 'humans' and 'ais' keys, or None if cancelled
+        """
+        clock = pygame.time.Clock()
+        
+        # Player count options
+        options = [
+            {'humans': 1, 'ais': 1, 'name': '1 Human vs 1 AI'},
+            {'humans': 1, 'ais': 2, 'name': '1 Human vs 2 AI'},
+            {'humans': 1, 'ais': 3, 'name': '1 Human vs 3 AI'},
+            {'humans': 2, 'ais': 0, 'name': '2 Humans (Local)'},
+            {'humans': 2, 'ais': 1, 'name': '2 Humans + 1 AI'},
+            {'humans': 2, 'ais': 2, 'name': '2 Humans + 2 AI'},
+            {'humans': 3, 'ais': 0, 'name': '3 Humans (Local)'},
+            {'humans': 3, 'ais': 1, 'name': '3 Humans + 1 AI'},
+            {'humans': 4, 'ais': 0, 'name': '4 Humans (Local)'},
+        ]
+        
+        selected = 0
+        
+        while True:
+            dt = clock.tick(60) / 1000.0
+            self.pulse_timer += dt
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return None
+                
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP or event.key == pygame.K_w:
+                        selected = (selected - 1) % len(options)
+                    elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                        selected = (selected + 1) % len(options)
+                    elif event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
+                        return options[selected]
+                    elif event.key == pygame.K_ESCAPE:
+                        return None
+                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = event.pos
+                    for i, rect in enumerate(self.option_rects):
+                        if rect.collidepoint(mouse_pos):
+                            return options[i]
+            
+            self._draw_player_count_selection(options, selected)
+            pygame.display.flip()
+    
+    def _draw_player_count_selection(self, options, selected):
+        """Draw player count selection screen."""
+        self.screen.fill(BLACK)
+        
+        # Title
+        title = self.font_large.render("🎮 Game Mode", True, GREEN)
+        title_rect = title.get_rect(center=(SCREEN_WIDTH // 2, 60))
+        self.screen.blit(title, title_rect)
+        
+        # Subtitle
+        subtitle = self.font_small.render("Select number of human and AI players", True, WHITE)
+        subtitle_rect = subtitle.get_rect(center=(SCREEN_WIDTH // 2, 120))
+        self.screen.blit(subtitle, subtitle_rect)
+        
+        # Draw options
+        self.option_rects = []
+        start_y = 180
+        option_height = 50
+        option_spacing = 10
+        option_width = 500
+        
+        for i, option in enumerate(options):
+            y = start_y + i * (option_height + option_spacing)
+            x = (SCREEN_WIDTH - option_width) // 2
+            
+            rect = pygame.Rect(x, y, option_width, option_height)
+            self.option_rects.append(rect)
+            
+            # Determine colors
+            if i == selected:
+                bg_color = (60, 60, 100)
+                border_color = GREEN
+                border_width = 3
+                text_color = GREEN
+                
+                # Pulse effect
+                pulse = abs(pygame.math.Vector2(0, 1).rotate(
+                    self.pulse_timer * 360 * self.pulse_speed).y)
+                glow = int(15 + 15 * pulse)
+                bg_color = tuple(min(255, c + glow) for c in bg_color)
+            else:
+                bg_color = (40, 40, 60)
+                border_color = (100, 100, 150)
+                border_width = 2
+                text_color = WHITE
+            
+            # Draw option box
+            pygame.draw.rect(self.screen, bg_color, rect, border_radius=8)
+            pygame.draw.rect(self.screen, border_color, rect, border_width, border_radius=8)
+            
+            # Mode name
+            name_text = self.font_small.render(option['name'], True, text_color)
+            name_rect = name_text.get_rect(left=rect.left + 20, centery=rect.centery)
+            self.screen.blit(name_text, name_rect)
+            
+            # Player count indicator
+            count_text = self.font_tiny.render(
+                f"👤 {option['humans']} | 🤖 {option['ais']}", 
+                True, (200, 200, 200)
+            )
+            count_rect = count_text.get_rect(right=rect.right - 20, centery=rect.centery)
+            self.screen.blit(count_text, count_rect)
+        
+        # Instructions
+        instructions = [
+            "↑↓ or W/S to select",
+            "ENTER or SPACE to confirm",
+            "ESC to cancel"
+        ]
+        
+        y = SCREEN_HEIGHT - 90
+        for instruction in instructions:
+            text = self.font_tiny.render(instruction, True, WHITE)
+            text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, y))
+            self.screen.blit(text, text_rect)
+            y += 25
+    
     def show_multiplayer_selection(self):
         """
         Show multiplayer player selection menu.
