@@ -68,47 +68,65 @@ class BombermanGame:
             GRID_SIZE - 2, GRID_SIZE - 2, RED, "AI"
         )
         
-        # Use intelligent model selector
-        models_dir = os.path.join(os.path.dirname(__file__), "models")
-        selector = ModelSelector(models_dir)
-        
-        # Check if user wants hybrid mode (can be set via environment variable)
-        use_hybrid = os.environ.get('BOMBERMAN_HYBRID_MODE', '').lower() in ['true', '1', 'yes']
-        hybrid_mode = os.environ.get('BOMBERMAN_HYBRID_STRATEGY', 'balanced')
-        
-        # Select best model based on performance
-        if use_hybrid:
-            selection = selector.select_hybrid_mode(mode=hybrid_mode)
-        else:
-            selection = selector.select_best_model()
+        # Initialize AI agent (will be set in run() if splash is shown)
+        self.ai_agent = None
+        self.ai_type = "Improved Heuristic"
         
         # Load AI training stats
         self.ai_stats = self._load_ai_stats()
-        # Create AI agent based on selection
+        
+        # Only auto-select model if not showing splash (splash will handle selection)
+        if not show_splash:
+            models_dir = os.path.join(os.path.dirname(__file__), "models")
+            selector = ModelSelector(models_dir)
+            
+            # Check if user wants hybrid mode (can be set via environment variable)
+            use_hybrid = os.environ.get('BOMBERMAN_HYBRID_MODE', '').lower() in ['true', '1', 'yes']
+            hybrid_mode = os.environ.get('BOMBERMAN_HYBRID_STRATEGY', 'balanced')
+            
+            # Select best model based on performance
+            if use_hybrid:
+                selection = selector.select_hybrid_mode(mode=hybrid_mode)
+            else:
+                selection = selector.select_best_model()
+            
+            # Create AI agent based on selection
+            self._create_ai_agent(selection)
+        
+        # Game state
+        self.running = True
+        self.paused = False
+        
+        # Load assets
+        self.assets = get_asset_manager()
+        self.wall_sprite = None
+        self._load_sprites()
+    
+    def _create_ai_agent(self, selection):
+        """
+        Create AI agent based on selection.
+        
+        Args:
+            selection: Selection dictionary from model selector
+        """
         if selection['model_path'] == 'heuristic':
             print(f"🌱 Using Improved Heuristic Agent")
             print(f"   Reason: {selection['reason']}")
             print(f"   Expected Win Rate: ~{selection['win_rate']:.1f}%")
-            if selection['model_type'] == 'heuristic':
-                print(f"🧠 Using IMPROVED Heuristic Agent (Industry Best Practices)")
-                print(f"   • A* pathfinding algorithm")
-                print(f"   • Weighted evaluation function")
-                print(f"   • Danger zone prediction")
-                print(f"   • Strategic bomb placement")
-                print(f"   • Performance tracking (Win Rate & Rewards)")
-                print(f"\n💡 Train AI to beat heuristic: ./train.sh")
-                self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
-                self.ai_type = "Improved Heuristic"
+            print(f"🧠 Using IMPROVED Heuristic Agent (Industry Best Practices)")
+            print(f"   • A* pathfinding algorithm")
+            print(f"   • Weighted evaluation function")
+            print(f"   • Danger zone prediction")
+            print(f"   • Strategic bomb placement")
+            print(f"   • Performance tracking (Win Rate & Rewards)")
+            print(f"\n💡 Train AI to beat heuristic: ./train.sh")
+            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+            self.ai_type = "Improved Heuristic"
             
         elif selection['model_type'] == 'ppo_pretrained':
             print(f"🎯 Using Pretrained PPO Model")
             print(f"   Reason: {selection['reason']}")
             print(f"   Expected Win Rate: ~{selection['win_rate']:.1f}%")
-            print(f"\n🧠 Model Features:")
-            print(f"   • Bootstrap trained with heuristics")
-            print(f"   • Ready for reinforcement learning")
-            print(f"   • Strategic decision making")
-            print(f"\n💡 Continue training: ./train.sh")
             self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
             self.ai_type = "PPO (Pretrained)"
             
@@ -116,51 +134,13 @@ class BombermanGame:
             print(f"🏆 Using Trained PPO Model")
             print(f"   Reason: {selection['reason']}")
             print(f"   Win Rate: {selection['win_rate']:.1f}%")
-            
-            if self.ai_stats:
-                total_episodes = self.ai_stats.get('total_episodes', 0)
-                total_wins = self.ai_stats.get('total_wins', 0)
-                training_time = self.ai_stats.get('total_training_time', 0)
-                current_level = self.ai_stats.get('current_level', 'Unknown')
-                
-                print(f"\n📊 Detailed Statistics:")
-                print(f"   🎯 Skill Level: {current_level}")
-                print(f"   🎮 Games Played: {total_episodes:,}")
-                print(f"   🏆 Games Won: {total_wins:,}")
-                print(f"   ⏱️  Training Time: {self._format_time(training_time)}")
-                
-                # Show AI strength message
-                win_rate = selection['win_rate']
-                if win_rate >= 50:
-                    print(f"\n   ⚠️  WARNING: This AI is VERY STRONG! Good luck! 💪")
-                elif win_rate >= 30:
-                    print(f"\n   💪 This AI is quite skilled - prepare for a challenge!")
-                elif win_rate >= 10:
-                    print(f"\n   🎯 This AI is learning - you have a good chance!")
-                else:
-                    print(f"\n   🌱 This AI is still learning - you should win easily!")
-            
-            print(f"\n🧠 AI Features:")
-            print(f"   • Deep Reinforcement Learning (PPO algorithm)")
-            print(f"   • Trained on {self.ai_stats.get('total_episodes', 0):,} games")
-            print(f"   • Learns from every game")
-            print(f"   • Adapts to your strategy")
-            print(f"\n💡 Train more for even better AI: ./train.sh")
-            
             self.ai_agent = PPOAgent(self.ai_player, model_path=selection['model_path'], training=False)
             self.ai_type = "PPO"
         
         elif selection['model_type'] == 'hybrid':
             print(f"🎭 Using Hybrid Agent (Heuristics + RL)")
             print(f"   Mode: {selection['mode']}")
-            print(f"   Reason: {selection['reason']}")
             print(f"   Estimated Win Rate: ~{selection['win_rate']:.1f}%")
-            print(f"\n🧠 Hybrid Features:")
-            print(f"   • Combines strategic heuristics with learned behaviors")
-            print(f"   • Adaptive decision making")
-            print(f"   • Best of both worlds approach")
-            print(f"   • Robust and reliable performance")
-            
             self.ai_agent = HybridAgent(
                 self.ai_player,
                 mode=selection['mode'],
@@ -176,15 +156,6 @@ class BombermanGame:
         
         # Set AI info in statistics
         self.stats.set_ai_info(self.ai_type, selection.get('model_path'))
-        
-        # Game state
-        self.running = True
-        self.paused = False
-        
-        # Load assets
-        self.assets = get_asset_manager()
-        self.wall_sprite = None
-        self._load_sprites()
     
     def _load_sprites(self):
         """Load game sprites."""
@@ -789,6 +760,12 @@ class BombermanGame:
             
             # Update statistics with selected AI
             self.stats.set_ai_info(self.ai_type, selected_ai.get('model_path'))
+        
+        # If AI agent not initialized yet, use default
+        if self.ai_agent is None:
+            self.ai_agent = ImprovedHeuristicAgent(self.ai_player)
+            self.ai_type = "Improved Heuristic"
+            self.stats.set_ai_info(self.ai_type, None)
         
         # Main game loop
         while self.running:
